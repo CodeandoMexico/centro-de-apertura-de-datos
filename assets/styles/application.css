@@ -1,0 +1,51 @@
+body {
+  font-family: "Open Sans", "Helvetica Neue";
+  color: #333333;
+  padding: 0;
+  margin: 0;
+}
+
+.requested-data {
+  border: 2px solid #CECECE;
+}
+
+.requested-data div {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.requested-data-votes {
+  padding: 0px 30px;
+  text-align: center;
+}
+
+.requested-data-votes span {
+  font-size: 35px;
+  display: block;
+}
+
+.requested-data-info {
+  width: 85%;
+}
+
+.requested-data .title {
+  letter-spacing: 3px;
+  font-weight: 400;
+}
+
+.requested-data .description {
+  font-size: 20px;
+  font-weight: 200;
+}
+
+.vote-up {
+  width: 0;
+  height: 0;
+  border-left: 35px solid transparent;
+  border-right: 35px solid transparent;
+  border-bottom: 30px solid #CECECE;
+}
+
+.vote-up:hover {
+  border-bottom-color: #1EBE39;
+}
