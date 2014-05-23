@@ -8,9 +8,9 @@
 module.exports = {
 
   index: function(req, res) {
-    RequestedData.find({sort: 'createdAt DESC'}).exec(function(err, articles) {
+    RequestedData.find({sort: 'createdAt DESC'}).exec(function(err, requestedDatas) {
       if (err) return res.send(500, err);
-      return res.json(articles);
+      return res.view('requestedData/index', {requestedDatas: requestedDatas});
     });
   },
 

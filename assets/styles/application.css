@@ -9,6 +9,12 @@ body {
   border: 2px solid #CECECE;
 }
 
+.requested-data-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
 .requested-data div {
   display: inline-block;
   vertical-align: middle;
@@ -22,14 +28,15 @@ body {
 .requested-data-votes span {
   font-size: 35px;
   display: block;
+  width: 150px;
 }
 
-.requested-data-info {
-  width: 85%;
+.requested-data-info p {
+  width: 800px;
 }
 
 .requested-data .title {
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   font-weight: 400;
 }
 
