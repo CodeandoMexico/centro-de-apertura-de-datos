@@ -1,18 +1,20 @@
-<div class="requested-data">
-  <div class="requested-data-votes">
-    <div class="vote-up"></div>
-    <span><%= requestedData.votes %> votos</span>
-  </div>
-  <div class="requested-data-info">
-    <% if (requestedData.url) { %>
-      <h1 class="title">
-        <a href="<%= requestedData.url %>" target="_blank">
-          <%= requestedData.title %>
-        </a>
-      </h1>
-    <% } else { %>
-      <h1 class="title"><%= requestedData.title %></h1>
-    <% } %>
-    <p class="description"><%= requestedData.description %></p>
+<div class="container-fluid">
+  <div class="requested-data row">
+    <div class="requested-data-votes col-md-2">
+      <div class="vote-up"></div>
+      <span><%= requestedData.votes %> votos</span>
+    </div>
+    <div class="requested-data-info col-md-9">
+      <% if (requestedData.url) { %>
+        <h1 class="title">
+          <a href="<%= requestedData.url %>" target="_blank">
+            <%= requestedData.title %>
+          </a>
+        </h1>
+      <% } else { %>
+        <h1 class="title"><%= requestedData.title %></h1>
+      <% } %>
+      <p class="description"><%= requestedData.description %></p>
+    </div>
   </div>
 </div>

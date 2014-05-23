@@ -18,21 +18,16 @@ body {
 .requested-data div {
   display: inline-block;
   vertical-align: middle;
+  float: none;
 }
 
 .requested-data-votes {
-  padding: 0px 30px;
   text-align: center;
 }
 
 .requested-data-votes span {
   font-size: 35px;
   display: block;
-  width: 150px;
-}
-
-.requested-data-info p {
-  width: 800px;
 }
 
 .requested-data .title {
@@ -55,4 +50,8 @@ body {
 
 .vote-up:hover {
   border-bottom-color: #1EBE39;
+}
+
+.site-title {
+  padding-left: 20px;
 }
