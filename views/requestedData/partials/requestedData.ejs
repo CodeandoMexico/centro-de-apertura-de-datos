@@ -1,20 +1,27 @@
 <div class="container-fluid">
   <div class="requested-data row">
-    <div class="requested-data-votes col-md-2">
-      <div class="vote-up"></div>
-      <span><%= requestedData.votes %> votos</span>
-    </div>
-    <div class="requested-data-info col-md-9">
+    <div class="requested-data-info col-md-7">
       <% if (requestedData.url) { %>
         <h1 class="title">
-          <a href="<%= requestedData.url %>" target="_blank">
-            <%= requestedData.title %>
-          </a>
+          <%= requestedData.title %>
+          <small>
+            <a href="<%= requestedData.url %>" class="requested-data-url" target="_blank">
+              (<%= requestedData.url %>)
+            </a>
+          </small>
         </h1>
       <% } else { %>
-        <h1 class="title"><%= requestedData.title %></h1>
+        <h2 class="title"><%= requestedData.title %></h2>
       <% } %>
       <p class="description"><%= requestedData.description %></p>
+    </div>
+    <div class="requested-data-votes col-md-2">
+      <span><span class="vote-count"><%= requestedData.votes %></span> Votos</span>
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-hollow btn-green" data-container="body" data-toggle="popover" data-placement="bottom">
+        Votar
+      </button>
     </div>
   </div>
 </div>

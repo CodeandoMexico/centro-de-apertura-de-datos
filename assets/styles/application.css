@@ -2,17 +2,20 @@ body {
   font-family: "Open Sans", "Helvetica Neue";
   color: #333333;
   padding: 0;
+  padding-bottom: 250px;
   margin: 0;
+  background-color: #F4F4F4;
 }
 
-.requested-data {
-  border: 2px solid #CECECE;
+.container {
+  max-width: 900px;
 }
 
 .requested-data-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  background-color: #FFFFFF;
 }
 
 .requested-data div {
@@ -21,37 +24,94 @@ body {
   float: none;
 }
 
-.requested-data-votes {
-  text-align: center;
-}
-
-.requested-data-votes span {
-  font-size: 35px;
-  display: block;
-}
-
 .requested-data .title {
-  letter-spacing: 2px;
-  font-weight: 400;
+  color: #464F9C;
 }
 
-.requested-data .description {
-  font-size: 20px;
+.requested-data .description, .requested-data-votes {
+  font-size: 18px;
+  font-weight: 100;
+  letter-spacing: 1px;
+  color: #989898;
+}
+
+.requested-data-info {
+  padding-left: 50px;
+}
+
+.requested-data-url {
+  font-size: 18px;
+  color: #989898;
   font-weight: 200;
 }
 
-.vote-up {
-  width: 0;
-  height: 0;
-  border-left: 35px solid transparent;
-  border-right: 35px solid transparent;
-  border-bottom: 30px solid #CECECE;
-}
-
-.vote-up:hover {
-  border-bottom-color: #1EBE39;
+.vote-count {
+  color: #AFD69A;
+  font-weight: bold;
 }
 
 .site-title {
   padding-left: 20px;
+  font-size: 20px;
+  font-weight: 100;
+  color: #989898;
+}
+
+.btn-hollow {
+  background-color: transparent;
+  border-width: 2px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 5px 30px;
+}
+
+.btn-wide {
+  padding: 10px 55px;
+}
+
+.btn-purple {
+  border-color: #25255B;
+  color: #25255B;
+}
+
+.btn-purple:hover {
+  background-color: #25255B;
+  color: #FFFFFF;
+}
+
+.btn-green {
+  border-color: #7BBA58;
+  color: #7BBA58;
+}
+
+.btn-green:hover {
+  background-color: #7BBA58;
+  color: #FFFFFF;
+}
+
+div.actions {
+  margin: 20px 0px;
+}
+
+.disclaimer {
+  text-align: center;
+  background-color: #ECECEC;
+  padding: 40px 240px;
+}
+
+.disclaimer h4 {
+  color: #464F9C;
+  font-weight: 400;
+}
+
+.disclaimer p {
+  font-weight: 200;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.disclaimer a {
+  font-size: 16px;
+  font-weight: 200;
 }
