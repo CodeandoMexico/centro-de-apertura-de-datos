@@ -64,6 +64,7 @@ module.exports.connections = {
   // npm install sails-postgresql
   //
   postgresql: {
+    adapter: 'sails-postgresql',
     url  : process.env.DATABASE_URL,
     pool: false,
     ssl: false
