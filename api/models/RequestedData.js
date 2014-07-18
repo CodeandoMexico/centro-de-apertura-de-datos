@@ -19,9 +19,10 @@ module.exports = {
       type: 'STRING',
       required: true
     },
-    votes:{
-      type: 'INTEGER',
-      defaultsTo: 0
+    voted: {
+      collection: 'user',
+      via: 'votes',
+      dominant: true
     }
 	}
 

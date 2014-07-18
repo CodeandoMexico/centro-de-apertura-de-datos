@@ -27,11 +27,24 @@ module.exports.routes = {
   // 
   // (Alternatively, remove this and add an `index.html` file in your `assets` directory)
   '/': {
-    view: 'homepage'
+    controller: 'requesteddata',
+    action: 'index'
   },
 
+  'post /login': {
+    controller: 'user',
+    action: 'login'
+  },
 
-  // Custom routes here...
+  'get /logout': {
+    controller: 'user',
+    action: 'logout'
+  },
+
+  'get /requesteddata/:id/voteup': {
+    controller: 'requesteddata',
+    action: 'voteUp'
+  }
 
 
   // If a request to a URL doesn't match any of the custom routes above, it is matched 
