@@ -115,3 +115,10 @@ div.actions {
   font-size: 16px;
   font-weight: 200;
 }
+
+.hidden form {
+  position:absolute;
+  left:0px;
+  top:0px;
+  z-index:-1;
+}

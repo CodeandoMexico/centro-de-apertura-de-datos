@@ -19,7 +19,7 @@
       <span><span class="vote-count"><%= request.voted.length %></span> Votos</span>
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-hollow btn-green" data-container="body" data-toggle="popover" data-placement="bottom">
+      <button type="button" class="btn btn-hollow btn-green" onclick="$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
         Votar
       </button>
     </div>
