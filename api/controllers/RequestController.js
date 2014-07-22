@@ -46,8 +46,8 @@ module.exports = {
       }, function(err, request) {
         if (err) return res.send(500, err);
         req.flash('message', 'Solicitud creada');
-        return res.redirect('/');
       });
     }
+    return res.redirect('/');
   },
 };
