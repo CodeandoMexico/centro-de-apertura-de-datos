@@ -16,12 +16,18 @@
       <p class="description"><%= request.description %></p>
     </div>
     <div class="requested-data-votes col-md-2">
-      <span><span class="vote-count"><%= request.voted.length %></span> Votos</span>
+      <span><span class="vote-count"><%= request.voted.length %></span>&nbsp;Votos</span>
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-hollow btn-green" onclick="$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
-        Votar
-      </button>
+      <% if (userVotes.indexOf(request.id) > -1) { %>
+        <button type="button" class="btn btn-hollow btn-red" onclick="$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+          Quitar Voto
+        </button>
+      <% } else { %>
+        <button type="button" class="btn btn-hollow btn-green" onclick="$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+          Votar
+        </button>
+      <% } %>
     </div>
   </div>
 </div>

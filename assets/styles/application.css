@@ -90,6 +90,16 @@ body {
   color: #FFFFFF;
 }
 
+.btn-red {
+  border-color: #FF0000;
+  color: #FF0000;
+}
+
+.btn-red:hover {
+  background-color: #FF0000;
+  color: #FFFFFF;
+}
+
 div.actions {
   margin: 20px 0px;
 }

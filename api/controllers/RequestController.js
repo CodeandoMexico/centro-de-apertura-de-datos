@@ -8,9 +8,34 @@
 module.exports = {
 
   index: function(req, res) {
-    Request.find({sort: 'createdAt DESC'}).populate('voted').exec(function(err, requests) {
+    Request.find({sort: 'createdAt DESC'})
+    .populate('voted')
+    .exec(function(err, requests) {
       if (err) return res.send(500, err);
-      return res.view({requests: requests});
+      // If the user is logged in, get his/her votes directly.
+      // This is done to avoid looping through all the 'voted'
+      // arrays of each request in this view.
+      if (req.session.user) {
+        User.findOne({id: req.session.user})
+        .populate('votes')
+        .exec(function(err, user) {
+          var userVotes = [];
+          for (i in user.votes) {
+            // Somehow there are function objects
+            // in the 'votes' array (which don't have
+            // an ID field).
+            if (user.votes[i].id) {
+              userVotes.push(user.votes[i].id);
+            }
+          }
+          return res.view({
+            requests: requests,
+            userVotes: userVotes
+          });
+        });
+      } else {
+        return res.view({requests: requests});
+      }
     });
   },
 
@@ -21,7 +46,7 @@ module.exports = {
     });
   },
 
-  voteUp: function(req, res) {
+  giveVote: function(req, res) {
     if (req.method == 'POST' || req.method == 'post') {
       var userId = req.session.user,
           requestId = req.param('id');
