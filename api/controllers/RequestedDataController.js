@@ -35,5 +35,13 @@ module.exports = {
         });
       });
     });
-  }
+  },
+
+  makeRequest: function(req, res) {
+    if (req.method == 'POST' || req.method == 'post') {
+      // pass
+    } else if (req.method == 'GET' || req.method == 'get') {
+      return res.view();
+    }
+  },
 };

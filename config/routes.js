@@ -31,22 +31,6 @@ module.exports.routes = {
     action: 'index'
   },
 
-  'post /login': {
-    controller: 'user',
-    action: 'login'
-  },
-
-  'get /logout': {
-    controller: 'user',
-    action: 'logout'
-  },
-
-  'get /requesteddata/:id/voteup': {
-    controller: 'requesteddata',
-    action: 'voteUp'
-  }
-
-
   // If a request to a URL doesn't match any of the custom routes above, it is matched 
   // against Sails route blueprints.  See `config/blueprints.js` for configuration options
   // and examples.

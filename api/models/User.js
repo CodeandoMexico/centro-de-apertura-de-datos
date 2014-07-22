@@ -8,11 +8,6 @@
 module.exports = {
 
 	attributes: {
-    username: {
-      type: 'STRING',
-      unique: true,
-      required: true
-    },
     email: {
       type: 'email',
       unique: true,
