@@ -37,11 +37,17 @@ module.exports = {
     });
   },
 
-  makeRequest: function(req, res) {
+  create: function(req, res) {
     if (req.method == 'POST' || req.method == 'post') {
-      // pass
-    } else if (req.method == 'GET' || req.method == 'get') {
-      return res.view();
+      Request.create({
+        title: req.param('title'),
+        url: req.param('url'),
+        description: req.param('description')
+      }, function(err, request) {
+        if (err) return res.send(500, err);
+        req.flash('message', 'Solicitud creada');
+        return res.redirect('/');
+      });
     }
   },
 };
