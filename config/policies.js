@@ -35,7 +35,7 @@ module.exports.policies = {
 		feed : ['isNiceToAnimals', 'hasRabbitFood']
 	}
 	*/
-  RequestedDataController: {
+  RequestedController: {
     'index': true,
     'create': 'currentUser',
     'update': 'currentUser',

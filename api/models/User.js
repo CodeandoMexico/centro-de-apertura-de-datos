@@ -19,7 +19,7 @@ module.exports = {
       minLength: 6
     },
     votes: {
-      collection: 'requesteddata',
+      collection: 'request',
       via: 'voted'
     }
 	},

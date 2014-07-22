@@ -16,10 +16,10 @@
     </div>
   </div>
   <ul class="requested-data-list">
-    <% for(var i = 0; i < requestedDatas.length; i++) { %>
+    <% for(var i = 0; i < requests.length; i++) { %>
       <li>
 	    <% console.log('x') %>
-        <%- partial('partials/requestedData', requestedDatas[i]) %>
+        <%- partial('partials/request', requests[i]) %>
       </li>
     <% } %>
   </ul>

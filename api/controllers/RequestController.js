@@ -1,5 +1,5 @@
 /**
- * RequestedDataController.js 
+ * RequestController.js 
  *
  * @description ::
  * @docs        :: http://sailsjs.org/#!documentation/controllers
@@ -8,30 +8,30 @@
 module.exports = {
 
   index: function(req, res) {
-    RequestedData.find({sort: 'createdAt DESC'}).populate('voted').exec(function(err, requestedDatas) {
+    Request.find({sort: 'createdAt DESC'}).populate('voted').exec(function(err, requests) {
       if (err) return res.send(500, err);
-      return res.view('requestedData/index', {requestedDatas: requestedDatas});
+      return res.view({requests: requests});
     });
   },
 
   find: function(req, res) {
-    RequestedData.findOne({id: req.param('id')}).populate('voted').exec(function(err, requestedData) {
+    Request.findOne({id: req.param('id')}).populate('voted').exec(function(err, request) {
       if (err) return res.send(500, err);
-      return res.view('requestedData/find', {requestedData: requestedData});
+      return res.view({request: request});
     });
   },
 
   voteUp: function(req, res) {
     var userId = req.session.user,
-        requestedDataId = req.param('id');
+        requestId = req.param('id');
     User.findOne({id: userId}).exec(function(err, user) {
       if (err) return res.send(500, err);
-      RequestedData.findOne({id: requestedDataId}).populate('voted').exec(function(err, requestedData) {
+      Request.findOne({id: requestId}).populate('voted').exec(function(err, request) {
         if (err) return res.send(500, err);
-        user.votes.add(requestedData.id);
+        user.votes.add(request.id);
         user.save(function(err, user) {
           if (err) return res.send(500, err);
-          res.send(200, {votes: requestedData.voted});
+          res.send(200, {votes: request.voted});
         });
       });
     });
