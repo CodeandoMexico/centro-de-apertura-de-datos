@@ -58,6 +58,27 @@ module.exports = {
         return res.redirect('/user/login');
       });
     }
-  }
+  },
+
+  giveVote: function(req, res) {
+    if (req.method == 'POST' || req.method == 'post') {
+      var userId = req.session.user,
+          requestId = req.param('id');
+      User.findOne({id: userId}).exec(function(err, user) {
+        if (err) return res.send(500, err);
+        Request.findOne({id: requestId}).populate('voted').exec(function(err, request) {
+          if (err) return res.send(500, err);
+          user.votes.add(request.id);
+          user.save(function(err, user) {
+            if (err) return res.send(500, err);
+            res.send(200, {votes: request.voted});
+            return res.redirect('/');
+          });
+        });
+      });
+    } else {
+      return res.redirect('/');
+    }
+  },
 
 };
