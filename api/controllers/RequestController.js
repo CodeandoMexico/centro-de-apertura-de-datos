@@ -33,7 +33,12 @@ module.exports = {
           });
         });
       } else {
-        return res.view({requests: requests});
+        // Current user is not logged-in.
+        // Return an empty array for voted requests.
+        return res.view({
+          requests: requests,
+          userVotes: []
+        });
       }
     });
   },
