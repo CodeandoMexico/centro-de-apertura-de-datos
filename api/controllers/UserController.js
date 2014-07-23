@@ -8,13 +8,11 @@
 module.exports = {
 
   login: function (req, res) {
-    console.log('entra login');
     if (req.method == 'POST' || req.method == 'post') {
       var bcrypt = require('bcrypt');
 
       User.findOneByEmail(req.body.email).exec(function (err, user) {
         if (err) res.json({ error: 'DB error' }, 500);
-        console.log('--->look for',req.body.email,'which is',user);
 
         if (user) {
           bcrypt.compare(req.body.password, user.password, function (err, match) {
@@ -47,17 +45,14 @@ module.exports = {
 
   signup: function(req, res) {
     if (req.method == 'POST' || req.method == 'post') {
-      console.log('ENTRA POST CREATE');
       User.create({
         email: req.param('email'),
         password: req.param('password')
       }, function(err, user) {
         if (err) return res.send(500, err);
-        console.log('----->created',user);
         req.flash('success', 'Usuario creado exitosamente');
         return res.redirect('/user/login');
       });
-      console.log('x');
     } else {
       return res.view();
     }

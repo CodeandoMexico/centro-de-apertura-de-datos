@@ -26,7 +26,6 @@ module.exports = {
 
   // Encrypt password before create
   beforeCreate: function(attrs, next) {
-    console.log('b4 create');
     var bcrypt = require('bcrypt');
 
     bcrypt.genSalt(10, function(err, salt){
