@@ -20,11 +20,11 @@
     </div>
     <div class="col-md-2">
       <% if (userVotes.indexOf(request.id) > -1) { %>
-        <button type="button" class="btn btn-hollow btn-red" onclick="$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+        <button type="button" class="btn btn-hollow btn-red" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
           Quitar Voto
         </button>
       <% } else { %>
-        <button type="button" class="btn btn-hollow btn-green" onclick="$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+        <button type="button" class="btn btn-hollow btn-green" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
           Votar
         </button>
       <% } %>

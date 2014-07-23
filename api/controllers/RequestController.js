@@ -21,9 +21,8 @@ module.exports = {
         .exec(function(err, user) {
           var userVotes = [];
           for (i in user.votes) {
-            // Somehow there are function objects
-            // in the 'votes' array (which don't have
-            // an ID field).
+            // Only grab actual request IDs and not Sails.js
+            // add() and remove() functions.
             if (user.votes[i].id) {
               userVotes.push(user.votes[i].id);
             }
