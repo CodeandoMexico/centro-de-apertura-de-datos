@@ -16,15 +16,17 @@ module.exports = {
       // This is done to avoid looping through all the 'voted'
       // arrays of each request in this view.
       if (req.session.user) {
-        User.findOne({id: req.session.user})
+        User.findOne({id: req.session.user.id})
         .populate('votes')
         .exec(function(err, user) {
           var userVotes = [];
-          for (i in user.votes) {
-            // Only grab actual request IDs and not Sails.js
-            // add() and remove() functions.
-            if (user.votes[i].id) {
-              userVotes.push(user.votes[i].id);
+          if (user) {
+            for (i in user.votes) {
+              // Only grab actual request IDs and not Sails.js
+              // add() and remove() functions.
+              if (user.votes[i].id) {
+                userVotes.push(user.votes[i].id);
+              }
             }
           }
           return res.view({

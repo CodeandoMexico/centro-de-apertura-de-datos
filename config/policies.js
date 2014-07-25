@@ -36,14 +36,11 @@ module.exports.policies = {
 	}
 	*/
   RequestController: {
-    '*': 'sessionAuth',
-    'index': true
+    '*': true
   },
 
   UserController: {
-    '*': 'sessionAuth',
-    'signup': true,
-    'login': true
+    '*': true,
   },
 };
 

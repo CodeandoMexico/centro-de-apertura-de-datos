@@ -19,14 +19,20 @@
       <span><span class="vote-count"><%= request.voted.length %></span>&nbsp;Votos</span>
     </div>
     <div class="col-md-2">
-      <% if (userVotes.indexOf(request.id) > -1) { %>
-        <button type="button" class="btn btn-hollow btn-red" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
-          Quitar Voto
-        </button>
+      <% if (req.session.user) { %>
+        <% if (userVotes.indexOf(request.id) > -1) { %>
+          <button type="button" class="btn btn-hollow btn-red" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+            Quitar Voto
+          </button>
+        <% } else { %>
+          <button type="button" class="btn btn-hollow btn-green" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+            Votar
+          </button>
+        <% } %>
       <% } else { %>
-        <button type="button" class="btn btn-hollow btn-green" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
-          Votar
-        </button>
+          <button type="button" class="btn btn-hollow btn-green" onclick="#">
+            Votar
+          </button>
       <% } %>
     </div>
   </div>
