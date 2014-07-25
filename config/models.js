@@ -13,4 +13,5 @@ module.exports.models = {
   //
   // (defaults to localDiskDb)
   connection: 'postgresql'
+  //connection: 'localDiskDb'
 };

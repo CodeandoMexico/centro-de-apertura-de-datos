@@ -35,12 +35,15 @@ module.exports.policies = {
 		feed : ['isNiceToAnimals', 'hasRabbitFood']
 	}
 	*/
-  RequestedDataController: {
-    'index': true,
-    'create': 'currentUser',
-    'update': 'currentUser',
-    'destroy': 'currentUser',
-    'voteUp': 'currentUser'
+  RequestController: {
+    '*': 'sessionAuth',
+    'index': true
+  },
+
+  UserController: {
+    '*': 'sessionAuth',
+    'signup': true,
+    'login': true
   },
 };
 

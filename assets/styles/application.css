@@ -90,6 +90,16 @@ body {
   color: #FFFFFF;
 }
 
+.btn-red {
+  border-color: #FF0000;
+  color: #FF0000;
+}
+
+.btn-red:hover {
+  background-color: #FF0000;
+  color: #FFFFFF;
+}
+
 div.actions {
   margin: 20px 0px;
 }
@@ -114,4 +124,11 @@ div.actions {
 .disclaimer a {
   font-size: 16px;
   font-weight: 200;
+}
+
+.hidden form {
+  position:absolute;
+  left:0px;
+  top:0px;
+  z-index:-1;
 }

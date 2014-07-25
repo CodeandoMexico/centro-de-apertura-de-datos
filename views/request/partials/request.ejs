@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <div class="requested-data row">
+    <div class="requested-data-info col-md-7">
+      <% if (request.url) { %>
+        <h1 class="title">
+          <%= request.title %>
+          <small>
+            <a href="<%= request.url %>" class="requested-data-url" target="_blank">
+              (<%= request.url %>)
+            </a>
+          </small>
+        </h1>
+      <% } else { %>
+        <h2 class="title"><%= request.title %></h2>
+      <% } %>
+      <p class="description"><%= request.description %></p>
+    </div>
+    <div class="requested-data-votes col-md-2">
+      <span><span class="vote-count"><%= request.voted.length %></span>&nbsp;Votos</span>
+    </div>
+    <div class="col-md-2">
+      <% if (userVotes.indexOf(request.id) > -1) { %>
+        <button type="button" class="btn btn-hollow btn-red" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+          Quitar Voto
+        </button>
+      <% } else { %>
+        <button type="button" class="btn btn-hollow btn-green" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+          Votar
+        </button>
+      <% } %>
+    </div>
+  </div>
+</div>

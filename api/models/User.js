@@ -8,11 +8,6 @@
 module.exports = {
 
 	attributes: {
-    username: {
-      type: 'STRING',
-      unique: true,
-      required: true
-    },
     email: {
       type: 'email',
       unique: true,
@@ -24,7 +19,7 @@ module.exports = {
       minLength: 6
     },
     votes: {
-      collection: 'requesteddata',
+      collection: 'request',
       via: 'voted'
     }
 	},
