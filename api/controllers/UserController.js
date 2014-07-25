@@ -7,7 +7,7 @@
 
 module.exports = {
 
-	signin: function(req, res) {
+  signin: function(req, res) {
     sails.config.oauth_stuff.twitter.getRequestToken(
       function(error, request_token, request_token_secret, results) {
       if (error) {
