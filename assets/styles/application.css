@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-  max-width: 900px;
+  max-width: 990px;
 }
 
 .requested-data-list {
@@ -187,6 +187,7 @@ div.actions {
 /* ===== END HEADER ===== */
 
 /* ===== START FOOTER ===== */
+
 ul.unstyled, ol.unstyled {
     margin-left: 0;
     list-style: none;
@@ -197,28 +198,46 @@ ul.unstyled, ol.unstyled {
     list-style: none;
 }
 
-.container-footer {
+.site-footer {
   padding-top: 50px;
   padding-bottom: 50px;
-  max-width: 970px;
+  background: none repeat scroll 0% 0% #EEE;
+  color: #2C2C2C;
+  font-weight: 200;
+  font-size: 1.1em;
+  width:100%;
+}
+
+.site-footer a {
+  color: #2C2C2C;
+}
+
+.site-footer h5 {
+  font-weight: 200;
+  color: #565656;
+}
+
+.site-footer .logo {
+  text-align: right;
+  vertical-align: top;
 }
 
 .footer-links, .attribution {
-    float: left;
-    width: 460px;
+  float: left;
+  width: 460px;
 }
 .footer-links {
-    margin-left: 0;
+  margin-left: 0;
 }
 .footer-links ul {
-    float: left;
-    margin-left: 20px;
+  float: left;
+  margin-left: 20px;
 }
 .footer-links ul:first-child {
-    margin-left: 0;
+  margin-left: 0;
 }
 .footer-links ul li {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .footer-links {
@@ -227,7 +246,30 @@ ul.unstyled, ol.unstyled {
 
 .footer-links .logo, .footer-links .all-links {
   display: inline-block;
-  margin: 0px 50px 0px 50px;
+  margin: 0px 50px;
 }
+
+#second-footer-links-column {
+    margin-left: 20px;
+}
+
+.footer-links ul {
+    float: left;
+    margin-left: 20px;
+    width: 220px;
+}
+ul.unstyled, ol.unstyled {
+    margin-left: 0px;
+    list-style: none outside none;
+}
+.unstyled {
+    margin: 0px;
+    list-style: none outside none;
+}
+ul, ol {
+    padding: 0px;
+    margin: 0px 0px 10px 25px;
+}
+
 
 /* ===== END FOOTER ===== */
