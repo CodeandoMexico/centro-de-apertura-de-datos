@@ -140,7 +140,7 @@ div.actions {
 }
 .navbar-inner {
     min-height: 40px;
-    padding-left: 20px;
+    padding-left: 25px;
     padding-right: 20px;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);
     border: 1px solid #d4d4d4;
@@ -187,15 +187,17 @@ div.actions {
 /* ===== END HEADER ===== */
 
 /* ===== START FOOTER ===== */
-
 ul.unstyled, ol.unstyled {
-    margin-left: 0;
-    list-style: none;
+    margin-left: 0px;
+    list-style: none outside none;
 }
-
 .unstyled {
-    margin: 0;
-    list-style: none;
+    margin: 0px;
+    list-style: none outside none;
+}
+ul, ol {
+    padding: 0px;
+    margin: 0px 0px 10px 25px;
 }
 
 .site-footer {
@@ -233,8 +235,7 @@ ul.unstyled, ol.unstyled {
   float: left;
   margin-left: 20px;
 }
-.footer-links ul:first-child {
-  margin-left: 0;
+
 }
 .footer-links ul li {
   margin-bottom: 5px;
@@ -249,6 +250,10 @@ ul.unstyled, ol.unstyled {
   margin: 0px 50px;
 }
 
+#first-footer-links-column {
+    margin-left: 0px;
+}
+
 #second-footer-links-column {
     margin-left: 20px;
 }
@@ -258,18 +263,5 @@ ul.unstyled, ol.unstyled {
     margin-left: 20px;
     width: 220px;
 }
-ul.unstyled, ol.unstyled {
-    margin-left: 0px;
-    list-style: none outside none;
-}
-.unstyled {
-    margin: 0px;
-    list-style: none outside none;
-}
-ul, ol {
-    padding: 0px;
-    margin: 0px 0px 10px 25px;
-}
-
 
 /* ===== END FOOTER ===== */
