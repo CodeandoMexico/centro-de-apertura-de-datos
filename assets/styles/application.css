@@ -132,3 +132,42 @@ div.actions {
   top:0px;
   z-index:-1;
 }
+
+/* ===== START MODAL ===== */
+.modal-backdrop {
+  background-color: #283858;
+}
+
+.modal-header {
+  background: none repeat scroll 0% 0% transparent;
+}
+
+.modal-centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center !important;
+}
+
+.modal-title {
+  max-width: 300px;
+}
+
+.modal-label {
+  color: #2a6bcc;
+  display : block;
+  padding-top: 10px;
+}
+
+.modal-text-input {
+  width: 300px;
+}
+
+.modal-text-area {
+  width: 300px;
+}
+
+.modal-form {
+  padding: 20px;
+}
+/* ===== END MODAL ===== */
