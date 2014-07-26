@@ -154,20 +154,28 @@ div.actions {
 }
 
 .modal-label {
-  color: #2a6bcc;
+  color: #464F9C;
   display : block;
-  padding-top: 10px;
+  padding-top: 15px;
 }
 
 .modal-text-input {
   width: 300px;
+  border: none;
+  border-bottom: 1px solid gray;
 }
 
 .modal-text-area {
   width: 300px;
+  border: 1px solid gray;
 }
 
 .modal-form {
   padding: 20px;
+}
+
+.modal-dialog {
+  padding-top: 65px;
+  max-width: 400px;
 }
 /* ===== END MODAL ===== */
