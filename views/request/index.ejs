@@ -24,14 +24,15 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title" id="requestFormModalLabel">Solicitud de Datos</h4>
+          <h4 class="modal-title modal-centered">
+            Solicita los datos que necesites y nuestro equipo te ayudar&aacute;
+          </h4>
         </div>
         <div class="modal-body">
           <%- partial('partials/requestForm.ejs') %>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick="$('#requestForm').submit()">Solicitar</button>
+          <button type="button" class="btn btn-hollow btn-purple btn-wide modal-centered" onclick="$('#requestForm').submit()">Solicitar</button>
         </div>
       </div>
     </div>
