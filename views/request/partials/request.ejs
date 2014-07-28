@@ -4,16 +4,11 @@
       <% if (request.url) { %>
         <h1 class="title">
           <%= request.title %>
-          <small>
-            <a href="<%= request.url %>" class="requested-data-url" target="_blank">
-              (<%= request.url %>)
-            </a>
-          </small>
         </h1>
       <% } else { %>
         <h2 class="title"><%= request.title %></h2>
       <% } %>
-      <p class="description"><%= request.description %></p>
+      <p class="description blur"><%= request.description %></p>
     </div>
     <div class="requested-data-votes col-md-2">
       <span><span class="vote-count"><%= request.voted.length %></span>&nbsp;Votos</span>
