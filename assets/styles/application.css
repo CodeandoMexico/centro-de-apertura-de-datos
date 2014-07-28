@@ -27,13 +27,20 @@ body {
   word-wrap: break-word;
 }
 
-.requested-data .description, .requested-data-votes {
+.requested-data .requested-data-votes {
   font-size: 18px;
   font-weight: 100;
   letter-spacing: 1px;
   color: #989898;
+}
+
+.description {
   word-wrap: break-word;
   text-align:justify;
+  line-height: 1.2em;
+  height: 3.6em;
+  font-size: 1.2em;
+  overflow: hidden;
 }
 
 .requested-data-info {
@@ -135,12 +142,14 @@ div.actions {
 }
 
 /* ===== START HEADER ===== */
+
 .navbar {
     overflow: visible;
     margin-bottom: 20px;
     *position: relative;
     *z-index: 2;
 }
+
 .navbar-inner {
     min-height: 40px;
     padding-left: 10px;
@@ -156,21 +165,26 @@ div.actions {
     *zoom: 1;
   background: #283858;
 }
+
 .navbar-inner:before, .navbar-inner:after {
     display: table;
     content: "";
     line-height: 0;
 }
+
 .navbar-inner:after {
     clear: both;
 }
+
 .navbar .container {
     width: auto;
 }
+
 .nav-collapse.collapse {
     height: auto;
     overflow: visible;
 }
+
 .navbar .brand {
     float: left;
     display: block;
@@ -187,17 +201,21 @@ div.actions {
 .brand {
   background-color: #151f31;
 }
+
 /* ===== END HEADER ===== */
 
 /* ===== START FOOTER ===== */
+
 ul.unstyled, ol.unstyled {
     margin-left: 0px;
     list-style: none outside none;
 }
+
 .unstyled {
     margin: 0px;
     list-style: none outside none;
 }
+
 ul, ol {
     padding: 0px;
     margin: 0px 0px 10px 25px;
@@ -231,9 +249,11 @@ ul, ol {
   float: left;
   width: 460px;
 }
+
 .footer-links {
   margin-left: 0;
 }
+
 .footer-links ul {
   float: left;
   margin-left: 20px;
@@ -265,9 +285,11 @@ ul, ol {
     margin-left: 20px;
     width: 220px;
 }
+
 /* ===== END FOOTER ===== */
 
 /* ===== START MODAL ===== */
+
 .modal-backdrop {
   background-color: #283858;
 }
@@ -312,4 +334,25 @@ ul, ol {
   padding-top: 65px;
   max-width: 400px;
 }
+
 /* ===== END MODAL ===== */
+
+/* ===== START DESCRIPTION BLUR ===== */
+
+.blur {
+  position: relative;
+  height: 3.6em; /* mostrar 3 lineas */
+}
+
+.blur:after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 70%;
+  height: 1.2em;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 85%);
+}
+
+/* ===== END DESCRIPTION BLUR ===== */
