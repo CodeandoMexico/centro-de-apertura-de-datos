@@ -1,11 +1,11 @@
-<form id="requestForm" action="/request/create" method="POST">
-  <label>T&iacute;tulo</label>
-  <input type="text" name="title">
+<form id="requestForm" class="modal-form" action="/request/create" method="POST">
+  <label class="modal-label">T&iacute;tulo</label>
+  <input type="text" class="modal-text-input" name="title" placeholder="Ej. INEGI">
   <br />
-  <label>URL</label>
-  <input type="text" name="url">
+  <label class="modal-label">URL</label>
+  <input type="text" class="modal-text-input" name="url" placeholder="Ej. http://www.inegi.org.mx/">
   <br />
-  <label>Descripci&oacute;n</label>
-  <textarea rows="5" cols="30" name="description"></textarea>
+  <label class="modal-label">Descripci&oacute;n</label>
+  <textarea rows="5" class="modal-text-area" name="description" placeholder="Ej. &Iacute;ndice de pobreza infantil en Am&eacute;rica Latina"></textarea>
   <input type="hidden" name="_csrf" value="<%= _csrf %>">
 </form>
