@@ -24,6 +24,7 @@ body {
 
 .requested-data .title {
   color: #464F9C;
+  word-wrap: break-word;
 }
 
 .requested-data .description, .requested-data-votes {
@@ -31,6 +32,8 @@ body {
   font-weight: 100;
   letter-spacing: 1px;
   color: #989898;
+  word-wrap: break-word;
+  text-align:justify;
 }
 
 .requested-data-info {
