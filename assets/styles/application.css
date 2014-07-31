@@ -261,3 +261,11 @@ hr {
 .voted {
   background-color: #C2E5FF; 
 }
+
+.paginator {
+  text-align: center;
+  padding: 30px;
+}
+
+.paginator {
+}
