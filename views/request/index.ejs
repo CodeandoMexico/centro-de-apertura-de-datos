@@ -1,17 +1,16 @@
 
 <div class="container">
   <div class="row actions">
-    <div class="col-md-11">
-      <h1 class="site-title">Datos por abrir
-        <span class="btn-group pull-right">
-          <button type="button" id="request-btn" class="btn btn-hollow btn-purple btn-wide" data-container="body" data-toggle="modal" data-target="#requestFormModal">
-            Solicitar Datos
-          </button>
-        </span>
-      </h1>
+    <div class="pseudo-header">
+      <div class="block-pull-right">
+        <button type="button" id="request-btn" class="btn btn-hollow btn-purple btn-wide" data-container="body" data-toggle="modal" data-target="#requestFormModal">
+          Solicitar Datos
+        </button>
+      </div>
     </div>
   </div>
   <ul class="requested-data-list">
+    <hr>
     <% for(var i = 0; i < requests.length; i++) { %>
       <li>
         <%- partial('partials/request', requests[i]) %>
