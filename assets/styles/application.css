@@ -29,6 +29,7 @@ body {
 }
 
 .requested-data:hover {
+  /*background-color: #283858;*/
 }
 
 .title {
@@ -54,6 +55,8 @@ body {
 
 .requested-data-info {
   padding-left: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .requested-data-url {
@@ -238,4 +241,10 @@ body {
 
 .btn-circle-vote:hover { 
     background-color: #C2E5FF; 
+}
+
+hr {
+  padding: 0;
+  margin: 0;
+  border-width: 2px;
 }
