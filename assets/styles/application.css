@@ -213,9 +213,17 @@ body {
   text-align: center;
 }
 
-.requested-when {
+.request-details {
   color: #888;
   font-size: small;
+}
+
+.request-details a {
+  color: #888;
+}
+
+.request-details a:hover {
+  color: #888;
 }
 
 @media (max-width: 970px) {
@@ -237,15 +245,19 @@ body {
 }
 
 .btn-circle-vote:focus { 
-    outline: none; 
+  outline: none; 
 }
 
 .btn-circle-vote:hover { 
-    background-color: #C2E5FF; 
+  background-color: #C2E5FF; 
 }
 
 hr {
   padding: 0;
   margin: 0;
   border-width: 2px;
+}
+
+.voted {
+  background-color: #C2E5FF; 
 }

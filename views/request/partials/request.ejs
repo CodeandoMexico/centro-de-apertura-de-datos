@@ -3,16 +3,16 @@
     <div class="col-md-1 centered-text vote">
       <% if (req.session.user) { %>
         <% if (userVotes.indexOf(request.id) > -1) { %>
-          <button type="button" class="btn btn-hollow btn-red" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
-            -
-          </button>
+          <a title="Quitar mi voto" class="btn btn-default btn-circle-vote voted" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+          </a>
         <% } else { %>
-          <button type="button" class="btn btn-hollow btn-green" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
-            +
-          </button>
+          <a title="Dar mi voto" class="btn btn-default btn-circle-vote" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+          </a>
         <% } %>
       <% } else { %>
-          <a href="#" class="btn btn-default btn-circle-vote">
+          <a title="Dar mi voto" class="btn btn-default btn-circle-vote">
             <i class="glyphicon glyphicon-thumbs-up"></i>
           </a>
       <% } %>
@@ -24,8 +24,10 @@
       <h3 class="title">
         <%= request.title %>
       </h3>
-      <div class="requested-when">
+      <div class="request-details">
         Fecha de solicitud: <%= request.createdAt %>
+        <br />
+        <a href="#">Detalles</a>
       </div>
     </div>
   </div>
