@@ -28,6 +28,9 @@ body {
   word-wrap: break-word;
 }
 
+.requested-data:hover {
+}
+
 .title {
   color: #464F9C;
   word-wrap: break-word;
@@ -60,7 +63,8 @@ body {
 }
 
 .vote-count {
-  color: #AFD69A;
+  /*color: #AFD69A;*/
+  color: black;
   font-weight: bold;
   width: 100%;
 }
@@ -214,6 +218,24 @@ body {
 @media (max-width: 970px) {
   .vote {
     width: 100%;
-    background: url(https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRWoT0R9HM87cObvR0TSgqSIaS88hr5FKOt04PvhjFU1RjMFrArDA);
   }
+}
+
+.btn-circle-vote {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 19px;
+  line-height: 1.42;
+  border-radius: 20px;
+  border-width: 2px;
+}
+
+.btn-circle-vote:focus { 
+    outline: none; 
+}
+
+.btn-circle-vote:hover { 
+    background-color: #C2E5FF; 
 }

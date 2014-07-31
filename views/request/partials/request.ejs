@@ -12,9 +12,9 @@
           </button>
         <% } %>
       <% } else { %>
-          <button type="button" class="btn btn-hollow btn-green" onclick="#">
-            +
-          </button>
+          <a href="#" class="btn btn-default btn-circle-vote">
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+          </a>
       <% } %>
       <div class="vote-count">
         <%= request.voted.length %>
