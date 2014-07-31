@@ -32,7 +32,8 @@ body {
   color: #464F9C;
   word-wrap: break-word;
   padding: 0;
-  margin:0;
+  margin: 0;
+  text-align: justify;
 }
 
 .requested-data .requested-data-votes {
@@ -205,10 +206,14 @@ body {
   text-align: center;
 }
 
-.vote {
+.requested-when {
+  color: #888;
+  font-size: small;
 }
 
-.requested-when {
-color: #888;
-font-size: small;
+@media (max-width: 970px) {
+  .vote {
+    width: 100%;
+    background: url(https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRWoT0R9HM87cObvR0TSgqSIaS88hr5FKOt04PvhjFU1RjMFrArDA);
+  }
 }
