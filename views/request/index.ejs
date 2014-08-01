@@ -9,11 +9,18 @@
       </div>
     </div>
   </div>
+    <ul class="nav nav-tabs upper-tabs">
+        <li class="active"><a href="#">M&aacute;s votadas</a></li>
+        <li><a href="#">M&aacute;s recientes</a></li>
+        <li><a href="#">Buscar</a></li>
+    </ul>
   <ul class="requested-data-list">
-    <hr>
     <% for(var i = 0; i < requests.length; i++) { %>
       <li>
         <%- partial('partials/request', requests[i]) %>
+        <% if (i != requests.length - 1) { // no HR for last entry %>
+          <hr>
+        <% } %>
       </li>
     <% } %>
   </ul>

@@ -15,6 +15,10 @@ body {
   /*padding-top:20px;*/
   margin: 0;
   background-color: #FFFFFF;
+  /*border-radius: 25px;*/
+  border-bottom-left-radius: 27.5px;
+  border-bottom-right-radius: 27.5px;
+  border-top-right-radius: 27.5px;
 }
 
 .requested-data div {
@@ -268,4 +272,19 @@ hr {
 }
 
 .paginator {
+}
+
+.upper-tabs {
+  font-size: 16px;
+  border: none;
+  border-style: none;
+}
+
+.nav-tabs > li.active > a {
+  border-color: transparent !important;
+  color: #25255B;
+}
+
+.nav-tabs > li > a {
+  color: #25255B;
 }
