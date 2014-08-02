@@ -10,9 +10,9 @@
     </div>
   </div>
     <ul class="nav nav-tabs upper-tabs">
-        <li class="active"><a href="#">M&aacute;s votadas</a></li>
-        <li><a href="#">M&aacute;s recientes</a></li>
-        <li><a href="#">Buscar</a></li>
+        <li class="<%= newest_li_active %>"><a href="/request/index?sort_by=newest">M&aacute;s recientes</a></li>
+        <li class="<%= most_popular_li_active %>"><a href="/request/index?sort_by=most_popular">M&aacute;s votadas</a></li>
+        <li class="<%= search_li_active %>"><a href="/request/search">Buscar</a></li>
     </ul>
   <ul class="requested-data-list">
     <% for(var i = 0; i < requests.length; i++) { %>
