@@ -16,14 +16,37 @@ module.exports = {
       return 0;
     }
 
+    // Used to tell the view which tab must be
+    // shown as selected.
     var newest_li_active = "active";
-    var most_popular_li_active = "";
+    var most_votes_li_active = "";
     var search_li_active = "";
+
+    // Used to tell the view whether previous (left) and
+    // next (right) paginating buttons should be shown.
+    var reached_left_page_limit = false;
+    var reached_right_page_limit = false;
+
+    // Tells the views how to make the prev/next buttons act.
+    // The default sorting method is 'newest' first.
+    var allowed_sorting_method = ['newest', 'most_votes'];
+    var sorting_method = 'newest';
+    if (typeof req.param('sort_by') === 'undefined') {
+      // Default to 'newest';
+    } else {
+      if (allowed_sorting_method.indexOf(req.param('sort_by')) <= -1) {
+        // Strange sorting method given by user.
+        // Default to 'newest'.
+      } else {
+        sorting_method = req.param('sort_by');
+      }
+    }
+    console.log('--->',sorting_method);
 
     Request.find({sort: 'createdAt DESC'})
     .populate('voted')
     .exec(function(err, requests) {
-      if (err) return res.send(500, err);
+      if (err) return console.log(err);
       // If the user is logged in, get his/her votes directly.
       // This is done to avoid looping through all the 'voted'
       // arrays of each request in this view.
@@ -41,33 +64,68 @@ module.exports = {
               }
             }
           }
-          if (req.param('sort_by') == 'most_popular') {
+          if (sorting_method  == 'most_votes') {
             requests.sort(compareVotes);
             newest_li_active = "";
-            most_popular_li_active = "active";
+            most_votes_li_active = "active";
           }
           return res.view({
             requests: requests,
             user_votes: user_votes,
             newest_li_active: newest_li_active,
-            most_popular_li_active: most_popular_li_active,
-            search_li_active: search_li_active
+            most_votes_li_active: most_votes_li_active,
+            search_li_active: search_li_active,
           });
         });
       } else {
         // Current user is not logged-in.
-        // Return an empty array for voted requests.
-        if (req.param('sort_by') == 'most_popular') {
+        if (sorting_method == 'most_votes') {
           requests.sort(compareVotes);
           newest_li_active = "";
-          most_popular_li_active = "active";
+          most_votes_li_active = "active";
         }
+
+        var pages_float = requests.length / sails.config.globals.cmx.requests_per_page;
+        var pages_int = pages_float % 10 > 1 ? Math.floor(pages_float) + 1 : pages_float;
+        var requested_page = 1;
+        if (typeof req.param('page') === 'undefined') { // No page parameter.
+          // Leave default as 1.
+        } else {
+          if (isNaN(req.param('page'))) { // Given page parameter is not a number.
+            // Leave default as 1.
+          } else {  // Given page parameter is a number. Cast to int.
+            requested_page = parseInt(req.param('page'));
+          }
+        }
+
+        // Tells the views which pages are back/forward the
+        // current one according to the 'page' parameter.
+        var previous_page = requested_page - 1;
+        var next_page = requested_page + 1;
+
+        var base = (requested_page - 1) * sails.config.globals.cmx.requests_per_page;
+        var paged_requests = requests.slice(base, base + sails.config.globals.cmx.requests_per_page);
+
+
+        if (requested_page <= 1) {
+          reached_left_page_limit = true;
+        }
+
+        if (next_page >= pages_int) {
+          reached_right_page_limit = true;
+        }
+
         return res.view({
-          requests: requests,
+          requests: paged_requests,
           user_votes: [],
           newest_li_active: newest_li_active,
-          most_popular_li_active: most_popular_li_active,
-          search_li_active: search_li_active
+          most_votes_li_active: most_votes_li_active,
+          search_li_active: search_li_active,
+          reached_left_page_limit: reached_left_page_limit,
+          reached_right_page_limit: reached_right_page_limit,
+          previous_page: previous_page,
+          next_page: next_page,
+          sorting_method: sorting_method
         });
       }
     });

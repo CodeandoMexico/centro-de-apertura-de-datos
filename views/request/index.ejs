@@ -11,7 +11,7 @@
   </div>
     <ul class="nav nav-tabs upper-tabs">
         <li class="<%= newest_li_active %>"><a href="/request/index?sort_by=newest">M&aacute;s recientes</a></li>
-        <li class="<%= most_popular_li_active %>"><a href="/request/index?sort_by=most_popular">M&aacute;s votadas</a></li>
+        <li class="<%= most_votes_li_active %>"><a href="/request/index?sort_by=most_votes">M&aacute;s votadas</a></li>
         <li class="<%= search_li_active %>"><a href="/request/search">Buscar</a></li>
     </ul>
   <ul class="requested-data-list">
@@ -26,12 +26,16 @@
   </ul>
   <div class="paginator row">
     <h3>
-      <button class="btn btn-hollow btn-purple btn-wide">
-        < anterior
-      </button>
-      <button class="btn btn-hollow btn-purple btn-wide">
-        siguiente >
-      </button>
+      <% if (!reached_left_page_limit) { %>
+        <button class="btn btn-hollow btn-purple btn-wide" onclick="location.href='/request/index?sort_by=<%= sorting_method %>&page=<%= previous_page %>'">
+          < p&aacute;gina <%= previous_page %>
+        </button>
+      <% } %>
+      <% if (!reached_right_page_limit) { %>
+        <button class="btn btn-hollow btn-purple btn-wide" onclick="location.href='/request/index?sort_by=<%= sorting_method %>&page=<%= next_page %>'">
+          p&aacute;gina <%= next_page %> >
+        </button>
+      <% } %>
     </h3>
   </div>
 </div>
