@@ -8,6 +8,6 @@ module.exports.globals = {
     site_title: 'Centro de Apertura de Datos',
     cdadd_logo: '/images/cdadd-logo.png',
     cmx_logo: '/images/cmx-logo.png',
-    requests_per_page: 3
+    requests_per_page: 6
   }
 };
