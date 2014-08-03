@@ -1,23 +1,54 @@
 
 <div class="container">
   <div class="row actions">
-    <div class="col-md-11">
-      <h1 class="site-title">Datos por abrir
-        <span class="btn-group pull-right">
-          <button type="button" id="request-btn" class="btn btn-hollow btn-purple btn-wide" data-container="body" data-toggle="modal" data-target="#requestFormModal">
-            Solicitar Datos
-          </button>
-        </span>
-      </h1>
+    <div class="pseudo-header">
+      <div class="block-pull-right">
+        <button type="button" id="request-btn" class="btn btn-hollow btn-purple btn-wide" data-container="body" data-toggle="modal" data-target="#requestFormModal">
+          Solicitar Datos
+        </button>
+      </div>
     </div>
   </div>
+    <ul class="nav nav-tabs upper-tabs">
+        <li class="<%= newest_li_class %>"><a href="/request/index?sort_by=newest">M&aacute;s recientes</a></li>
+        <li class="<%= most_votes_li_class %>"><a href="/request/index?sort_by=most_votes">M&aacute;s votadas</a></li>
+        <li class=""><a href="/request/search">Buscar</a></li>
+    </ul>
   <ul class="requested-data-list">
-    <% for(var i = 0; i < requests.length; i++) { %>
+    <% for(var i = 0; i < pd.paged_requests.length; i++) { %>
       <li>
-        <%- partial('partials/request', requests[i]) %>
+        <%- partial('partials/request', pd.paged_requests[i]) %>
+        <% if (i != pd.paged_requests.length - 1) { // no HR for last entry %>
+          <hr>
+        <% } %>
       </li>
     <% } %>
   </ul>
+  <div class="paginator row">
+    <h3>
+      <% if (pd.show_prev_page_btn) { %>
+        <button class="btn btn-hollow btn-purple btn-wide" onclick="location.href='/request/index?sort_by=<%= sorting_method %>&page=<%= pd.previous_page %>'">
+          < p&aacute;gina <%= pd.previous_page %>
+        </button>
+      <% } else { %>
+        <button class="btn btn-hollow btn-purple btn-wide btn-hidden">
+          < p&aacute;gina -
+        </button>
+      <% } %>
+      <button class="btn btn-hollow btn-purple btn-current-page">
+        <%= pd.requested_page %>
+      </button>
+      <% if (pd.show_next_page_btn) { %>
+        <button class="btn btn-hollow btn-purple btn-wide" onclick="location.href='/request/index?sort_by=<%= sorting_method %>&page=<%= pd.next_page %>'">
+          p&aacute;gina <%= pd.next_page %> >
+        </button>
+      <% } else { %>
+        <button class="btn btn-hollow btn-purple btn-wide btn-hidden">
+          p&aacute;gina + >
+        </button>
+      <% } %>
+    </h3>
+  </div>
 </div>
 
 <div class="modal fade" id="requestFormModal" tabindex="-1" role="dialog" aria-labelledby="requestFormModalLabel" aria-hidden="true">

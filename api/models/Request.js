@@ -24,6 +24,19 @@ module.exports = {
       via: 'votes',
       dominant: true
     }
-	}
+	},
+
+  /*
+   * Function used to sort requests by number ov votes.
+   * @param a {Request} A request object to compare against b
+   * @param b {Request} A request object to compare against a
+   */
+  compareVotes: function(a, b) {
+    if (a.voted.length < b.voted.length)
+      return 1;
+    if (a.voted.length > b.voted.length)
+      return -1;
+    return 0;
+  },
 
 };

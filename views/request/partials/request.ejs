@@ -1,34 +1,34 @@
 <div class="container-fluid">
   <div class="requested-data row">
-    <div class="requested-data-info col-md-7">
-      <% if (request.url) { %>
-        <h1 class="title">
-          <%= request.title %>
-        </h1>
-      <% } else { %>
-        <h2 class="title"><%= request.title %></h2>
-      <% } %>
-      <p class="description blur"><%= request.description %></p>
-    </div>
-    <div class="requested-data-votes col-md-2">
-      <span><span class="vote-count"><%= request.voted.length %></span>&nbsp;Votos</span>
-    </div>
-    <div class="col-md-2">
+    <div class="col-md-1 centered-text vote">
       <% if (req.session.user) { %>
-        <% if (userVotes.indexOf(request.id) > -1) { %>
-          <button type="button" class="btn btn-hollow btn-red" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
-            Quitar Voto
-          </button>
+        <% if (user_votes.indexOf(request.id) > -1) { %>
+          <a title="Quitar mi voto" class="btn btn-default btn-circle-vote voted" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+          </a>
         <% } else { %>
-          <button type="button" class="btn btn-hollow btn-green" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
-            Votar
-          </button>
+          <a title="Dar mi voto" class="btn btn-default btn-circle-vote" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+          </a>
         <% } %>
       <% } else { %>
-          <button type="button" class="btn btn-hollow btn-green" onclick="#">
-            Votar
-          </button>
+          <a title="Dar mi voto" class="btn btn-default btn-circle-vote">
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+          </a>
       <% } %>
+      <div class="vote-count">
+        <%= request.voted.length %>
+      </div>
+    </div>
+    <div class="requested-data-info col-md-10">
+      <h3 class="title">
+        <%= request.title %>
+      </h3>
+      <div class="request-details">
+        Fecha de solicitud: <%= request.createdAt %>
+        <br />
+        <a href="#">Detalles</a>
+      </div>
     </div>
   </div>
 </div>
