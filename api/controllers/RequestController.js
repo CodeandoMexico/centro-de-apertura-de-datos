@@ -8,14 +8,6 @@
 module.exports = {
 
   index: function(req, res) {
-    function compareVotes(a, b) {
-      if (a.voted.length < b.voted.length)
-        return 1;
-      if (a.voted.length > b.voted.length)
-        return -1;
-      return 0;
-    }
-
     // Used to tell the view which tab must be
     // shown as selected.
     var newest_li_active = "active";
@@ -65,7 +57,7 @@ module.exports = {
             }
           }
           if (sorting_method  == 'most_votes') {
-            requests.sort(compareVotes);
+            requests.sort(Request.compareVotes);
             newest_li_active = "";
             most_votes_li_active = "active";
           }
@@ -80,7 +72,7 @@ module.exports = {
       } else {
         // Current user is not logged-in.
         if (sorting_method == 'most_votes') {
-          requests.sort(compareVotes);
+          requests.sort(Request.compareVotes);
           newest_li_active = "";
           most_votes_li_active = "active";
         }

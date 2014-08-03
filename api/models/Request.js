@@ -24,6 +24,14 @@ module.exports = {
       via: 'votes',
       dominant: true
     }
-	}
+	},
+
+  compareVotes: function(a, b) {
+    if (a.voted.length < b.voted.length)
+      return 1;
+    if (a.voted.length > b.voted.length)
+      return -1;
+    return 0;
+  },
 
 };
