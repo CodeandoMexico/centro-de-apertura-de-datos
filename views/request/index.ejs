@@ -31,6 +31,9 @@
           < p&aacute;gina <%= previous_page %>
         </button>
       <% } %>
+      <button class="btn btn-hollow btn-purple btn-current-page">
+        <%= requested_page %>
+      </button>
       <% if (!reached_right_page_limit) { %>
         <button class="btn btn-hollow btn-purple btn-wide" onclick="location.href='/request/index?sort_by=<%= sorting_method %>&page=<%= next_page %>'">
           p&aacute;gina <%= next_page %> >

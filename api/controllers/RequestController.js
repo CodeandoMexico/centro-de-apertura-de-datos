@@ -32,6 +32,7 @@ module.exports = {
     var allowed_sorting_method = ['newest', 'most_votes'];
     var sorting_method = 'newest';
     if (typeof req.param('sort_by') === 'undefined') {
+      // No sorting method given by user.
       // Default to 'newest';
     } else {
       if (allowed_sorting_method.indexOf(req.param('sort_by')) <= -1) {
@@ -41,7 +42,6 @@ module.exports = {
         sorting_method = req.param('sort_by');
       }
     }
-    console.log('--->',sorting_method);
 
     Request.find({sort: 'createdAt DESC'})
     .populate('voted')
@@ -86,7 +86,7 @@ module.exports = {
         }
 
         var pages_float = requests.length / sails.config.globals.cmx.requests_per_page;
-        var pages_int = pages_float % 10 > 1 ? Math.floor(pages_float) + 1 : pages_float;
+        var pages_int = (pages_float === parseInt(pages_float)) ? pages_float : Math.floor(pages_float) + 1;
         var requested_page = 1;
         if (typeof req.param('page') === 'undefined') { // No page parameter.
           // Leave default as 1.
@@ -111,8 +111,13 @@ module.exports = {
           reached_left_page_limit = true;
         }
 
-        if (next_page >= pages_int) {
+        if (requested_page >= pages_int) {
           reached_right_page_limit = true;
+        }
+
+        // Very big or very negative page number given.
+        if (paged_requests.length == 0) {
+          return res.redirect('/');
         }
 
         return res.view({
@@ -125,7 +130,8 @@ module.exports = {
           reached_right_page_limit: reached_right_page_limit,
           previous_page: previous_page,
           next_page: next_page,
-          sorting_method: sorting_method
+          sorting_method: sorting_method,
+          requested_page: requested_page
         });
       }
     });

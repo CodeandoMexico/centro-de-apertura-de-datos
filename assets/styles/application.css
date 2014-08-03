@@ -283,8 +283,16 @@ hr {
 .nav-tabs > li.active > a {
   border-color: transparent !important;
   color: #25255B;
+  cursor: pointer !important;
 }
 
 .nav-tabs > li > a {
   color: #25255B;
+}
+
+.btn-current-page {
+  padding: 10px 7.5px;
+  cursor: default;
+  background-color: #25255B;
+  color: #FFFFFF;
 }
