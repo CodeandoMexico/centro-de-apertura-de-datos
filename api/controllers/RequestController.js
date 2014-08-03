@@ -9,10 +9,18 @@ module.exports = {
 
   index: function(req, res) {
 
+    /*
+     * Computes pagination data.
+     * @param req_param_page {user given, must be int} Contains the requested page number.
+     * @param requests {array of Request objects} All requests in the databse.
+     */
     function getPaginationData(req_param_page, requests) {
         var pd = {};
 
-        // Get the total amount of possible pages.
+        pd.show_prev_page_btn = true;
+        pd.show_next_page_btn = true;
+
+        // Get the amount of possible pages.
         var pages_float = requests.length / sails.config.globals.cmx.requests_per_page;
         var pages_int = (pages_float === parseInt(pages_float)) ? pages_float : Math.floor(pages_float) + 1;
 
@@ -31,13 +39,13 @@ module.exports = {
         // Max to the left.
         if (pd.requested_page <= 1) {
           pd.requested_page = 1;
-          pd.reached_left_page_limit = true;
+          pd.show_prev_page_btn = false;
         }
 
         // Max to the right.
         if (pd.requested_page >= pages_int) {
           pd.requested_page = pages_int;
-          pd.reached_right_page_limit = true;
+          pd.show_next_page_btn = false;
         }
 
         // Tells the views which pages are back/forward.
@@ -51,10 +59,6 @@ module.exports = {
         return pd;
     }
 
-    // Used to tell the view whether previous (left) and
-    // next (right) paginating buttons should be shown.
-    var reached_left_page_limit = false;
-    var reached_right_page_limit = false;
 
     // Default sorting method is set to 'newest first'.
     var sorting_method = 'newest';
@@ -89,23 +93,17 @@ module.exports = {
               }
             }
           }
+
           if (sorting_method  == 'most_votes') {
             requests.sort(Request.compareVotes);
           }
 
-          var pd = getPaginationData(req.param('page'), requests);
-
           return res.view({
-            requests: pd.paged_requests,
             user_votes: user_votes,
             newest_li_class: newest_li_class,
             most_votes_li_class: most_votes_li_class,
-            reached_left_page_limit: pd.reached_left_page_limit,
-            reached_right_page_limit: pd.reached_right_page_limit,
-            previous_page: pd.previous_page,
-            next_page: pd.next_page,
             sorting_method: sorting_method,
-            requested_page: pd.requested_page
+            pd: getPaginationData(req.param('page'), requests)
           });
         });
       } else {
@@ -114,19 +112,12 @@ module.exports = {
           requests.sort(Request.compareVotes);
         }
 
-        var pd = getPaginationData(req.param('page'), requests);
-
         return res.view({
-          requests: pd.paged_requests,
           user_votes: [],
           newest_li_class: newest_li_class,
           most_votes_li_class: most_votes_li_class,
-          reached_left_page_limit: pd.reached_left_page_limit,
-          reached_right_page_limit: pd.reached_right_page_limit,
-          previous_page: pd.previous_page,
-          next_page: pd.next_page,
           sorting_method: sorting_method,
-          requested_page: pd.requested_page
+          pd: getPaginationData(req.param('page'), requests)
         });
       }
     });
