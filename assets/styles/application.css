@@ -296,3 +296,7 @@ hr {
   background-color: #25255B;
   color: #FFFFFF;
 }
+
+.btn-hidden {
+  visibility: hidden;
+}
