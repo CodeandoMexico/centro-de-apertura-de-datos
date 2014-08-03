@@ -8,31 +8,21 @@
 module.exports = {
 
   index: function(req, res) {
-    // Used to tell the view which tab must be
-    // shown as selected.
-    var newest_li_active = "active";
-    var most_votes_li_active = "";
-    var search_li_active = "";
-
     // Used to tell the view whether previous (left) and
     // next (right) paginating buttons should be shown.
     var reached_left_page_limit = false;
     var reached_right_page_limit = false;
 
-    // Tells the views how to make the prev/next buttons act.
-    // The default sorting method is 'newest' first.
-    var allowed_sorting_method = ['newest', 'most_votes'];
+    // Default sorting method is set to 'newest first'.
     var sorting_method = 'newest';
-    if (typeof req.param('sort_by') === 'undefined') {
-      // No sorting method given by user.
-      // Default to 'newest';
-    } else {
-      if (allowed_sorting_method.indexOf(req.param('sort_by')) <= -1) {
-        // Strange sorting method given by user.
-        // Default to 'newest'.
-      } else {
-        sorting_method = req.param('sort_by');
-      }
+    var newest_li_class = "active";
+    var most_votes_li_class = "";
+    switch(req.param('sort_by')) {
+      case 'most_votes':
+        sorting_method = 'most_votes';
+        newest_li_class = "";
+        most_votes_li_class = "active";
+        break;
     }
 
     Request.find({sort: 'createdAt DESC'})
@@ -58,66 +48,61 @@ module.exports = {
           }
           if (sorting_method  == 'most_votes') {
             requests.sort(Request.compareVotes);
-            newest_li_active = "";
-            most_votes_li_active = "active";
           }
           return res.view({
             requests: requests,
             user_votes: user_votes,
-            newest_li_active: newest_li_active,
-            most_votes_li_active: most_votes_li_active,
-            search_li_active: search_li_active,
+            newest_li_class: newest_li_class,
+            most_votes_li_class: most_votes_li_class,
           });
         });
       } else {
         // Current user is not logged-in.
         if (sorting_method == 'most_votes') {
           requests.sort(Request.compareVotes);
-          newest_li_active = "";
-          most_votes_li_active = "active";
         }
 
+        // Get the total amount of possible pages.
         var pages_float = requests.length / sails.config.globals.cmx.requests_per_page;
         var pages_int = (pages_float === parseInt(pages_float)) ? pages_float : Math.floor(pages_float) + 1;
+
+        // Always default to page 1.
         var requested_page = 1;
-        if (typeof req.param('page') === 'undefined') { // No page parameter.
-          // Leave default as 1.
+        if (typeof req.param('page') === 'undefined') { // No page parameter given.
+          // Keep default.
         } else {
           if (isNaN(req.param('page'))) { // Given page parameter is not a number.
-            // Leave default as 1.
+            // Keep default.
           } else {  // Given page parameter is a number. Cast to int.
             requested_page = parseInt(req.param('page'));
           }
         }
 
-        // Tells the views which pages are back/forward the
-        // current one according to the 'page' parameter.
-        var previous_page = requested_page - 1;
-        var next_page = requested_page + 1;
-
-        var base = (requested_page - 1) * sails.config.globals.cmx.requests_per_page;
-        var paged_requests = requests.slice(base, base + sails.config.globals.cmx.requests_per_page);
-
-
+        // Max to the left.
         if (requested_page <= 1) {
+          requested_page = 1;
           reached_left_page_limit = true;
         }
 
+        // Max to the right.
         if (requested_page >= pages_int) {
+          requested_page = pages_int;
           reached_right_page_limit = true;
         }
 
-        // Very big or very negative page number given.
-        if (paged_requests.length == 0) {
-          return res.redirect('/');
-        }
+        // Tells the views which pages are back/forward.
+        var previous_page = requested_page - 1;
+        var next_page = requested_page + 1;
+
+        // Get which requests should be shown in this page.
+        var start = (requested_page - 1) * sails.config.globals.cmx.requests_per_page;
+        var paged_requests = requests.slice(start, start + sails.config.globals.cmx.requests_per_page);
 
         return res.view({
           requests: paged_requests,
           user_votes: [],
-          newest_li_active: newest_li_active,
-          most_votes_li_active: most_votes_li_active,
-          search_li_active: search_li_active,
+          newest_li_class: newest_li_class,
+          most_votes_li_class: most_votes_li_class,
           reached_left_page_limit: reached_left_page_limit,
           reached_right_page_limit: reached_right_page_limit,
           previous_page: previous_page,
