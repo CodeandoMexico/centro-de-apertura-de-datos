@@ -8,6 +8,49 @@
 module.exports = {
 
   index: function(req, res) {
+
+    function getPaginationData(req_param_page, requests) {
+        var pd = {};
+
+        // Get the total amount of possible pages.
+        var pages_float = requests.length / sails.config.globals.cmx.requests_per_page;
+        var pages_int = (pages_float === parseInt(pages_float)) ? pages_float : Math.floor(pages_float) + 1;
+
+        // Always default to page 1.
+        pd.requested_page = 1;
+        if (typeof req_param_page  === 'undefined') { // No page parameter given.
+          // Keep default.
+        } else {
+          if (isNaN(req_param_page)) { // Given page parameter is not a number.
+            // Keep default.
+          } else {  // Given page parameter is a number. Cast to int.
+            pd.requested_page = parseInt(req_param_page);
+          }
+        }
+
+        // Max to the left.
+        if (pd.requested_page <= 1) {
+          pd.requested_page = 1;
+          pd.reached_left_page_limit = true;
+        }
+
+        // Max to the right.
+        if (pd.requested_page >= pages_int) {
+          pd.requested_page = pages_int;
+          pd.reached_right_page_limit = true;
+        }
+
+        // Tells the views which pages are back/forward.
+        pd.previous_page = pd.requested_page - 1;
+        pd.next_page = pd.requested_page + 1;
+
+        // Get which requests should be shown in this page.
+        var start = (pd.requested_page - 1) * sails.config.globals.cmx.requests_per_page;
+        pd.paged_requests = requests.slice(start, start + sails.config.globals.cmx.requests_per_page);
+
+        return pd;
+    }
+
     // Used to tell the view whether previous (left) and
     // next (right) paginating buttons should be shown.
     var reached_left_page_limit = false;
@@ -49,11 +92,20 @@ module.exports = {
           if (sorting_method  == 'most_votes') {
             requests.sort(Request.compareVotes);
           }
+
+          var pd = getPaginationData(req.param('page'), requests);
+
           return res.view({
-            requests: requests,
+            requests: pd.paged_requests,
             user_votes: user_votes,
             newest_li_class: newest_li_class,
             most_votes_li_class: most_votes_li_class,
+            reached_left_page_limit: pd.reached_left_page_limit,
+            reached_right_page_limit: pd.reached_right_page_limit,
+            previous_page: pd.previous_page,
+            next_page: pd.next_page,
+            sorting_method: sorting_method,
+            requested_page: pd.requested_page
           });
         });
       } else {
@@ -62,53 +114,19 @@ module.exports = {
           requests.sort(Request.compareVotes);
         }
 
-        // Get the total amount of possible pages.
-        var pages_float = requests.length / sails.config.globals.cmx.requests_per_page;
-        var pages_int = (pages_float === parseInt(pages_float)) ? pages_float : Math.floor(pages_float) + 1;
-
-        // Always default to page 1.
-        var requested_page = 1;
-        if (typeof req.param('page') === 'undefined') { // No page parameter given.
-          // Keep default.
-        } else {
-          if (isNaN(req.param('page'))) { // Given page parameter is not a number.
-            // Keep default.
-          } else {  // Given page parameter is a number. Cast to int.
-            requested_page = parseInt(req.param('page'));
-          }
-        }
-
-        // Max to the left.
-        if (requested_page <= 1) {
-          requested_page = 1;
-          reached_left_page_limit = true;
-        }
-
-        // Max to the right.
-        if (requested_page >= pages_int) {
-          requested_page = pages_int;
-          reached_right_page_limit = true;
-        }
-
-        // Tells the views which pages are back/forward.
-        var previous_page = requested_page - 1;
-        var next_page = requested_page + 1;
-
-        // Get which requests should be shown in this page.
-        var start = (requested_page - 1) * sails.config.globals.cmx.requests_per_page;
-        var paged_requests = requests.slice(start, start + sails.config.globals.cmx.requests_per_page);
+        var pd = getPaginationData(req.param('page'), requests);
 
         return res.view({
-          requests: paged_requests,
+          requests: pd.paged_requests,
           user_votes: [],
           newest_li_class: newest_li_class,
           most_votes_li_class: most_votes_li_class,
-          reached_left_page_limit: reached_left_page_limit,
-          reached_right_page_limit: reached_right_page_limit,
-          previous_page: previous_page,
-          next_page: next_page,
+          reached_left_page_limit: pd.reached_left_page_limit,
+          reached_right_page_limit: pd.reached_right_page_limit,
+          previous_page: pd.previous_page,
+          next_page: pd.next_page,
           sorting_method: sorting_method,
-          requested_page: requested_page
+          requested_page: pd.requested_page
         });
       }
     });
