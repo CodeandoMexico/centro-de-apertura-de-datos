@@ -18,6 +18,7 @@ body {
   /*border-radius: 25px;*/
   border-bottom-left-radius: 27.5px;
   border-bottom-right-radius: 27.5px;
+  /*border-top-left-radius: 27.5px;*/
   border-top-right-radius: 27.5px;
 }
 
@@ -280,6 +281,10 @@ hr {
   border-style: none;
 }
 
+.nav-tabs > li {
+  margin-bottom: -3px;
+}
+
 .nav-tabs > li.active > a {
   border-color: transparent !important;
   color: #25255B;
@@ -299,4 +304,20 @@ hr {
 
 .btn-hidden {
   visibility: hidden;
+}
+
+.li-search {
+  padding: 10px 7.5px;
+  float: right !important;
+  border-color: transparent !important;
+  color: #25255B;
+  cursor: pointer !important;
+  margin-right: 27.5px !important;
+}
+
+.li-search input {
+  border: none;
+  border-bottom: dotted 2px #25255B;
+  background-color: #F4F4F4;
+  color: #25255B;
 }

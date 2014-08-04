@@ -12,7 +12,11 @@
     <ul class="nav nav-tabs upper-tabs">
         <li class="<%= newest_li_class %>"><a href="/request/index?sort_by=newest">M&aacute;s recientes</a></li>
         <li class="<%= most_votes_li_class %>"><a href="/request/index?sort_by=most_votes">M&aacute;s votadas</a></li>
-        <li class=""><a href="/request/search">Buscar</a></li>
+        <li class="li-search">
+          <form action="/request/search" method="GET">
+            <input type="text" name="q" placeholder="Buscar..."></input>
+          </form>
+        </li>
     </ul>
   <ul class="requested-data-list">
     <% for(var i = 0; i < pd.paged_requests.length; i++) { %>
