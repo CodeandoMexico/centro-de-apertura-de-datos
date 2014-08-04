@@ -52,6 +52,7 @@ function getPaginationData(req_param_page, requests) {
     var start = (pd.requested_page - 1) * sails.config.globals.cmx.requests_per_page;
     pd.paged_requests = requests.slice(start, start + sails.config.globals.cmx.requests_per_page);
 
+    console.log('========>',pd);
     return pd;
 }
 
@@ -145,9 +146,7 @@ module.exports = {
   },
 
   search: function(req, res) {
-    if (req.method == 'POST' || req.method == 'post') {
-      // query db
-    } else if (req.method == 'GET' || req.method == 'get') {
+    if (req.method == 'GET' || req.method == 'get') {
       Request.find()
       .where({
         or: [{
@@ -160,15 +159,17 @@ module.exports = {
       })
       .populate('voted')
       .exec(function(err, requests) {
-        console.log('---->',requests);
         return res.view('request/index', {
             user_votes: [],
             newest_li_class: '',
             most_votes_li_class: '',
             sorting_method: 'newest',
-            pd: getPaginationData(0, requests)
+            pd: getPaginationData(req.param('page'), requests),
+            search_term: req.param('q')
         });
       });
+    } else {
+      return res.redirect('/');
     }
   }
 };
