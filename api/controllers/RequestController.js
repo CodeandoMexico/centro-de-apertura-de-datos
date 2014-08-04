@@ -147,6 +147,16 @@ module.exports = {
 
   search: function(req, res) {
     if (req.method == 'GET' || req.method == 'get') {
+      var sorting_method = 'newest';
+      var newest_li_class = "active";
+      var most_votes_li_class = "";
+      switch(req.param('sort_by')) {
+        case 'most_votes':
+          sorting_method = 'most_votes';
+          newest_li_class = "";
+          most_votes_li_class = "active";
+          break;
+      }
       Request.find()
       .where({
         or: [{
@@ -161,9 +171,9 @@ module.exports = {
       .exec(function(err, requests) {
         return res.view('request/index', {
             user_votes: [],
-            newest_li_class: '',
-            most_votes_li_class: '',
-            sorting_method: 'newest',
+            newest_li_class: newest_li_class,
+            most_votes_li_class: most_votes_li_class,
+            sorting_method: sorting_method,
             pd: getPaginationData(req.param('page'), requests),
             search_term: req.param('q')
         });
