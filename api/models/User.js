@@ -8,41 +8,17 @@
 module.exports = {
 
 	attributes: {
-    username: {
+    // Twitter user IDs are too long to be of the
+    // 'INTEGER' type in Sails.
+    id: {
       type: 'STRING',
-      unique: true,
+      primaryKey: true,
       required: true
-    },
-    email: {
-      type: 'email',
-      unique: true,
-      required: true
-    },
-    password: {
-      type: 'STRING',
-      required: true,
-      minLength: 6
     },
     votes: {
-      collection: 'requesteddata',
+      collection: 'request',
       via: 'voted'
     }
 	},
-
-  // Encrypt password before create
-  beforeCreate: function(attrs, next) {
-    var bcrypt = require('bcrypt');
-
-    bcrypt.genSalt(10, function(err, salt){
-      if (err) return next(err);
-
-      bcrypt.hash(attrs.password, salt, function(err, hash){
-        if (err) return next(err);
-
-        attrs.password = hash;
-        next();
-      });
-    });
-  }
 
 };

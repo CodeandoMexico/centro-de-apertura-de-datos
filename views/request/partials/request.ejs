@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <div class="requested-data row">
+    <div class="col-md-1 centered-text vote">
+      <% if (req.session.user) { %>
+        <% if (user_votes.indexOf(request.id) > -1) { %>
+          <a title="Quitar mi voto" class="btn btn-default btn-circle-vote voted" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+          </a>
+        <% } else { %>
+          <a title="Dar mi voto" class="btn btn-default btn-circle-vote" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+          </a>
+        <% } %>
+      <% } else { %>
+          <a title="Dar mi voto" class="btn btn-default btn-circle-vote">
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+          </a>
+      <% } %>
+      <div class="vote-count">
+        <%= request.voted.length %>
+      </div>
+    </div>
+    <div class="requested-data-info col-md-10">
+      <h3 class="title">
+        <%= request.title %>
+      </h3>
+      <div class="request-details">
+        Fecha de solicitud: <%= request.createdAt %>
+        <br />
+        <a href="#">Detalles</a>
+      </div>
+    </div>
+  </div>
+</div>
