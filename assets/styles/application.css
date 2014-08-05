@@ -321,3 +321,7 @@ hr {
   background-color: #F4F4F4;
   color: #25255B;
 }
+
+.glyphicon-remove-search {
+  top: 5px;
+}

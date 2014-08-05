@@ -61,10 +61,10 @@ module.exports = {
                     id: data.id
                   }).exec(function(err, user) {
                     if (err) console.log('Error creating user:', err);
-                    res.redirect('/');
+                    return res.redirect('/');
                   });
                 } else {
-                  res.redirect('/');
+                  return res.redirect('/');
                 }
               });
             }

@@ -21,4 +21,22 @@ module.exports = {
     }
 	},
 
+  getVotes: function(id, next) {
+    User.findOne({id: id})
+    .populate('votes')
+    .exec(function(err, user) {
+      var user_votes = [];
+      if (user) {
+        for (i in user.votes) {
+          // Only grab actual request IDs and not Sails.js
+          // add() and remove() functions.
+          if (user.votes[i].id) {
+            user_votes.push(user.votes[i].id);
+          }
+        }
+      }
+      next(user_votes);
+    });
+  },
+
 };

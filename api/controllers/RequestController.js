@@ -52,7 +52,6 @@ function getPaginationData(req_param_page, requests) {
     var start = (pd.requested_page - 1) * sails.config.globals.cmx.requests_per_page;
     pd.paged_requests = requests.slice(start, start + sails.config.globals.cmx.requests_per_page);
 
-    console.log('========>',pd);
     return pd;
 }
 
@@ -60,6 +59,8 @@ module.exports = {
 
   index: function(req, res) {
     // Default sorting method is set to 'newest first'.
+    // Send information to the view, so it knows what
+    // nav-bar pill to show as active.
     var sorting_method = 'newest';
     var newest_li_class = "active";
     var most_votes_li_class = "";
@@ -75,57 +76,28 @@ module.exports = {
     .populate('voted')
     .exec(function(err, requests) {
       if (err) return console.log(err);
-      // If the user is logged in, get his/her votes directly.
-      // This is done to avoid looping through all the 'voted'
-      // arrays of each request in this view.
-      if (req.session.user) {
-        User.findOne({id: req.session.user.id})
-        .populate('votes')
-        .exec(function(err, user) {
-          var user_votes = [];
-          if (user) {
-            for (i in user.votes) {
-              // Only grab actual request IDs and not Sails.js
-              // add() and remove() functions.
-              if (user.votes[i].id) {
-                user_votes.push(user.votes[i].id);
-              }
-            }
-          }
 
-          if (sorting_method  == 'most_votes') {
-            requests.sort(Request.compareVotes);
-          }
+      if (sorting_method == 'most_votes') {
+      // Override the default sorting method.
+        requests.sort(Request.compareVotes);
+      }
 
-          return res.view({
-            user_votes: user_votes,
-            newest_li_class: newest_li_class,
-            most_votes_li_class: most_votes_li_class,
-            sorting_method: sorting_method,
-            pd: getPaginationData(req.param('page'), requests)
-          });
+      data = {
+        newest_li_class: newest_li_class,
+        most_votes_li_class: most_votes_li_class,
+        sorting_method: sorting_method,
+        pd: getPaginationData(req.param('page'), requests)
+      };
+
+      if (req.session.user && req.session.user.id) {
+        User.getVotes(req.session.user.id, function(user_votes) {
+          data.user_votes = user_votes
+          return res.view(data);
         });
       } else {
-        // Current user is not logged-in.
-        if (sorting_method == 'most_votes') {
-          requests.sort(Request.compareVotes);
-        }
-
-        return res.view({
-          user_votes: [],
-          newest_li_class: newest_li_class,
-          most_votes_li_class: most_votes_li_class,
-          sorting_method: sorting_method,
-          pd: getPaginationData(req.param('page'), requests)
-        });
+          data.user_votes = []
+          return res.view(data);
       }
-    });
-  },
-
-  find: function(req, res) {
-    Request.findOne({id: req.param('id')}).populate('voted').exec(function(err, request) {
-      if (err) return res.send(500, err);
-      return res.view({request: request});
     });
   },
 
@@ -169,6 +141,10 @@ module.exports = {
       })
       .populate('voted')
       .exec(function(err, requests) {
+        if (sorting_method == 'most_votes') {
+          // Override the default sorting method.
+          requests.sort(Request.compareVotes);
+        }
         return res.view('request/index', {
             user_votes: [],
             newest_li_class: newest_li_class,

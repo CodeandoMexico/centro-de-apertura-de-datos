@@ -23,7 +23,8 @@
           <li class="<%= most_votes_li_class %>"><a href="/request/search?sort_by=most_votes&q=<%= search_term %>">M&aacute;s votadas</a></li>
           <li class="li-search">
             <form action="/request/search" method="GET">
-              <input type="text" name="q" placeholder="<%= search_term %>"></input>
+              <a href="/"><i class="glyphicon glyphicon-remove glyphicon-remove-search"></i></a>
+              <input type="text" name="q" value="<%= search_term %>"></input>
             </form>
           </li>
         <% } %>
