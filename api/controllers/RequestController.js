@@ -161,11 +161,23 @@ module.exports = {
 
   view: function(req, res) {
     if (req.method == 'GET' || req.method == 'get') {
-      Request.findOne({
-        id: req.param('id')
-      }, function(err, request) {
+      Request.findOne({id: req.param('id')})
+      .populate('voted')
+      .exec(function(err, request) {
         if (err) console.log(err)
-        return res.view({request: request});
+        if (req.session.user && req.session.user.id) {
+          User.hasVotedForRequest(req.session.user.id, req.param('id'), function(voted_by_user) {
+            return res.view({
+             request: request,
+             voted_by_user: voted_by_user
+           });
+          });
+        } else {
+          return res.view({
+            request: request,
+            voted_by_user: false
+          });
+        }
       });
     } else {
       return res.redirect('/');

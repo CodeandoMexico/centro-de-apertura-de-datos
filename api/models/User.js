@@ -39,4 +39,15 @@ module.exports = {
     });
   },
 
+  // TODO: wait for new sails.js release and do this via waterline.
+  hasVotedForRequest: function(user_id, request_id, next) {
+    User.query({
+      text: 'SELECT * FROM request_voted__user_votes WHERE request_voted = $1 AND user_votes = $2',
+      values: [request_id, user_id],
+    }, function(err, result) {
+      if (err) console.log(err);
+      next(result.rowCount);
+    });
+  },
+
 };
