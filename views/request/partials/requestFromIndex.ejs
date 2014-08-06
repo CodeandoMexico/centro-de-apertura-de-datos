@@ -2,23 +2,32 @@
   <div class="requested-data row">
     <div class="col-md-1 centered-text vote">
       <% if (req.session.user) { %>
-        <% if (user_votes.indexOf(request.id) > -1) { %>
-          <a title="Quitar mi voto" class="btn btn-default btn-circle-vote voted" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
-            <i class="glyphicon glyphicon-thumbs-up"></i>
+        <%if (user_votes.indexOf(request.id) < 0) { %>
+          <a title="Dar mi voto" class="btn-give-vote" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+            <i class="glyphicon glyphicon-ok"></i>
           </a>
-        <% } else { %>
-          <a title="Dar mi voto" class="btn btn-default btn-circle-vote" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
-            <i class="glyphicon glyphicon-thumbs-up"></i>
+        <% } else {  %>
+          <a class="btn-empty">
+            <i></i>
           </a>
         <% } %>
       <% } else { %>
-          <a title="Dar mi voto" class="btn btn-default btn-circle-vote">
-            <i class="glyphicon glyphicon-thumbs-up"></i>
+          <a title="Dar mi voto" class="btn-give-vote">
+            <i class="glyphicon glyphicon-ok"></i>
           </a>
       <% } %>
       <div class="vote-count">
         <%= request.voted.length %>
       </div>
+        <% if (user_votes.indexOf(request.id) > 0) { %>
+          <a title="Quitar mi voto" class="btn-remove-vote" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+            <i class="glyphicon glyphicon-remove"></i>
+          </a>
+        <% } else { %>
+          <a class="btn-empty">
+            <i></i>
+          </a>
+        <% } %>
     </div>
     <div class="requested-data-info col-md-10">
       <h3 class="title">

@@ -240,25 +240,6 @@ body {
   }
 }
 
-.btn-circle-vote {
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 19px;
-  line-height: 1.42;
-  border-radius: 20px;
-  border-width: 2px;
-}
-
-.btn-circle-vote:focus { 
-  outline: none; 
-}
-
-.btn-circle-vote:hover { 
-  background-color: #C2E5FF; 
-}
-
 hr {
   padding: 0;
   margin: 0;
@@ -331,4 +312,20 @@ hr {
 .requested-data-description {
   padding-top: 5px;
   padding-bottom: 30px;
+}
+
+.btn-give-vote {
+  color: green;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.btn-remove-vote {
+  color: red;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.btn-empty {
+  padding: 3px;
 }
