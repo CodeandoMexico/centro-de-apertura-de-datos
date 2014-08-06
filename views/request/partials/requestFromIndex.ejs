@@ -22,12 +22,12 @@
     </div>
     <div class="requested-data-info col-md-10">
       <h3 class="title">
-        <%= request.title %>
+        <a href="#" data-target="#requestInfoModal" data-toggle="modal" onclick="$('#info-modal-request-title').html('<%= request.title %>');$('#info-modal-request-description').html('<%= request.description %>');"><%= request.title %></a>
       </h3>
       <div class="request-details">
         Solicitado <%= sails.config.moment.moment(request.createdAt).fromNow() %>
         <br />
-        <a href="#">Detalles</a>
+        <a href="/request/view/<%= request.id %>">Liga <i class="glyphicon glyphicon-link"></i></a>
       </div>
     </div>
   </div>

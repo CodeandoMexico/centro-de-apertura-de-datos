@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="requested-data row">
+    <div class="col-md-1 centered-text vote">
+      <% if (req.session.user) { %>
+        <% if (user_votes.indexOf(request.id) > -1) { %>
+          <a title="Quitar mi voto" class="btn btn-default btn-circle-vote voted" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+          </a>
+        <% } else { %>
+          <a title="Dar mi voto" class="btn btn-default btn-circle-vote" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+          </a>
+        <% } %>
+      <% } else { %>
+          <a title="Dar mi voto" class="btn btn-default btn-circle-vote">
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+          </a>
+      <% } %>
+      <div class="vote-count">
+        <%= request.voted.length %>
+      </div>
+    </div>
+    <div class="requested-data-info col-md-10">
+      <h3 class="title">
+        <%= request.title %>
+      </h3>
+      <div class="request-details">
+        Solicitado <%= sails.config.moment.moment(request.createdAt).fromNow() %> (<%= request.createdAt %>)
+        <br />
+        URL: <%= request.url %>
+        <br />
+        Folio: <%= request.id %>
+        <br />
+        <!--Comparte esta solicitud: <input type="text" size="35" value="http://<%= req.headers.host %>/request/view/<%= request.id %>" onclick="this.select();" />-->
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="requested-data-description col-md-1"></div>
+    <div class="requested-data-description col-md-10">
+      <%= request.description %>
+    </div>
+  </div>
+</div>

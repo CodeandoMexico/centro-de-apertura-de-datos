@@ -38,9 +38,11 @@ body {
 }
 
 .title {
+  font-size: 22px;
   color: #464F9C;
   word-wrap: break-word;
   padding: 0;
+  padding-bottom: 3px;
   margin: 0;
   text-align: justify;
 }
@@ -324,4 +326,9 @@ hr {
 
 .glyphicon-remove-search {
   top: 2.7px;
+}
+
+.requested-data-description {
+  padding-top: 5px;
+  padding-bottom: 30px;
 }

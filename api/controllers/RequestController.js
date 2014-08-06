@@ -108,7 +108,7 @@ module.exports = {
         url: req.param('url'),
         description: req.param('description')
       }, function(err, request) {
-        if (err) return res.send(500, err);
+        if (err) console.log(err);
         req.flash('message', 'Solicitud creada');
         return res.redirect('/');
       });
@@ -157,5 +157,19 @@ module.exports = {
     } else {
       return res.redirect('/');
     }
-  }
+  },
+
+  view: function(req, res) {
+    if (req.method == 'GET' || req.method == 'get') {
+      Request.findOne({
+        id: req.param('id')
+      }, function(err, request) {
+        if (err) console.log(err)
+        return res.view({request: request});
+      });
+    } else {
+      return res.redirect('/');
+    }
+  },
+
 };

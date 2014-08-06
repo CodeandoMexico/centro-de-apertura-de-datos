@@ -32,7 +32,7 @@
   <ul class="requested-data-list">
     <% for(var i = 0; i < pd.paged_requests.length; i++) { %>
       <li>
-        <%- partial('partials/request', pd.paged_requests[i]) %>
+        <%- partial('partials/requestFromIndex', {request: pd.paged_requests[i]}) %>
         <% if (i != pd.paged_requests.length - 1) { // no HR for last entry %>
           <hr>
         <% } %>
@@ -88,6 +88,17 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-hollow btn-purple btn-wide modal-centered" onclick="$('#requestForm').submit()">Solicitar</button>
         </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="requestInfoModal" tabindex="-1" role="dialog" aria-labelledby="requestFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="info-modal-request-title" class="modal-title modal-centered"></h4>
+        </div>
+        <div id="info-modal-request-description" class="modal-body"></div>
       </div>
     </div>
 </div>
