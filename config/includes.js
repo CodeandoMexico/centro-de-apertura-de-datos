@@ -19,3 +19,11 @@ moment.locale('es-MX');
 module.exports.moment = {
   moment: moment
 }
+
+/*
+  Handles URL formatting.
+*/
+var url = require('url');
+module.exports.url = {
+  url: url
+}
