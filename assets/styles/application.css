@@ -208,13 +208,10 @@ body {
   left: 0;
 }
 
-.pseudo-header {
-  padding: 25px;
-}
-
 .block-pull-right {
   display: block;
   text-align: right;
+  padding: 25px;
 }
 
 .centered-text {

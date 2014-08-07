@@ -1,16 +1,13 @@
-
 <div class="container">
-  <div class="row actions">
-    <div class="pseudo-header">
-    </div>
+
+  <div>
+    <%- partial('partials/tabs_n_search_bar', {show_search_bar: false}) %>
   </div>
-    <ul class="nav nav-tabs upper-tabs">
-      <li class=""><a href="/request/index?sort_by=newest">M&aacute;s recientes</a></li>
-      <li class=""><a href="/request/index?sort_by=most_votes">M&aacute;s votadas</a></li>
-    </ul>
+
   <ul class="requested-data-list">
-    <%- partial('partials/requestFromView', {request: request}) %>
+    <%- partial('partials/request_in_view', {request: request}) %>
   </ul>
+
 </div>
 
-<%- partial('partials/voteForm.ejs') %>
+<%- partial('partials/vote_form.ejs') %>
