@@ -1,95 +1,31 @@
-
 <div class="container">
-  <div class="row actions">
-    <div class="pseudo-header">
-      <div class="block-pull-right">
-        <button type="button" id="request-btn" class="btn btn-hollow btn-purple btn-wide" data-container="body" data-toggle="modal" data-target="#requestFormModal">
-          Solicitar Datos
-        </button>
-      </div>
-    </div>
+
+  <div class="row block-pull-right">
+    <button type="button" id="request-btn" class="btn btn-hollow btn-purple btn-wide" data-container="body" data-toggle="modal" data-target="#requestFormModal">
+      Solicitar Datos
+    </button>
   </div>
-    <ul class="nav nav-tabs upper-tabs">
-        <% if (typeof search_term === 'undefined') { %>
-          <li class="<%= newest_li_class %>"><a href="/request/index?sort_by=newest">M&aacute;s recientes</a></li>
-          <li class="<%= most_votes_li_class %>"><a href="/request/index?sort_by=most_votes">M&aacute;s votadas</a></li>
-          <li class="li-search">
-            <form action="/request/search" method="GET">
-              <input type="text" name="q" placeholder="Buscar..."></input>
-            </form>
-          </li>
-        <% } else { %>
-          <li class="<%= newest_li_class %>"><a href="/request/search?sort_by=newest&q=<%= search_term %>">M&aacute;s recientes</a></li>
-          <li class="<%= most_votes_li_class %>"><a href="/request/search?sort_by=most_votes&q=<%= search_term %>">M&aacute;s votadas</a></li>
-          <li class="li-search">
-            <form action="/request/search" method="GET">
-              <a href="/"><i class="glyphicon glyphicon-remove glyphicon-remove-search"></i></a>
-              <input type="text" name="q" value="<%= search_term %>"></input>
-            </form>
-          </li>
-        <% } %>
-    </ul>
+
+  <div>
+    <%- partial('partials/tabs_n_search_bar', {show_search_bar: true}) %>
+  </div>
+
   <ul class="requested-data-list">
-    <% for(var i = 0; i < pd.paged_requests.length; i++) { %>
+    <% for(i in pd.paged_requests) { %>
       <li>
-        <%- partial('partials/requestFromIndex', {request: pd.paged_requests[i]}) %>
+        <%- partial('partials/request_in_index', {request: pd.paged_requests[i]}) %>
         <% if (i != pd.paged_requests.length - 1) { // no HR for last entry %>
           <hr>
         <% } %>
       </li>
     <% } %>
   </ul>
+
   <div class="paginator row">
-    <h3> 
-      <% if (pd.show_prev_page_btn) { %>
-        <% if (typeof search_term === 'undefined') { %>
-          <button class="btn btn-hollow btn-purple btn-wide" onclick="location.href='/request/index?sort_by=<%= sorting_method %>&page=<%= pd.previous_page %>'">
-        <% } else { %>
-          <button class="btn btn-hollow btn-purple btn-wide" onclick="location.href='/request/search?sort_by=<%= sorting_method %>&page=<%= pd.previous_page %>&q=<%= search_term %>'">
-        <% } %>
-          < p&aacute;gina <%= pd.previous_page %>
-        </button>
-      <% } else { %>
-        <button class="btn btn-hollow btn-purple btn-wide btn-hidden">
-          < p&aacute;gina -
-        </button>
-      <% } %>
-      <button class="btn btn-hollow btn-purple btn-current-page">
-        <%= pd.requested_page %>
-      </button>
-      <% if (pd.show_next_page_btn) { %>
-        <% if (typeof search_term === 'undefined') { %>
-          <button class="btn btn-hollow btn-purple btn-wide" onclick="location.href='/request/index?sort_by=<%= sorting_method %>&page=<%= pd.next_page %>'">
-        <% } else { %>
-          <button class="btn btn-hollow btn-purple btn-wide" onclick="location.href='/request/search?sort_by=<%= sorting_method %>&page=<%= pd.next_page %>&q=<%= search_term %>'">
-        <% } %>
-          p&aacute;gina <%= pd.next_page %> >
-        </button>
-      <% } else { %>
-        <button class="btn btn-hollow btn-purple btn-wide btn-hidden">
-          p&aacute;gina + >
-        </button>
-      <% } %>
-    </h3>
+    <%- partial('partials/page_buttons') %>
   </div>
+
 </div>
 
-<div class="modal fade" id="requestFormModal" tabindex="-1" role="dialog" aria-labelledby="requestFormModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title modal-centered">
-            Solicita los datos que necesites y nuestro equipo te ayudar&aacute;
-          </h4>
-        </div>
-        <div class="modal-body">
-          <%- partial('partials/requestForm.ejs') %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-hollow btn-purple btn-wide modal-centered" onclick="$('#requestForm').submit()">Solicitar</button>
-        </div>
-      </div>
-    </div>
-</div>
-
-<%- partial('partials/voteForm.ejs') %>
+<%- partial('partials/request_form_modal') %>
+<%- partial('partials/vote_form') %>
