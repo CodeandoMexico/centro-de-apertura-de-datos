@@ -2,22 +2,29 @@
   <div class="requested-data row">
     <div class="col-md-1 centered-text vote">
       <% if (req.session.user) { %>
-        <% if (voted_by_user) { %>
-          <a title="Quitar mi voto" class="btn btn-default btn-circle-vote voted" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
-            <i class="glyphicon glyphicon-thumbs-up"></i>
+        <% if (!voted_by_user) { %>
+          <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+            <i class="glyphicon glyphicon-chevron-up"></i>
           </a>
         <% } else { %>
-          <a title="Dar mi voto" class="btn btn-default btn-circle-vote" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
-            <i class="glyphicon glyphicon-thumbs-up"></i>
+          <a title="Ya has votado" class="btn-vote btn-give-vote-voted">
+            <i class="glyphicon glyphicon-chevron-up"></i>
+          </a>
+          <a title="Quitar mi voto" class="btn-vote-small btn-remove-vote" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+            <i class="glyphicon glyphicon-remove"></i>
           </a>
         <% } %>
       <% } else { %>
-          <a title="Dar mi voto" class="btn btn-default btn-circle-vote">
-            <i class="glyphicon glyphicon-thumbs-up"></i>
+          <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted">
+            <i class="glyphicon glyphicon-chevron-up"></i>
           </a>
       <% } %>
       <div class="vote-count">
-        <%= request.voted.length %>
+        <% if (request.voted.length == 1) { %>
+          1 voto
+        <% } else { %>
+          <%= request.voted.length %> votos
+        <% } %>
       </div>
     </div>
     <div class="requested-data-info col-md-10">
