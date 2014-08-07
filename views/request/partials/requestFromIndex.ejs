@@ -2,32 +2,30 @@
   <div class="requested-data row">
     <div class="col-md-1 centered-text vote">
       <% if (req.session.user) { %>
-        <%if (user_votes.indexOf(request.id) < 0) { %>
-          <a title="Dar mi voto" class="btn-give-vote" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
-            <i class="glyphicon glyphicon-ok"></i>
+        <%if (user_votes.indexOf(request.id) < 0) { // Logged in and hasn't voted for this one %>
+          <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+            <i class="glyphicon glyphicon-chevron-up"></i>
           </a>
-        <% } else {  %>
-          <a class="btn-empty">
-            <i></i>
+        <% } else { // Logged in and has already voted for this request %>
+          <a title="Ya has votado" class="btn-vote btn-give-vote-voted">
+            <i class="glyphicon glyphicon-chevron-up"></i>
+          </a>
+          <a title="Quitar mi voto" class="btn-vote-small btn-remove-vote" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
+            <i class="glyphicon glyphicon-remove"></i>
           </a>
         <% } %>
-      <% } else { %>
-          <a title="Dar mi voto" class="btn-give-vote">
-            <i class="glyphicon glyphicon-ok"></i>
+      <% } else { // Not logged in. %>
+          <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted">
+            <i class="glyphicon glyphicon-chevron-up"></i>
           </a>
       <% } %>
       <div class="vote-count">
-        <%= request.voted.length %>
-      </div>
-        <% if (user_votes.indexOf(request.id) > 0) { %>
-          <a title="Quitar mi voto" class="btn-remove-vote" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
-            <i class="glyphicon glyphicon-remove"></i>
-          </a>
+        <% if (request.voted.length == 1) { %>
+          1 voto
         <% } else { %>
-          <a class="btn-empty">
-            <i></i>
-          </a>
+          <%= request.voted.length %> votos
         <% } %>
+      </div>
     </div>
     <div class="requested-data-info col-md-10">
       <h3 class="title">
