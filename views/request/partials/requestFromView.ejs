@@ -32,13 +32,9 @@
         <%= request.title %>
       </h3>
       <div class="request-details">
-        Solicitado <%= sails.config.moment.moment(request.createdAt).fromNow() %> (<%= request.createdAt %>)
+        Solicitado <%= sails.config.moment.moment(request.createdAt).fromNow() %> (<%= sails.config.moment.moment(request.createdAt).format('MMMM D YYYY, HH:mm') %>)
         <br />
-        URL: <%= request.url %>
-        <br />
-        Folio: <%= request.id %>
-        <br />
-        <!--Comparte esta solicitud: <input type="text" size="35" value="http://<%= req.headers.host %>/request/view/<%= request.id %>" onclick="this.select();" />-->
+        URL: <a href="<%= request.url %>" target="_blank"><%= request.url %></a>
       </div>
     </div>
   </div>
