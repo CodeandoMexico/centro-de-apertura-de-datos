@@ -356,9 +356,24 @@ hr {
 #header-image {
   padding-top: 15px;
   padding-bottom: 15px;
+  display: inline-block;
 }
 
 #header-anchor {
   background-color: #151F31;
   padding: 30px 100px;
+}
+
+#header-navigation {
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.header-navigation ul {
+  list-style-type: none;
+}
+
+.header-navigation li { 
+  display: inline; 
+  padding-right: 20px;
 }
