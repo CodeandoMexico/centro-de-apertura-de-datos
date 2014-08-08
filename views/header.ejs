@@ -1,0 +1,18 @@
+<div id="header" class="row">
+  <a id="header-anchor" href="http://datamx.io">
+    <img id="header-image" alt="datamx.io" src="http://i.imgur.com/weQNDQL.png" />
+  </a>
+  <ul class="header-navigation" id="header-navigation">
+    <li>Datos</li>
+    <li>Organizaciones</li>
+    <li>Apps</li>
+    <li><a href="http://apertura-de-datos.herokuapp.com/">Centro de Apertura</a></li>
+  </ul>
+  <span class="header-login">
+    <% if (!req.session.user) { %>
+      <a href="/user/signin">Login con Twitter&nbsp;&nbsp;</a>
+    <% } else { %>
+      <a href="/user/signout">Logout (<%= req.session.user.screen_name %>) &nbsp;&nbsp;</a>
+    <% } %>
+  </span>
+</div>
