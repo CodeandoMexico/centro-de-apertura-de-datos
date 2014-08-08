@@ -10,9 +10,10 @@
   </ul>
   <span class="header-login">
     <% if (!req.session.user) { %>
-      <a href="/user/signin">Login con Twitter&nbsp;&nbsp;</a>
+      <a href="/user/signin">Iniciar Sesi&oacute;n&nbsp;&nbsp;</a>
     <% } else { %>
-      <a href="/user/signout">Logout (<%= req.session.user.screen_name %>) &nbsp;&nbsp;</a>
+      <img class="user-profile-picture" width="30" height="30" src="<%= req.session.user.profile_image_url %>"/>
+      <a href="/user/signout"><%= req.session.user.name %>&nbsp;&nbsp;</a>
     <% } %>
   </span>
 </div>

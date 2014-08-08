@@ -353,6 +353,11 @@ hr {
   overflow: auto;
   margin-right: 0px; /* Avoid horizontal scroll bar */
   margin-left: 0px;
+  color: white;
+}
+
+#header a {
+  color: white;
 }
 
 #header-image {
@@ -386,4 +391,7 @@ hr {
   float: right;
   margin-top: 25px;
   margin-right: -5;
+}
+
+.user-profile-picture {
 }

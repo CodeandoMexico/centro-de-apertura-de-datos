@@ -49,6 +49,7 @@ module.exports = {
                 access_token_secret: access_token_secret,
                 screen_name: data.screen_name,
                 name: data.name,
+                profile_image_url: data.profile_image_url,
                 id: data.id
               }
 
