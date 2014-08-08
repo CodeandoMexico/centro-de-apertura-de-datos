@@ -351,6 +351,8 @@ hr {
   color: #FFF;
   letter-spacing: 1px;
   overflow: auto;
+  margin-right: 0px; /* Avoid horizontal scroll bar */
+  margin-left: 0px;
 }
 
 #header-image {
@@ -361,12 +363,14 @@ hr {
 
 #header-anchor {
   background-color: #151F31;
-  padding: 30px 100px;
+  padding: 28px 80px; 
+  /* Avoid vertical scroll bar in header with 28 px (header image has 15px for top and bottom */
+  /* Control logo's width with 80 px*/
 }
 
 #header-navigation {
   display: inline-block;
-  padding-left: 10px;
+  padding-left: 12.5px;
 }
 
 .header-navigation ul {
@@ -376,4 +380,10 @@ hr {
 .header-navigation li { 
   display: inline; 
   padding-right: 20px;
+}
+
+.header-login {
+  float: right;
+  margin-top: 25px;
+  margin-right: -5;
 }
