@@ -345,3 +345,20 @@ hr {
 .col-md-1 {
   width: 12%;
 }
+
+#header {
+  background-color: #283858;
+  color: #FFF;
+  letter-spacing: 1px;
+  overflow: auto;
+}
+
+#header-image {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+#header-anchor {
+  background-color: #151F31;
+  padding: 30px 100px;
+}
