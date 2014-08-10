@@ -348,12 +348,11 @@ hr {
 
 #header {
   background-color: #283858;
-  color: #FFF;
+  color: white;
   letter-spacing: 1px;
   overflow: auto;
   margin-right: 0px; /* Avoid horizontal scroll bar */
   margin-left: 0px;
-  color: white;
 }
 
 #header a {
@@ -447,3 +446,19 @@ hr {
   text-decoration: underline;
 }
 
+#footer {
+  margin-top: 10px;
+  text-align: center;
+  background-color: #283858;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow: auto;
+  margin-right: 0px; /* Avoid horizontal scroll bar */
+  margin-left: 0px;
+  color: white;
+}
+
+#footer-logo {
+  height: 85px;
+  width: auto;
+}
