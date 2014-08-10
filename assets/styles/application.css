@@ -353,6 +353,27 @@ hr {
   overflow: auto;
   margin-right: 0px; /* Avoid horizontal scroll bar */
   margin-left: 0px;
+  color: white;
+}
+
+#header a {
+  color: white;
+  outline: 0;
+}
+
+#header a:visited { 
+  color: white;
+  text-decoration: none;
+}
+
+#header a:hover { 
+  color: white;
+  text-decoration: none;
+}
+
+#header a:active { 
+  color: white; 
+  text-decoration: none;
 }
 
 #header-image {
@@ -386,4 +407,16 @@ hr {
   float: right;
   margin-top: 25px;
   margin-right: -5;
+}
+
+.user-profile-picture {
+  float: left;
+  margin-top: -3.5px; 
+  margin-right: 5px; /* Leave a gap between picture and name */
+}
+
+
+#popover-login {
+  background: transparent;
+  border: none;
 }

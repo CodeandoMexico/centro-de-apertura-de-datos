@@ -1,3 +1,4 @@
+
 <div id="header" class="row">
   <a id="header-anchor" href="http://datamx.io">
     <img id="header-image" alt="datamx.io" src="http://i.imgur.com/weQNDQL.png" />
@@ -8,11 +9,36 @@
     <li>Apps</li>
     <li><a href="http://apertura-de-datos.herokuapp.com/">Centro de Apertura</a></li>
   </ul>
-  <span class="header-login">
-    <% if (!req.session.user) { %>
-      <a href="/user/signin">Login con Twitter&nbsp;&nbsp;</a>
+  <div class="header-login">
+    <% if (!req.session.user || typeof req.session.user === 'undefined') { %>
+      <ul class="header-navigation">
+        <li>
+          <a href="/user/signin">Iniciar Sesi&oacute;n</a>
+        </li>
+      </ul>
     <% } else { %>
-      <a href="/user/signout">Logout (<%= req.session.user.screen_name %>) &nbsp;&nbsp;</a>
+      <% console.log(req.session.user) %>
+      <img class="user-profile-picture" width="30" height="30" src="<%= req.session.user.profile_image_url %>"/>
+
+      <ul class="header-navigation">
+        <li>
+          <button id="popover-login" data-toggle="popover" data-content="">
+            <%= req.session.user.name %>
+          </button>
+        </li>
+      </ul>
     <% } %>
-  </span>
+  </div>
 </div>
+
+<script>
+$(document).ready(function() {
+  $('#popover-login').popover({
+    trigger: 'focus',
+    placement: 'bottom',
+    html: true,
+    content: '<a style="color:black;" href="/user/signout">Logout</a>',
+  });
+});
+</script>
+
