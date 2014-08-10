@@ -89,7 +89,7 @@ module.exports = {
         pd: getPaginationData(req.param('page'), requests)
       };
 
-      if (req.session.user && req.session.user.id) {
+      if (req.session.user) {
         User.getVotes(req.session.user.id, function(user_votes) {
           data.user_votes = user_votes
           return res.view(data);
@@ -165,7 +165,7 @@ module.exports = {
       .populate('voted')
       .exec(function(err, request) {
         if (err) console.log(err)
-        if (req.session.user && req.session.user.id) {
+        if (req.session.user) {
           User.hasVotedForRequest(req.session.user.id, req.param('id'), function(voted_by_user) {
             return res.view({
              request: request,

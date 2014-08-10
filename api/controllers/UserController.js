@@ -13,7 +13,7 @@ module.exports = {
       if (error) {
          console.log('Error getting OAuth request token', error);
       } else {
-         req.session.user = {
+         req.session.oauth = {
            request_token: request_token,
            request_token_secret: request_token_secret
          }
@@ -24,14 +24,14 @@ module.exports = {
   },
 
   authCallback: function(req, res) {
-    var has_request_tokens = req.session.user &&
-                             req.session.user.request_token &&
-                             req.session.user.request_token_secret;
+    var has_request_tokens = req.session.oauth &&
+                             req.session.oauth.request_token &&
+                             req.session.oauth.request_token_secret;
 
     if (has_request_tokens) {
       sails.config.oauth.twitter.getAccessToken(
-        req.session.user.request_token,
-        req.session.user.request_token_secret,
+        req.session.oauth.request_token,
+        req.session.oauth.request_token_secret,
         req.param('oauth_verifier'),
         function(error, access_token, access_token_secret, results) {
         if (error) {
@@ -44,9 +44,11 @@ module.exports = {
             if (error) {
               console.log('Error verifying credentials:', error);
             } else {
-              req.session.user = {
+              req.session.oauth = {
                 access_token: access_token,
                 access_token_secret: access_token_secret,
+              }
+              req.session.user = {
                 screen_name: data.screen_name,
                 name: data.name,
                 profile_image_url: data.profile_image_url,
@@ -81,6 +83,7 @@ module.exports = {
   },
 
   signout: function(req, res) {
+    req.session.oauth = null;
     req.session.user = null;
     req.flash('success', 'Has finalizado tu sesi&oacute;n');
     return res.redirect('/');

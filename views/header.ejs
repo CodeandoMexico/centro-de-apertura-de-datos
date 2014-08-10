@@ -17,7 +17,6 @@
         </li>
       </ul>
     <% } else { %>
-      <% console.log(req.session.user) %>
       <img class="user-profile-picture" width="30" height="30" src="<%= req.session.user.profile_image_url %>"/>
 
       <ul class="header-navigation">
