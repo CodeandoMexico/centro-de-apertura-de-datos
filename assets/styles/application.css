@@ -426,13 +426,16 @@ hr {
   padding-bottom: 70px;
 }
 
-#intro-text {
+#intro-text-col{
   text-align: center;
   font-size: 16px;
+  padding-left: 110px;
+  padding-right: 110px;
 }
 
-#intro-btn {
+#intro-btn-col {
   margin-top: 19.5px;
+  text-align: center;
 }
 
 .intro-important {
@@ -440,6 +443,7 @@ hr {
   color: #283858;
 }
 
-.underlined-link {
+#intro-link {
   text-decoration: underline;
 }
+
