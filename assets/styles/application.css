@@ -420,3 +420,26 @@ hr {
   background: transparent;
   border: none;
 }
+
+#intro {
+  padding-top: 45px;
+  padding-bottom: 70px;
+}
+
+#intro-text {
+  text-align: center;
+  font-size: 16px;
+}
+
+#intro-btn {
+  margin-top: 19.5px;
+}
+
+.intro-important {
+  font-weight: bold;
+  color: #283858;
+}
+
+.underlined-link {
+  text-decoration: underline;
+}
