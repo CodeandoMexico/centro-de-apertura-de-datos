@@ -17,18 +17,20 @@
   </head>
 
   <body>
-    <%- partial('header') %>
-    <%- partial('intro') %>
-    <%- body %>
+    <div id="super-container">
+      <%- partial('header') %>
+      <%- body %>
+      <!--TEMPLATES-->
+      
+      <!--TEMPLATES END-->
+
+
+      <!--SCRIPTS-->
+      <script src="/js/dependencies/bootstrap.min.js"></script>
+      <script src="/js/dependencies/sails.io.js"></script>
+      <!--SCRIPTS END-->
+      <div class="clearfooter"></div>
+    </div>
     <%- partial('footer') %>
-    <!--TEMPLATES-->
-    
-    <!--TEMPLATES END-->
-
-
-    <!--SCRIPTS-->
-    <script src="/js/dependencies/bootstrap.min.js"></script>
-    <script src="/js/dependencies/sails.io.js"></script>
-    <!--SCRIPTS END-->
   </body>
 </html>

@@ -3,6 +3,11 @@ body {
   padding: 0;
   margin: 0;
   background-color: #F4F4F4;
+  height: 100%;
+}
+
+html {
+  height: 100%;
 }
 
 .container {
@@ -20,6 +25,7 @@ body {
   border-bottom-right-radius: 27.5px;
   /*border-top-left-radius: 27.5px;*/
   border-top-right-radius: 27.5px;
+  /*min-height: 540px;*/ /* Each <li> is 90 px high */
 }
 
 .requested-data div {
@@ -97,6 +103,10 @@ body {
 
 .btn-wide {
   padding: 10px 25px;
+}
+
+.btn-thin {
+  padding: 1px 7.5px;
 }
 
 .btn-purple {
@@ -270,7 +280,6 @@ hr {
 }
 
 .btn-current-page {
-  padding: 10px 7.5px;
   cursor: default;
   background-color: #25255B;
   color: #FFFFFF;
@@ -447,18 +456,26 @@ hr {
 }
 
 #footer {
-  margin-top: 10px;
+  height: 65px;
+  padding-top: 7.5px;
   text-align: center;
   background-color: #283858;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  overflow: auto;
-  margin-right: 0px; /* Avoid horizontal scroll bar */
-  margin-left: 0px;
   color: white;
+  position: relative;
 }
 
 #footer-logo {
   height: 50px;
   width: auto;
+}
+
+#super-container {
+  min-height: 100%;
+  margin-bottom: -65px;
+  position: relative;
+}
+
+.clearfooter {
+  height: 65px;
+  clear: both;
 }
