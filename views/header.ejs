@@ -11,19 +11,23 @@
   </ul>
   <div class="header-login">
     <% if (!req.session.user || typeof req.session.user === 'undefined') { %>
-      <ul class="header-navigation">
+      <ul id="header-login-actions">
         <li>
           <a href="/user/signin">Iniciar Sesi&oacute;n</a>
         </li>
       </ul>
     <% } else { %>
-      <img class="user-profile-picture" width="30" height="30" src="<%= req.session.user.profile_image_url %>"/>
-
-      <ul class="header-navigation">
+      <ul id="header-login-actions">
+        <li>
+          <img class="user-profile-picture" width="30" height="30" src="<%= req.session.user.profile_image_url %>"/>
+        </li>
         <li>
           <button id="popover-login" data-toggle="popover" data-content="">
             <%= req.session.user.name %>
           </button>
+        </li>
+        <li>
+          <a href="/user/signout"><i class="glyphicon glyphicon-log-out"></i></a>
         </li>
       </ul>
     <% } %>

@@ -486,3 +486,16 @@ hr {
 .hidden-search-input {
   visibility: hidden;
 }
+
+#header-login-actions {
+  display: inline-block;
+  margin-right: 12.5px;
+}
+
+#header-login-actions ul {
+  list-style-type: none;
+}
+
+#header-login-actions li { 
+  display: inline; 
+}
