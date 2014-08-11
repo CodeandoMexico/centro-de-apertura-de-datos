@@ -294,7 +294,6 @@ hr {
   float: right !important;
   border-color: transparent !important;
   color: #25255B;
-  cursor: pointer !important;
   margin-right: 27.5px !important;
 }
 
@@ -431,7 +430,7 @@ hr {
 
 #intro {
   padding-top: 45px;
-  padding-bottom: 70px;
+  padding-bottom: 35px;
 }
 
 #intro-text-col{
@@ -478,4 +477,12 @@ hr {
 .clearfooter {
   height: 65px;
   clear: both;
+}
+
+#main-content-div {
+  padding-top: 30px;
+}
+
+.hidden-search-input {
+  visibility: hidden;
 }
