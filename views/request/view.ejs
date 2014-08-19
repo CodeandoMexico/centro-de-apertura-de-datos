@@ -1,10 +1,10 @@
 <div id="main-content-div" class="container">
 
   <div>
-    <%- partial('partials/tabs_n_search_bar', {show_search_bar: false}) %>
+    <%- partial('partials/return_n_social', {request: request}) %>
   </div>
 
-  <ul class="requested-data-list">
+  <ul class="requested-data-list rounded">
     <%- partial('partials/request_in_view', {request: request}) %>
   </ul>
 

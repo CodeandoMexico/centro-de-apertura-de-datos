@@ -297,6 +297,13 @@ hr {
   margin-right: 27.5px !important;
 }
 
+.li-social {
+  float: right !important;
+  border-color: transparent !important;
+  color: #25255B;
+  margin-right: 27.5px !important;
+}
+
 .li-search input {
   border: none;
   border-bottom: dotted 2px #25255B;
@@ -498,4 +505,37 @@ hr {
 
 #header-login-actions li { 
   display: inline; 
+}
+
+ul.undecorated {
+  list-style-type: none;
+}
+
+li.inline {
+  display: inline;
+}
+
+li.right {
+  float: right !important;
+  border-color: transparent !important;
+  color: #25255B;
+  margin-right: 27.5px !important;
+}
+
+li.left {
+  float: left !important;
+  border-color: transparent !important;
+  color: black;
+  margin-left: -27.5px !important;
+}
+
+.icon-flipped {
+  transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+}
+
+.rounded {
+  border-radius: 27.5px !important;
 }
