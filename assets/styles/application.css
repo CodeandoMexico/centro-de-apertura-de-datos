@@ -535,3 +535,7 @@ li.left {
   -webkit-transform: scaleX(-1);
   -ms-transform: scaleX(-1);
 }
+
+.rounded {
+  border-radius: 27.5px !important;
+}
