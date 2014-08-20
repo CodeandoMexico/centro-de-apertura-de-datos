@@ -17,15 +17,21 @@ html {
 .requested-data-list {
   list-style-type: none;
   padding: 0;
-  /*padding-top:20px;*/
   margin: 0;
   background-color: #FFFFFF;
-  /*border-radius: 25px;*/
-  border-bottom-left-radius: 27.5px;
-  border-bottom-right-radius: 27.5px;
-  /*border-top-left-radius: 27.5px;*/
-  border-top-right-radius: 27.5px;
-  /*min-height: 540px;*/ /* Each <li> is 90 px high */
+  border-radius: 27.5px;
+}
+
+
+#filters-n-search-div {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background-color: #FFFFFF;
+  margin-bottom: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
 }
 
 .requested-data div {
