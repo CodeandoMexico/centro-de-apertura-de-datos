@@ -3,14 +3,22 @@
   if (typeof most_votes_li_class == 'undefined') most_votes_li_class = '';
 %>
 
-<div id="filters-n-search-div">
-  Filtar por:
-  <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/request/index?sort_by=newest'">
-    M&aacute;s recientes
-  </button>
-  <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/request/index?sort_by=most_votes'">
-    M&aacute;s votos
-  </button>
-  Palabras clave
-  <input type="text" />
+<div id="filters-n-search-wrapper" class="row">
+  <div class="filters-n-search-col">
+    Filtar por:
+  </div>
+  <div class="filters-n-search-col">
+    <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/request/index?sort_by=newest'">
+      M&aacute;s recientes
+    </button>
+  </div>
+  <div class="filters-n-search-col">
+    <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/request/index?sort_by=most_votes'">
+      M&aacute;s votos
+    </button>
+  </div>
+  <div class="filters-n-search-col">
+    Palabras clave:
+    <input type="text" />
+  </div>
 </div>
