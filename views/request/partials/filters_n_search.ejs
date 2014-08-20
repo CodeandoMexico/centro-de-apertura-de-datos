@@ -1,0 +1,16 @@
+<%
+  if (typeof newest_li_class === 'undefined') newest_li_class = '';
+  if (typeof most_votes_li_class == 'undefined') most_votes_li_class = '';
+%>
+
+<div id="filters-n-search-div">
+  Filtar por:
+  <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/request/index?sort_by=newest'">
+    M&aacute;s recientes
+  </button>
+  <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/request/index?sort_by=most_votes'">
+    M&aacute;s votos
+  </button>
+  Palabras clave
+  <input type="text" />
+</div>
