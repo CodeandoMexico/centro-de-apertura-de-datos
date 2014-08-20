@@ -394,6 +394,8 @@ hr {
   padding-top: 15px;
   padding-bottom: 15px;
   display: inline-block;
+  width: 194px !important;
+  height: 73px !important;
 }
 
 #header-logo-anchor {
@@ -553,10 +555,16 @@ li.left {
 #header-navigation-responsive a {
   color: white;
   float: left;
-  margin-top: -25px;
+  margin-top: -35px;
+  font-size: 21px;
 }
 
-@media screen and (max-width : 765px){
+.user-profile-picture-responsive {
+  margin-left: 10px;
+  margin-top: -2px;
+}
+
+@media screen and (max-width : 1048px){
   #header {
     display: none;
   }
@@ -571,6 +579,7 @@ li.left {
     padding-top: 10px;
     padding-bottom: 10px;
     padding: 0px;
+    max-height: 45px !important;
   }
 
   .header-logo-anchor {
