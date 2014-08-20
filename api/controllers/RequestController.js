@@ -119,6 +119,9 @@ module.exports = {
 
   search: function(req, res) {
     if (req.method == 'GET' || req.method == 'get') {
+      if (typeof req.param('q') === 'undefined' || req.param('q') == '') {
+        return res.redirect('/');
+      }
       var sorting_method = 'newest';
       var newest_filter_class = "active-filter";
       var most_votes_filter_class = "";
