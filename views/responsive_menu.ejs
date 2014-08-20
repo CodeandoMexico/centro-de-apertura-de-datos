@@ -2,7 +2,9 @@
   <h3>
     <% if (req.session.user) { %>
       <button onclick="window.location.href='/user/signout';" class="cbp-btn">Cerrar sesi&oacute;n</button>
-      <img class="user-profile-picture-responsive" width="30" height="30" src="<%= req.session.user.profile_image_url %>"/>
+      <a class="cbp-regular-anchor" title="Mi perfil" href="/user/profile">
+        <img class="user-profile-picture-responsive" width="30" height="30" src="<%= req.session.user.profile_image_url %>"/>
+      </a>
     <% } else { %>
       <button onclick="window.location.href='/user/signin';" class="cbp-btn">Iniciar sesi&oacute;n</button>
     <% } %>

@@ -20,6 +20,22 @@
     background: #151F31;
 }
  
+.cbp-regular-anchor {
+  border: none !important;
+  display: inline !important;
+  padding: 0px !important;
+}
+
+.cbp-regular-anchor:hover {
+  background-color: transparent !important;
+  outline: none;
+}
+
+.cbp-regular-anchor:active {
+  background-color: transparent !important;
+  outline: none;
+}
+
 .cbp-spmenu a {
     display: block;
     color: #fff;

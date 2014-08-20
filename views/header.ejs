@@ -11,8 +11,6 @@
   </div>
 </div>
 
-
-
 <div id="header" class="row">
   <a id="header-logo-anchor" href="http://datamx.io">
     <img id="header-logo-image" alt="datamx.io" src="/images/datamx_dark.png" />
@@ -33,21 +31,24 @@
     <% } else { %>
       <ul id="header-login-actions">
         <li>
-          <img class="user-profile-picture" width="30" height="30" src="<%= req.session.user.profile_image_url %>"/>
+          <a title="Mi perfil" href="/user/profile">
+            <img class="user-profile-picture" width="30" height="30" src="<%= req.session.user.profile_image_url %>"/>
+          </a>
         </li>
         <li>
-          <button id="popover-login" data-toggle="popover" data-content="">
+          <button id="popover-login" data-toggle="popover" data-content="" onclick="window.location.href='/user/profile'">
             <%= req.session.user.name %>
           </button>
         </li>
         <li>
-          <a href="/user/signout"><i class="glyphicon glyphicon-log-out"></i></a>
+          <a title="Logout" href="/user/signout"><i class="glyphicon glyphicon-log-out"></i></a>
         </li>
       </ul>
     <% } %>
   </div>
 </div>
 
+<!--
 <script>
 $(document).ready(function() {
   $('#popover-login').popover({
@@ -58,4 +59,4 @@ $(document).ready(function() {
   });
 });
 </script>
-
+-->
