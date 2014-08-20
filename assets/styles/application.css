@@ -625,4 +625,8 @@ li.left {
     width: 160px;
   }
 
+  .vote {
+    width: 100%;
+  }
+
 }
