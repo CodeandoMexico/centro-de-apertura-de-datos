@@ -583,6 +583,11 @@ li.left {
   display: inline;
 }
 
+.active-filter {
+  background-color: #25255B;
+  color: #FFFFFF;
+}
+
 @media screen and (max-width : 1048px){
   #header {
     display: none;

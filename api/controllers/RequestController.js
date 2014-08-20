@@ -62,13 +62,13 @@ module.exports = {
     // Send information to the view, so it knows what
     // nav-bar pill to show as active.
     var sorting_method = 'newest';
-    var newest_li_class = "active";
-    var most_votes_li_class = "";
+    var newest_filter_class = "active-filter";
+    var most_votes_filter_class = "";
     switch(req.param('sort_by')) {
       case 'most_votes':
         sorting_method = 'most_votes';
-        newest_li_class = "";
-        most_votes_li_class = "active";
+        newest_filter_class = "";
+        most_votes_filter_class = "active-filter";
         break;
     }
 
@@ -83,8 +83,8 @@ module.exports = {
       }
 
       data = {
-        newest_li_class: newest_li_class,
-        most_votes_li_class: most_votes_li_class,
+        newest_filter_class: newest_filter_class,
+        most_votes_filter_class: most_votes_filter_class,
         sorting_method: sorting_method,
         pd: getPaginationData(req.param('page'), requests)
       };
@@ -120,13 +120,13 @@ module.exports = {
   search: function(req, res) {
     if (req.method == 'GET' || req.method == 'get') {
       var sorting_method = 'newest';
-      var newest_li_class = "active";
-      var most_votes_li_class = "";
+      var newest_filter_class = "active-filter";
+      var most_votes_filter_class = "";
       switch(req.param('sort_by')) {
         case 'most_votes':
           sorting_method = 'most_votes';
-          newest_li_class = "";
-          most_votes_li_class = "active";
+          newest_filter_class = "";
+          most_votes_filter_class = "active-filter";
           break;
       }
       Request.find()
@@ -147,8 +147,8 @@ module.exports = {
         }
         return res.view('request/index', {
             user_votes: [],
-            newest_li_class: newest_li_class,
-            most_votes_li_class: most_votes_li_class,
+            newest_filter_class: newest_filter_class,
+            most_votes_filter_class: most_votes_filter_class,
             sorting_method: sorting_method,
             pd: getPaginationData(req.param('page'), requests),
             search_term: req.param('q')
