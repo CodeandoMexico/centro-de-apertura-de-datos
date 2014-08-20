@@ -1,13 +1,25 @@
+<div id="header-responsive" class="row">
+  <div id="header-responsive-col" class="col-md-12">
+    <a class="header-logo-anchor" href="http://datamx.io">
+      <img class="header-logo-image" alt="datamx.io" src="/images/datamx_dark.png" />
+    </a>
+    <div id="header-navigation-responsive">
+      <a id="show-left-push" href="#">
+        <i class="glyphicon glyphicon-th"></i>
+      </a>
+    </div>
+  </div>
+</div>
 
 <div id="header" class="row">
-  <a id="header-anchor" href="http://datamx.io">
-    <img id="header-image" alt="datamx.io" src="http://i.imgur.com/weQNDQL.png" />
+  <a id="header-logo-anchor" href="http://datamx.io">
+    <img id="header-logo-image" alt="datamx.io" src="/images/datamx_dark.png" />
   </a>
   <ul class="header-navigation" id="header-navigation">
-    <li>Datos</li>
-    <li>Organizaciones</li>
-    <li>Apps</li>
-    <li><a href="http://apertura-de-datos.herokuapp.com/">Centro de Apertura</a></li>
+    <li><a href="http://datamx.io/dataset">Datos</a></li>
+    <li><a href="http://datamx.io/organization">Organizaciones</a></li>
+    <li><a href="https://github.com/CodeandoMexico">Apps</a></li>
+    <li><a href="http://codeandomexico.org/retos">Retos</a></li>
   </ul>
   <div class="header-login">
     <% if (!req.session.user || typeof req.session.user === 'undefined') { %>
@@ -19,21 +31,24 @@
     <% } else { %>
       <ul id="header-login-actions">
         <li>
-          <img class="user-profile-picture" width="30" height="30" src="<%= req.session.user.profile_image_url %>"/>
+          <a title="Mi perfil" href="/user/profile">
+            <img class="user-profile-picture" width="30" height="30" src="<%= req.session.user.profile_image_url %>"/>
+          </a>
         </li>
         <li>
-          <button id="popover-login" data-toggle="popover" data-content="">
+          <button id="popover-login" data-toggle="popover" data-content="" onclick="window.location.href='/user/profile'">
             <%= req.session.user.name %>
           </button>
         </li>
         <li>
-          <a href="/user/signout"><i class="glyphicon glyphicon-log-out"></i></a>
+          <a title="Logout" href="/user/signout"><i class="glyphicon glyphicon-log-out"></i></a>
         </li>
       </ul>
     <% } %>
   </div>
 </div>
 
+<!--
 <script>
 $(document).ready(function() {
   $('#popover-login').popover({
@@ -44,4 +59,4 @@ $(document).ready(function() {
   });
 });
 </script>
-
+-->

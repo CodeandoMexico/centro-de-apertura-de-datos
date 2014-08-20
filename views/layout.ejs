@@ -11,6 +11,7 @@
 
     <!--STYLES-->
     <link rel="stylesheet" href="/styles/application.css">
+    <link rel="stylesheet" href="/styles/cbp.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
 
@@ -19,7 +20,7 @@
 
   </head>
 
-  <body>
+  <body class="cbp-spmenu-push">
     <div id="super-container">
       <%- partial('header') %>
       <%- body %>
@@ -31,6 +32,8 @@
       <!--SCRIPTS-->
       <script src="/js/dependencies/bootstrap.min.js"></script>
       <script src="/js/dependencies/sails.io.js"></script>
+      <script src="/js/cbp.js"></script>
+      <script src="/js/classie.js"></script>
       <!--SCRIPTS END-->
       <div class="clearfooter"></div>
     </div>
