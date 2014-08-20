@@ -460,8 +460,6 @@ hr {
 #intro-text-col{
   text-align: center;
   font-size: 16px;
-  padding-left: 110px;
-  padding-right: 110px;
 }
 
 #intro-btn-col {
@@ -588,6 +586,11 @@ li.left {
   color: #FFFFFF;
 }
 
+#footer-gate {
+  display: none;
+  padding: 10px;
+}
+
 @media screen and (max-width : 1048px){
   #header {
     display: none;
@@ -624,7 +627,15 @@ li.left {
 
   #request-search-box {
     text-align: center;
-    width: 160px;
+    width: 180px;
+  }
+
+  .vote {
+    width: 100%;
+  }
+
+  #footer-gate {
+    display: block;
   }
 
 }
