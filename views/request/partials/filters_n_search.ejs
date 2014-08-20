@@ -8,17 +8,18 @@
     Filtar por:
   </div>
   <div class="filters-n-search-col">
-    <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/request/index?sort_by=newest'">
+    <button class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/request/index?sort_by=newest'">
       M&aacute;s recientes
     </button>
   </div>
   <div class="filters-n-search-col">
-    <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/request/index?sort_by=most_votes'">
+    <button class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/request/index?sort_by=most_votes'">
       M&aacute;s votos
     </button>
   </div>
   <div class="filters-n-search-col">
-    Palabras clave:
-    <input type="text" />
+    <form id="request-search-form" action="/request/search" method="GET">
+      <input id="request-search-box" type="text" name="q" placeholder="Palabras clave"></input>
+    </form>
   </div>
 </div>
