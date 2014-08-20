@@ -390,13 +390,13 @@ hr {
   text-decoration: none;
 }
 
-#header-image {
+#header-logo-image {
   padding-top: 15px;
   padding-bottom: 15px;
   display: inline-block;
 }
 
-#header-anchor {
+#header-logo-anchor {
   background-color: #151F31;
   padding: 28px 80px; 
   /* Avoid vertical scroll bar in header with 28 px (header image has 15px for top and bottom */
@@ -538,4 +538,44 @@ li.left {
 
 .rounded {
   border-radius: 27.5px !important;
+}
+
+#header-responsive {
+  display: none;
+}
+
+#header-responsive-col {
+  background-color: #151F31;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+#header-navigation-responsive a {
+  color: white;
+  float: left;
+  margin-top: -25px;
+}
+
+@media screen and (max-width : 765px){
+  #header {
+    display: none;
+  }
+
+  #header-responsive {
+    display: inline;
+    text-align: center;
+    margin: 0px;
+  }
+
+  .header-logo-image {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding: 0px;
+  }
+
+  .header-logo-anchor {
+    padding: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 }
