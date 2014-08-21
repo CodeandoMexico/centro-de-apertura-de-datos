@@ -12,9 +12,13 @@
           < p&aacute;gina -
         </button>
       <% } %>
-      <button class="btn btn-hollow btn-purple btn-current-page btn-thin">
-        <%= pd.requested_page %>
-      </button>
+
+      <% if (pd.requested_page > 0) { // There are no requests in the DB. %>
+        <button class="btn btn-hollow btn-purple btn-current-page btn-thin">
+          <%= pd.requested_page %>
+        </button>
+      <% } %>
+
       <% if (pd.show_next_page_btn) { %>
         <% if (typeof search_term === 'undefined') { %>
           <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/request/index?sort_by=<%= sorting_method %>&page=<%= pd.next_page %>'">

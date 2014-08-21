@@ -551,10 +551,6 @@ li.left {
   -ms-transform: scaleX(-1);
 }
 
-.rounded {
-  border-radius: 27.5px !important;
-}
-
 #header-responsive {
   display: none;
 }
@@ -577,6 +573,10 @@ li.left {
   margin-top: -2px;
 }
 
+.user-profile-div {
+  padding: 25px;
+}
+
 #request-search-form {
   display: inline;
 }
@@ -589,6 +589,15 @@ li.left {
 #footer-gate {
   display: none;
   padding: 10px;
+}
+
+.wide-centered-text {
+  text-align: center;
+  padding: 40px;
+}
+
+.sized-font {
+  font-size: 16px;
 }
 
 @media screen and (max-width : 1048px){
