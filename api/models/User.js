@@ -56,7 +56,11 @@ module.exports = {
       values: [id],
     }, function(err, result) {
       if (err) console.log(err);
-      next(result.rows);
+      if (typeof result === 'undefined') {
+        next([]);
+      } else {
+        next(result.rows);
+      }
     });
   },
 
