@@ -50,4 +50,18 @@ module.exports = {
     });
   },
 
+  getCreatedRequests: function(id, next) {
+    Request.query({
+      text: 'SELECT * FROM request WHERE creator = $1',
+      values: [id],
+    }, function(err, result) {
+      if (err) console.log(err);
+      if (typeof result === 'undefined') {
+        next([]);
+      } else {
+        next(result.rows);
+      }
+    });
+  },
+
 };

@@ -91,7 +91,8 @@ module.exports = {
 
   giveVote: function(req, res) {
     if (req.method == 'POST' || req.method == 'post') {
-      User.findOne({id: req.session.user.id}).exec(function(err, user) {
+      User.findOne({id: req.session.user.id})
+      .exec(function(err, user) {
         if (err) console.log('Error looking for the current user:', err);
         Request.findOne({id: req.param('id')})
         .populate('voted')
@@ -111,7 +112,8 @@ module.exports = {
 
   removeVote: function(req, res) {
     if (req.method == 'POST' || req.method == 'post') {
-      User.findOne({id: req.session.user.id}).exec(function(err, user) {
+      User.findOne({id: req.session.user.id})
+      .exec(function(err, user) {
         if (err) console.log('Error looking for the current user:', err);
         Request.findOne({id: req.param('id')})
         .populate('voted')
@@ -128,5 +130,20 @@ module.exports = {
       return res.redirect('/');
     }
   },
+
+  profile: function(req, res) {
+    if (req.method == 'GET' || req.method == 'get') {
+      User.findOne({id: req.session.user.id})
+      .populate('votes')
+      .exec(function(err, user) {
+        User.getCreatedRequests(user.id, function(requests) {
+          return res.view({
+            user: user,
+            requests: requests
+          });
+        });
+      });
+    }
+  }
 
 };

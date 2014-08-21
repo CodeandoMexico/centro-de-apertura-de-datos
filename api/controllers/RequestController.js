@@ -106,7 +106,8 @@ module.exports = {
       Request.create({
         title: req.param('title'),
         url: req.param('url'),
-        description: req.param('description')
+        description: req.param('description'),
+        creator: req.session.user.id
       }, function(err, request) {
         if (err) console.log(err);
         req.flash('message', 'Solicitud creada');

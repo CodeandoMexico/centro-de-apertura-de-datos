@@ -1,20 +1,25 @@
 <%- partial('../intro') %>
 
 <div id="main-content-div" class="container">
-  <%- partial('../responsive_menu') %>
 
   <div>
     <%- partial('partials/filters_n_search') %>
   </div>
 
   <ul class="requested-data-list">
-    <% for(i in pd.paged_requests) { %>
-      <li>
-        <%- partial('partials/request_in_index', {request: pd.paged_requests[i]}) %>
-        <% if (i != pd.paged_requests.length - 1) { // no HR for last entry %>
-          <hr>
-        <% } %>
-      </li>
+    <% if (pd.paged_requests.length == 0) { %>
+        <div class="wide-centered-text">
+          <span class="sized-font">No hay solicitudes.</span>
+        </div>
+    <% } else { %>
+      <% for(i in pd.paged_requests) { %>
+        <li>
+          <%- partial('partials/request_in_index', {request: pd.paged_requests[i]}) %>
+          <% if (i != pd.paged_requests.length - 1) { // no HR for last entry %>
+            <hr>
+          <% } %>
+        </li>
+      <% } %>
     <% } %>
   </ul>
 

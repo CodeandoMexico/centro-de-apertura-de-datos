@@ -19,6 +19,10 @@ module.exports = {
       type: 'STRING',
       required: true
     },
+    creator: {
+      type: 'STRING',
+      required: true
+    },
     voted: {
       collection: 'user',
       via: 'votes',
