@@ -14,9 +14,13 @@
   </div>
   <div class="row">
     <div id="intro-btn-col" class="col-md-12">
-      <button type="button" id="request-btn" class="btn btn-hollow btn-purple btn-wide" data-container="body" data-toggle="modal" data-target="#requestFormModal">
-        Solicitar Datos
-      </button>
+      <% if (req.session.user) { %>
+        <button type="button" class="btn btn-hollow btn-purple btn-wide" data-container="body" data-toggle="modal" data-target="#requestFormModal">
+      <% } else { %>
+        <button type="button" class="btn btn-hollow btn-purple btn-wide" data-container="body" data-toggle="modal" data-target="#youMustLoginModal">
+      <% } %>
+          Solicitar Datos
+        </button>
     </div>
   </div>
 </div>
