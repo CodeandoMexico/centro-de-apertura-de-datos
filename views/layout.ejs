@@ -24,6 +24,9 @@
     <div id="super-container">
       <%- partial('header') %>
       <%- partial('responsive_menu') %>
+      <% if (typeof req.session.user === 'undefined' || req.session.user == null) { %>
+        <%- partial('you_must_login_modal') %>
+      <% } %>
       <%- body %>
       <!--TEMPLATES-->
       
