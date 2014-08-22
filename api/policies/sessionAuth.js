@@ -16,6 +16,10 @@ module.exports = function(req, res, next) {
     return next();
   }
 
-  // User is not allowed, ask for credentials.
-  return res.forbidden('Necesitas autenticarte para poder acceder a este recurso.');
+  /* User is not allowed, create a flash message. */
+  req.session.flash = {
+    text: 'No autorizado',
+    type: 'danger',
+  };
+  return res.redirect('/request/index');
 };
