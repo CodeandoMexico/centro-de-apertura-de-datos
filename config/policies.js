@@ -36,11 +36,16 @@ module.exports.policies = {
 	}
 	*/
   RequestController: {
-    '*': true
+    '*': 'sessionAuth',
+    'index': true,
+    'search': true,
+    'view': true,
   },
 
   UserController: {
-    '*': true,
+    '*': 'sessionAuth',
+    'signin': true,
+    'authCallback': true,
   },
 };
 

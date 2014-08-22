@@ -12,10 +12,10 @@ module.exports = function(req, res, next) {
   // User is allowed, proceed to the next policy, 
   // or if this is the last policy, the controller
   // Check if the req.session.user variable holds a number.
-  if (req.session.user === parseInt(req.session.user)) {
+  if (typeof req.session.user !== 'undefined' && req.session.user != null) {
     return next();
   }
 
   // User is not allowed, ask for credentials.
-  return res.redirect('/user/login');
+  return res.forbidden('Necesitas autenticarte para poder acceder a este recurso.');
 };
