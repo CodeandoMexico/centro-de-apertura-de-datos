@@ -600,6 +600,20 @@ li.left {
   font-size: 16px;
 }
 
+.flash {
+  text-align: center;
+  font-weight: bold;
+}
+
+.flash-danger {
+  color: black;
+  background-color: #ED7777;
+}
+.flash-success {
+  color: black;
+  background-color: #77D16D;
+}
+
 @media screen and (max-width : 1048px){
   #header {
     display: none;

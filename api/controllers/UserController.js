@@ -85,7 +85,10 @@ module.exports = {
   signout: function(req, res) {
     req.session.oauth = null;
     req.session.user = null;
-    req.flash('success', 'Has finalizado tu sesi&oacute;n');
+    req.session.flash = {
+      type: 'success',
+      text: 'Has finalizado tu sesi&oacute;n',
+    };
     return res.redirect('/');
   },
 
@@ -100,7 +103,17 @@ module.exports = {
           if (err) console.log('Error looking for the request:', err);
           user.votes.add(request.id);
           user.save(function(err, user) {
-            if (err) console.log('Error giving the vote:', err);
+            if (err) {
+              console.log('Error giving the vote:', err);
+              req.session.flash = {
+                type: 'danger',
+                text: 'Error al votar',
+              };
+            }
+            req.session.flash = {
+              type: 'success',
+              text: 'Has votado exitosamente',
+            };
             return res.redirect('/');
           });
         });
@@ -121,7 +134,17 @@ module.exports = {
           if (err) console.log('Error looking for the request:', err);
           user.votes.remove(request.id);
           user.save(function(err, user) {
-            if (err) console.log('Error removing the vote:', err);
+            if (err) {
+              console.log('Error removing the vote:', err);
+              req.session.flash = {
+                type: 'danger',
+                text: 'No se pudo quitar el voto',
+              };
+            }
+            req.session.flash = {
+              type: 'success',
+              text: 'Has quitado tu voto exitosamente',
+            };
             return res.redirect('/');
           });
         });

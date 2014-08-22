@@ -110,7 +110,10 @@ module.exports = {
         creator: req.session.user.id
       }, function(err, request) {
         if (err) console.log(err);
-        req.flash('message', 'Solicitud creada');
+        req.session.flash = {
+          'type': 'success',
+          'text': 'Tu solicitud ha sido creada',
+        };
         return res.redirect('/');
       });
     } else {
