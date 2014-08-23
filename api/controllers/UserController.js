@@ -54,7 +54,10 @@ module.exports = {
                 profile_image_url: data.profile_image_url,
                 id: data.id
               }
-
+              req.session.flash = {
+                type: 'success',
+                text: '¡Bienvenido ' + data.name + '!',
+              };
               User.findOne({id: data.id}).exec(function(err, user) {
                 if (!user) {
                   // First time I see this twitter user.
