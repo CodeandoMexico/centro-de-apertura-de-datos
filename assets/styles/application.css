@@ -652,12 +652,21 @@ li.left {
     width: 180px;
   }
 
+  .request-search-box-with-term {
+    text-align: center;
+    width: 157.5px !important;
+  }
+
   .vote {
     width: 100%;
   }
 
   #footer-gate {
     padding: 15px;
+  }
+
+  hr {
+    border-width: 4px;
   }
 
 }
