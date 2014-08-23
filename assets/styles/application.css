@@ -587,7 +587,6 @@ li.left {
 }
 
 #footer-gate {
-  display: none;
   padding: 10px;
 }
 
@@ -658,7 +657,7 @@ li.left {
   }
 
   #footer-gate {
-    display: block;
+    padding: 15px;
   }
 
 }
