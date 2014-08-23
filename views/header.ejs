@@ -19,7 +19,7 @@
     <li><a href="http://datamx.io/dataset">Datos</a></li>
     <li><a href="http://datamx.io/organization">Organizaciones</a></li>
     <li><a href="https://github.com/CodeandoMexico">Apps</a></li>
-    <li><a href="http://codeandomexico.org/retos">Retos</a></li>
+    <li><a href="http://apertura.datamx.io">Centro de Apertura</a></li>
   </ul>
   <div class="header-login">
     <% if (!req.session.user || typeof req.session.user === 'undefined') { %>
@@ -47,16 +47,3 @@
     <% } %>
   </div>
 </div>
-
-<!--
-<script>
-$(document).ready(function() {
-  $('#popover-login').popover({
-    trigger: 'focus',
-    placement: 'bottom',
-    html: true,
-    content: '<a style="color:black;" href="/user/signout">Logout</a>',
-  });
-});
-</script>
--->
