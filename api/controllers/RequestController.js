@@ -119,7 +119,7 @@ module.exports = {
         } else if (check == 'invalid') {
           req.session.flash = {
             type: 'danger',
-            text: 'Imposible crear solicitud: datos incompletos o incorrectos'
+            text: 'Imposible crear solicitud: datos incompletos o inv&aacute;lidos'
           };
           return res.redirect('/');
         }
