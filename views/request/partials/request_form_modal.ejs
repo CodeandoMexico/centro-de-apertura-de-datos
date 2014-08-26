@@ -35,27 +35,31 @@
 </div>
 
 <script>
-
+/*
+ *  Checks if the to-be-created request's info has been filled in by the user.
+ *  Uses native JavaScript and very few variables to get better performance.
+ *  It only exists here because no other page has the request-creation mechanism.
+ */
 function processRequestSubmissionForm() {
   var validation_error = false;
 
   if (document.getElementById('submitted-request-title').value == '') {
     validation_error = true;
-    document.getElementById('required-field-msg-title').innerHTML = '(necesario)';
+    document.getElementById('required-field-msg-title').innerHTML = '(requerido)';
   } else {
     document.getElementById('required-field-msg-title').innerHTML = '';
   }
 
   if (document.getElementById('submitted-request-url').value == '') {
     validation_error = true;
-    document.getElementById('required-field-msg-url').innerHTML = '(necesario)';
+    document.getElementById('required-field-msg-url').innerHTML = '(requerido)';
   } else {
     document.getElementById('required-field-msg-url').innerHTML = '';
   }
 
   if (document.getElementById('submitted-request-description').value == '') {
     validation_error = true;
-    document.getElementById('required-field-msg-description').innerHTML = '(necesario)';
+    document.getElementById('required-field-msg-description').innerHTML = '(requerido)';
   } else {
     document.getElementById('required-field-msg-description').innerHTML = '';
   }
