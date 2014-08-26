@@ -1,18 +1,72 @@
 <div class="modal fade" id="requestFormModal" tabindex="-1" role="dialog" aria-labelledby="requestFormModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
+
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
           <h4 class="modal-title modal-centered">
             Solicita los datos que necesites y nuestro equipo te ayudar&aacute;
           </h4>
         </div>
+
         <div class="modal-body">
-          <%- partial('request_form') %>
+          <form id="requestForm" class="modal-form" action="/request/create" method="POST">
+            <label class="modal-label">T&iacute;tulo</label>
+            <span id="required-field-msg-title" class="required-field-msg"></span>
+            <input type="text" id="submitted-request-title" class="modal-text-input" name="title" placeholder="Ej. INEGI">
+            <br />
+            <label class="modal-label">URL</label>
+            <span id="required-field-msg-url" class="required-field-msg"></span>
+            <input type="text" id="submitted-request-url" class="modal-text-input" name="url" placeholder="Ej. http://www.inegi.org.mx/">
+            <br />
+            <label class="modal-label">Descripci&oacute;n</label>
+            <span id="required-field-msg-description" class="required-field-msg"></span>
+            <textarea rows="5" id="submitted-request-description" class="modal-text-area" name="description" placeholder="Ej. &Iacute;ndice de pobreza infantil en M&eacute;xico"></textarea>
+            <input type="hidden" name="_csrf" value="<%= _csrf %>">
+          </form>
         </div>
+
         <div class="modal-footer">
-          <button type="button" class="btn btn-hollow btn-purple btn-wide modal-centered" onclick="$('#requestForm').submit()">Solicitar</button>
+          <button type="button" class="btn btn-hollow btn-purple btn-wide modal-centered" onclick="processRequestSubmissionForm()">Solicitar</button>
         </div>
+
       </div>
     </div>
 </div>
+
+<script>
+/*
+ *  Checks if the to-be-created request's info has been filled in by the user.
+ *  Uses native JavaScript and very few variables to get better performance.
+ *  It only exists here because no other page has the request-creation mechanism.
+ */
+function processRequestSubmissionForm() {
+  var validation_error = false;
+
+  if (document.getElementById('submitted-request-title').value == '') {
+    validation_error = true;
+    document.getElementById('required-field-msg-title').innerHTML = '(requerido)';
+  } else {
+    document.getElementById('required-field-msg-title').innerHTML = '';
+  }
+
+  if (document.getElementById('submitted-request-url').value == '') {
+    validation_error = true;
+    document.getElementById('required-field-msg-url').innerHTML = '(requerido)';
+  } else {
+    document.getElementById('required-field-msg-url').innerHTML = '';
+  }
+
+  if (document.getElementById('submitted-request-description').value == '') {
+    validation_error = true;
+    document.getElementById('required-field-msg-description').innerHTML = '(requerido)';
+  } else {
+    document.getElementById('required-field-msg-description').innerHTML = '';
+  }
+
+  if (!validation_error) {
+    document.getElementById('requestForm').submit();
+  }
+
+}
+</script>

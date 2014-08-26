@@ -10,20 +10,19 @@ module.exports.oauth = {
   })
 }
 
-
 /*
   Handles date formatting.
 */
 var moment = require('moment');
 moment.locale('es-MX');
-module.exports.moment = {
-  moment: moment
-}
+module.exports.moment = moment;
 
 /*
   Handles URL formatting.
 */
-var url = require('url');
-module.exports.url = {
-  url: url
-}
+module.exports.url = require('url');
+
+/*
+  Handles URL validation.
+*/
+module.exports.valid_url = require('valid-url');

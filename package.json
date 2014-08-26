@@ -25,7 +25,8 @@
     "sails-disk": "~0.10.0",
     "sails-postgresql": "~0.10.0-rc3",
     "node-twitter-api": "1.2.3",
-    "moment": "2.8.1"
+    "moment": "2.8.1",
+    "valid-url": "1.0.9"
   },
   "scripts": {
     "start": "node app.js",
