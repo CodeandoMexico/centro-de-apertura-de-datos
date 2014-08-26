@@ -619,6 +619,18 @@ li.left {
   color: red;
 }
 
+.goback {
+  font-size: 31.5px;
+}
+
+.goback a {
+  color: black;
+}
+
+#goback-icon {
+  top: -2.5px;
+}
+
 @media screen and (max-width : 1048px){
   #header {
     display: none;
@@ -673,6 +685,10 @@ li.left {
 
   hr {
     border-width: 4px;
+  }
+
+  .title {
+    text-align: left;
   }
 
 }
