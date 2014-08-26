@@ -1,29 +1,43 @@
+<script src="/js/processVoteAjax.js"></script>
+
 <div class="container-fluid">
   <div class="requested-data row">
-    <div class="col-md-1 centered-text vote">
-      <% if (req.session.user) { %>
-        <%if (user_votes.indexOf(request.id) < 0) { // Logged in and hasn't voted for this one %>
-          <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" onclick="$('#voteForm').attr('action', '/user/giveVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
-            <i class="glyphicon glyphicon-chevron-up"></i>
-          </a>
-        <% } else { // Logged in and has already voted for this request %>
-          <a title="Ya has votado" class="btn-vote btn-give-vote-voted">
-            <i class="glyphicon glyphicon-chevron-up"></i>
-          </a>
-          <a title="Quitar mi voto" class="btn-vote-small btn-remove-vote" onclick="$('#voteForm').attr('action', '/user/removeVote');$('#voteFormRequestIdInput').val('<%= request.id %>');$('#voteForm').submit()">
-            <i class="glyphicon glyphicon-remove"></i>
-          </a>
+    <div id="vote-col-<%= request.id %>" class="col-md-1 centered-text vote">
+      <span id="vote-btns-<%= request.id %>">
+        <% if (req.session.user) { %>
+          <%if (user_votes.indexOf(request.id) < 0) { // Logged in and hasn't voted for this one %>
+            <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" onclick="processVoteAjax(<%= request.id %>, '/user/giveVote', '<%= _csrf %>');">
+              <i class="glyphicon glyphicon-chevron-up"></i>
+            </a>
+          <% } else { // Logged in and has already voted for this request %>
+            <a title="Ya has votado" class="btn-vote btn-give-vote-voted">
+              <i class="glyphicon glyphicon-chevron-up"></i>
+            </a>
+            <a title="Quitar mi voto" class="btn-vote-small btn-remove-vote" onclick="processVoteAjax(<%= request.id %>, '/user/removeVote', '<%= _csrf %>');">
+              <i class="glyphicon glyphicon-remove"></i>
+            </a>
+          <% } %>
+        <% } else { // Not logged in. %>
+            <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" data-toggle="modal" href="#youMustLoginModal">
+              <i class="glyphicon glyphicon-chevron-up"></i>
+            </a>
         <% } %>
-      <% } else { // Not logged in. %>
-          <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" data-toggle="modal" href="#youMustLoginModal">
-            <i class="glyphicon glyphicon-chevron-up"></i>
-          </a>
-      <% } %>
-      <div class="vote-count">
+      </span>
+      <div id="vote-count-<%= request.id %>" class="vote-count">
         <% if (request.voted.length == 1) { %>
-          1 voto
+          <span id="vote-count-number-<%= request.id %>">
+            1
+          </span>
+          <span id="vote-count-noun-<%= request.id %>">
+            voto
+          </span>
         <% } else { %>
-          <%= request.voted.length %> votos
+          <span id="vote-count-number-<%= request.id %>">
+            <%= request.voted.length %>
+          </span>
+          <span id="vote-count-noun-<%= request.id %>">
+            votos
+          </span>
         <% } %>
       </div>
     </div>
@@ -38,3 +52,4 @@
     </div>
   </div>
 </div>
+
