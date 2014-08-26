@@ -100,7 +100,7 @@ module.exports = {
       User.findOne({id: req.session.user.id})
       .exec(function(err, user) {
         if (err) console.log('Error looking for the current user:', err);
-        Request.findOne({id: req.param('id')})
+        Request.findOne({id: req.param('request_id')})
         .populate('voted')
         .exec(function(err, request) {
           if (err) console.log('Error looking for the request:', err);
@@ -131,7 +131,7 @@ module.exports = {
       User.findOne({id: req.session.user.id})
       .exec(function(err, user) {
         if (err) console.log('Error looking for the current user:', err);
-        Request.findOne({id: req.param('id')})
+        Request.findOne({id: req.param('request_id')})
         .populate('voted')
         .exec(function(err, request) {
           if (err) console.log('Error looking for the request:', err);
