@@ -201,7 +201,6 @@ html {
 
 .modal-label {
   color: #464F9C;
-  display : block;
   padding-top: 15px;
 }
 
@@ -608,9 +607,16 @@ li.left {
   color: black;
   background-color: #ED7777;
 }
+
 .flash-success {
   color: black;
   background-color: #77D16D;
+}
+
+.required-field-msg {
+  display: inline;
+  font-weight: bold;
+  color: red;
 }
 
 @media screen and (max-width : 1048px){
