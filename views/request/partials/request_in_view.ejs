@@ -32,7 +32,7 @@
         <%= request.title %>
       </h3>
       <div class="request-details">
-        Solicitado <%= sails.config.moment.moment(request.createdAt).fromNow() %> (<%= sails.config.moment.moment(request.createdAt).format('MMMM D YYYY, HH:mm') %>)
+        Solicitado <%= sails.config.moment(request.createdAt).fromNow() %> (<%= sails.config.moment(request.createdAt).format('MMMM D YYYY, HH:mm') %>)
         <br />
         URL: <a href="<%= request.url %>" target="_blank"><%= request.url %></a>
       </div>

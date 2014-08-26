@@ -33,7 +33,7 @@
         <span class="request-details">(<%= sails.config.url.parse(request.url).hostname %>)</span> 
       </h3>
       <div class="request-details">
-        Solicitado <%= sails.config.moment.moment(request.createdAt).fromNow() %>
+        Solicitado <%= sails.config.moment(request.createdAt).fromNow() %>
       </div>
     </div>
   </div>
