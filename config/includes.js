@@ -13,11 +13,16 @@ module.exports.oauth = {
 /*
   Handles date formatting.
 */
-module.exports.moment = require('moment').locale('es-MX');
+var moment = require('moment');
+moment.locale('es-MX');
+module.exports.moment = moment;
 
 /*
   Handles URL formatting.
 */
 module.exports.url = require('url');
 
+/*
+  Handles URL validation.
+*/
 module.exports.valid_url = require('valid-url');
