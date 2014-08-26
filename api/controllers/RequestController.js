@@ -59,8 +59,6 @@ module.exports = {
 
   index: function(req, res) {
     // Default sorting method is set to 'newest first'.
-    // Send information to the view, so it knows what
-    // nav-bar pill to show as active.
     var sorting_method = 'newest';
     var newest_filter_class = "active-filter";
     var most_votes_filter_class = "";
@@ -103,18 +101,28 @@ module.exports = {
 
   create: function(req, res) {
     if (req.method == 'POST' || req.method == 'post') {
-      Request.create({
-        title: req.param('title'),
-        url: req.param('url'),
-        description: req.param('description'),
-        creator: req.session.user.id
-      }, function(err, request) {
-        if (err) console.log(err);
-        req.session.flash = {
-          'type': 'success',
-          'text': 'Tu solicitud ha sido creada',
-        };
-        return res.redirect('/');
+      Request.checkData(req, function(check) {
+        if (check == 'valid') {
+          Request.create({
+            title: req.param('title'),
+            url: req.param('url'),
+            description: req.param('description'),
+            creator: req.session.user.id
+          }, function(err, request) {
+            if (err) console.log(err);
+            req.session.flash = {
+              'type': 'success',
+              'text': 'Tu solicitud ha sido creada',
+            };
+            return res.redirect('/');
+          });
+        } else if (check == 'invalid') {
+          req.session.flash = {
+            type: 'danger',
+            text: 'Imposible crear solicitud: datos incompletos o incorrectos'
+          };
+          return res.redirect('/');
+        }
       });
     } else {
       return res.redirect('/');

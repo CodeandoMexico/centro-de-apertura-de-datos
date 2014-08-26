@@ -30,7 +30,7 @@
     <div class="requested-data-info col-md-10">
       <h3 class="title">
         <a href="/request/view/<%= request.id %>"><%= request.title %></a>
-        <span class="request-details">(<%= sails.config.url.url.parse(request.url).hostname %>)</span> 
+        <span class="request-details">(<%= sails.config.url.parse(request.url).hostname %>)</span> 
       </h3>
       <div class="request-details">
         Solicitado <%= sails.config.moment.moment(request.createdAt).fromNow() %>

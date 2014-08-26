@@ -13,7 +13,7 @@ module.exports = {
       required: true
     },
     url: {
-      type: 'URL',
+      type: 'STRING', // Disregard Sails' URL type (using valid-uri).
     },
     description: {
       type: 'STRING',
@@ -42,5 +42,31 @@ module.exports = {
       return -1;
     return 0;
   },
+
+  /*
+   * If no URL protocol is specified, like in "datamx.io", default it
+   * to HTTP, so that the result looks like "http://datamx.io".
+   */
+  getFormattedUrl: function(url) {
+    var url_protocol = sails.config.url.parse(url).protocol;
+    return url_protocol == null ? 'http://' + url.toLowerCase() : url.toLowerCase();
+  },
+
+  beforeCreate: function(params, next) {
+    params.url = Request.getFormattedUrl(params.url);
+    next();
+  },
+
+  checkData: function(req, next) {
+    if (req.param('title') == '' || req.param('description') == '' || req.param('url') == '') {
+      // Check for empty data.
+      next('invalid');
+    } else if (typeof sails.config.valid_url.isUri(Request.getFormattedUrl(req.param('url'))) === 'undefined') {
+      // Check for invalid URLs.
+      next('invalid');
+    } else {
+      next('valid');
+    }
+  }
 
 };
