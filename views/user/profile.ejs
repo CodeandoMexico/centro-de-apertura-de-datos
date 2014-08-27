@@ -21,7 +21,7 @@
             Tus solicitudes:
             <ul>
               <% for(i in requests) { %>
-                <li><a href="/request/view/<%= requests[i].id %>"><%= requests[i].title %></a></li>
+                <li><a href="/solicitud/<%= requests[i].id %>"><%= requests[i].title %></a></li>
               <% } %>
             </ul>
           </div>
@@ -33,7 +33,7 @@
           <ul>
             <% for(i in user.votes) { %>
               <% if (typeof user.votes[i].title !== 'undefined') { %>
-                <li><a href="/request/view/<%= user.votes[i].id %>"><%= user.votes[i].title %></a></li>
+                <li><a href="/solicitud/<%= user.votes[i].id %>"><%= user.votes[i].title %></a></li>
               <% } %>
             <% } %>
           </ul>
