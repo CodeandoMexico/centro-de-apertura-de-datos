@@ -46,17 +46,21 @@ module.exports = {
       values: [request_id, user_id],
     }, function(err, result) {
       if (err) console.log(err);
-      next(result.rowCount);
+      if (typeof result === 'undefined' || typeof result.rowCount === 'undefined') {
+        next(0);
+      } else {
+        next(result.rowCount);
+      }
     });
   },
 
-  getCreatedRequests: function(id, next) {
+  getCreatedRequests: function(user_id, next) {
     Request.query({
       text: 'SELECT * FROM request WHERE creator = $1',
-      values: [id],
+      values: [user_id],
     }, function(err, result) {
       if (err) console.log(err);
-      if (typeof result === 'undefined') {
+      if (typeof result === 'undefined' || typeof result.rows === 'undefined') {
         next([]);
       } else {
         next(result.rows);

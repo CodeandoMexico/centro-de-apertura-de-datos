@@ -103,22 +103,36 @@ module.exports = {
         Request.findOne({id: req.param('request_id')})
         .populate('voted')
         .exec(function(err, request) {
-          if (err) console.log('Error looking for the request:', err);
-          user.votes.add(request.id);
-          user.save(function(err, user) {
-            if (err) {
-              console.log('Error giving the vote:', err);
-              req.session.flash = {
-                type: 'danger',
-                text: 'Error al votar',
-              };
-            }
+          if (err || typeof request === 'undefined') {
+            console.log('Error looking for the request:', err);
             req.session.flash = {
-              type: 'success',
-              text: 'Has votado exitosamente',
+              type: 'danger',
+              text: 'Error al buscar solicitud',
             };
             return res.redirect('/');
-          });
+          } else {
+            user.votes.add(request.id);
+            user.save(function(err, user) {
+              if (err) {
+                // Model constraints will not allow 2 or more
+                // entries with the same request ID. Meaning that
+                // err will be triggered whenever a user tries to
+                // vote twice for the same request.
+                console.log('Error giving the vote:', err);
+                req.session.flash = {
+                  type: 'danger',
+                  text: 'Error al votar',
+                };
+                return res.redirect('/');
+              } else {
+                req.session.flash = {
+                  type: 'success',
+                  text: 'Has votado exitosamente',
+                };
+                return res.redirect('/');
+              }
+            });
+          }
         });
       });
     } else {
@@ -134,22 +148,37 @@ module.exports = {
         Request.findOne({id: req.param('request_id')})
         .populate('voted')
         .exec(function(err, request) {
-          if (err) console.log('Error looking for the request:', err);
-          user.votes.remove(request.id);
-          user.save(function(err, user) {
-            if (err) {
-              console.log('Error removing the vote:', err);
-              req.session.flash = {
-                type: 'danger',
-                text: 'No se pudo quitar el voto',
-              };
-            }
+          if (err || typeof request === 'undefined') {
+            console.log('Error looking for the request:', err);
             req.session.flash = {
-              type: 'success',
-              text: 'Has quitado tu voto exitosamente',
+              type: 'danger',
+              text: 'Error al buscar solicitud',
             };
             return res.redirect('/');
-          });
+          } else {
+            user.votes.remove(request.id);
+            user.save(function(err, user) {
+              if (err) {
+                // If a user tries to 'remove' his/her vote
+                // even though he/she hasn't actually voted
+                // for this request, err will not be triggered.
+                // However, no votes will be subtracted from the
+                // request.
+                console.log('Error removing the vote:', err);
+                req.session.flash = {
+                  type: 'danger',
+                  text: 'Error al votar',
+                };
+                return res.redirect('/');
+              } else {
+                req.session.flash = {
+                  type: 'success',
+                  text: 'Has quitado tu voto exitosamente',
+                };
+                return res.redirect('/');
+              }
+            });
+          }
         });
       });
     } else {

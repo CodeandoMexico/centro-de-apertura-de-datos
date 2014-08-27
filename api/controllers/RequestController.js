@@ -180,18 +180,26 @@ module.exports = {
       .populate('voted')
       .exec(function(err, request) {
         if (err) console.log(err)
-        if (req.session.user) {
-          User.hasVotedForRequest(req.session.user.id, req.param('id'), function(voted_by_user) {
-            return res.view({
-             request: request,
-             voted_by_user: voted_by_user
-           });
-          });
+        if (typeof request === 'undefined') {
+          req.session.flash = {
+            type: 'danger',
+            text: 'Solicitud no encontrada'
+          };
+          return res.redirect('/');
         } else {
-          return res.view({
-            request: request,
-            voted_by_user: false
-          });
+          if (req.session.user) {
+            User.hasVotedForRequest(req.session.user.id, req.param('id'), function(voted_by_user) {
+              return res.view({
+               request: request,
+               voted_by_user: voted_by_user
+             });
+            });
+          } else {
+            return res.view({
+              request: request,
+              voted_by_user: false
+            });
+          }
         }
       });
     } else {
