@@ -144,7 +144,7 @@ module.exports = {
           most_votes_filter_class = "active-filter";
           break;
       }
-      Request.find()
+      Request.find({sort: 'createdAt DESC'})
       .where({
         or: [{
           url: {contains: req.param('q')}
