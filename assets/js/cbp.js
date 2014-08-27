@@ -15,17 +15,21 @@ function disableOther(button) {
   }
 }
 
-document.getElementById('main-content-div').onclick = function() {
-  if ($(menuLeft).hasClass('cbp-spmenu-open')) {
-    $(body).toggleClass('cbp-spmenu-push-toright');
-    $(menuLeft).toggleClass('cbp-spmenu-open');
+if (document.getElementById('main-content-div')) {
+  document.getElementById('main-content-div').onclick = function() {
+    if ($(menuLeft).hasClass('cbp-spmenu-open')) {
+      $(body).toggleClass('cbp-spmenu-push-toright');
+      $(menuLeft).toggleClass('cbp-spmenu-open');
+    }
   }
 }
 
-document.getElementById('intro').onclick = function() {
-  if ($(menuLeft).hasClass('cbp-spmenu-open')) {
-    $(body).toggleClass('cbp-spmenu-push-toright');
-    $(menuLeft).toggleClass('cbp-spmenu-open');
+if (document.getElementById('intro')) {
+  document.getElementById('intro').onclick = function() {
+    if ($(menuLeft).hasClass('cbp-spmenu-open')) {
+      $(body).toggleClass('cbp-spmenu-push-toright');
+      $(menuLeft).toggleClass('cbp-spmenu-open');
+    }
   }
 }
 
