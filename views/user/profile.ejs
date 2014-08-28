@@ -21,7 +21,11 @@
             Tus solicitudes:
             <ul>
               <% for(i in requests) { %>
-                <li><a href="/solicitud/<%= requests[i].id %>"><%= requests[i].title %></a></li>
+                <li>
+                  <a href="/solicitud/<%= requests[i].id %>"><%= requests[i].title %></a>
+                  &nbsp;
+                  [<a href="/solicitud/editar/<%= requests[i].id %>">editar</a>]
+                </li>
               <% } %>
             </ul>
           </div>
