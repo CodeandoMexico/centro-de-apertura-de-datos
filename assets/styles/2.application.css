@@ -654,6 +654,22 @@ li.left {
   width: 100%;
 }
 
+.faq {
+  padding: 15px;
+}
+
+.faq ul li {
+  margin-top: 20px;
+}
+
+.faq-question {
+  font-weight: bold;
+}
+
+.faq-answer {
+  display: block;
+}
+
 @media screen and (max-width : 1048px){
   #header {
     display: none;
