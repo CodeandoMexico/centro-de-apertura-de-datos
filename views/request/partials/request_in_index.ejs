@@ -46,6 +46,10 @@
       </h3>
       <div class="request-details">
         Solicitado <%= sails.config.moment(request.createdAt).fromNow() %>
+        <% if (req.session && req.session.user && req.session.user.id == request.creator) { %>
+          <br />
+          [<a href="/solicitud/editar/<%= request.id %>">editar</a>]
+        <% } %>
       </div>
     </div>
   </div>

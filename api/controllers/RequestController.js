@@ -104,9 +104,9 @@ module.exports = {
       Request.checkData(req, function(check) {
         if (check == 'valid') {
           Request.create({
-            title: req.param('title'),
+            title: req.param('title').trim(),
             url: req.param('url'),
-            description: req.param('description'),
+            description: req.param('description').trim(),
             creator: req.session.user.id
           }, function(err, request) {
             if (err) console.log(err);
@@ -200,6 +200,62 @@ module.exports = {
               voted_by_user: false
             });
           }
+        }
+      });
+    } else {
+      return res.redirect('/');
+    }
+  },
+
+  edit: function(req, res) {
+    if (req.method == 'GET' || req.method == 'get') {
+      Request.findOne({
+        id: req.param('id')
+      }).exec(function(err, request) {
+        if (err || typeof request === 'undefined') {
+          console.log('Error looking for the request', err);
+          req.session.flash = {
+            type: 'danger',
+            text: 'Error al buscar solicitud'
+          };
+          return res.redirect('/');
+        } else {
+          if (request.creator == req.session.user.id) {
+            return res.view({request: request});
+          } else {
+            req.session.flash = {
+              type: 'danger',
+              text: 'No puedes editar solicitudes ajenas'
+            };
+            return res.redirect('/');
+          }
+        }
+      });
+    } else if (req.method == 'POST' || req.method == 'post') {
+      // IMPORTANT: update() will return an array of objects.
+      // Even though only 1 record can have this unique combination
+      // of request ID and user ID, the method will return an array.
+      Request.update({
+        id: req.param('id'),
+        creator: req.session.user.id
+      }, {
+        title: req.param('title').trim(),
+        url: req.param('url'),
+        description: req.param('description').trim()
+      }).exec(function(err, requests) {
+        if (err || typeof requests[0] === 'undefined' ) {
+          console.log('Error updating the request', err);
+          req.session.flash = {
+            type: 'danger',
+            text: 'Error al actualizar solicitud'
+          };
+          return res.redirect('/');
+        } else {
+          req.session.flash = {
+            type: 'success',
+            text: 'Solicitud editada exitosamente'
+          };
+          return res.redirect('/solicitud/' + requests[0].id);
         }
       });
     } else {

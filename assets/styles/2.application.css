@@ -628,6 +628,32 @@ li.left {
   top: -2.5px;
 }
 
+.edit-input {
+  width: 100% !important;
+}
+
+.edit-textarea {
+  width: 100%;
+  height: 90px;
+}
+
+#edit-form {
+  padding: 15px;
+}
+
+.requested-data-info-edit {
+  padding-left: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 100%;
+}
+
+.request-details-edit {
+  color: #888;
+  font-size: small;
+  width: 100%;
+}
+
 @media screen and (max-width : 1048px){
   #header {
     display: none;
@@ -688,4 +714,11 @@ li.left {
     text-align: left;
   }
 
+  .requested-data-description {
+    width: 100%;
+  }
+
+  .requested-data-info {
+    padding-left: 15px;
+  }
 }
