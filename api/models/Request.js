@@ -50,7 +50,7 @@ module.exports = {
    */
   getFormattedUrl: function(url) {
     var url_protocol = sails.config.url.parse(url).protocol;
-    return url_protocol == null ? 'http://' + url.toLowerCase() : url.toLowerCase();
+    return url_protocol == null ? 'http://' + url : url;
   },
 
   /*
