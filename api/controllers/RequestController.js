@@ -76,7 +76,7 @@ module.exports = {
       if (err) return console.log(err);
 
       if (sorting_method == 'most_votes') {
-      // Override the default sorting method.
+        // Override the default sorting method.
         requests.sort(Request.compareVotes);
       }
 
@@ -131,19 +131,33 @@ module.exports = {
 
   search: function(req, res) {
     if (req.method == 'GET' || req.method == 'get') {
+
       if (typeof req.param('q') === 'undefined' || req.param('q') == '') {
         return res.redirect('/');
       }
-      var sorting_method = 'newest';
-      var newest_filter_class = "active-filter";
-      var most_votes_filter_class = "";
-      switch(req.param('sort_by')) {
-        case 'most_votes':
-          sorting_method = 'most_votes';
-          newest_filter_class = "";
-          most_votes_filter_class = "active-filter";
-          break;
+
+      // Default search filter is 'newest'.
+      var sorting_method          = 'newest';
+      var newest_filter_class     = 'active-filter';
+      var most_votes_filter_class = '';
+
+      if (req.param('sort_by') == 'newest' || req.param('sort_by') == '' || typeof req.param('sort_by') === 'undefined') {
+        // Even if it's redundat, keep this here in case
+        // the user gives some weird sorting method.
+        sorting_method = 'newest';
+        newest_filter_class = "active-filter";
+      } else if (req.param('sort_by') == 'most_votes') {
+        sorting_method = 'most_votes';
+        most_votes_filter_class = "active-filter";
+      } else {
+        // Not recognized sorting method.
+        return res.redirect('/');
       }
+
+      // Always grab the request sorted by date.
+      // If the 'most_votes' (or other) filter was 
+      // chosen, the array of requests will be
+      // sorted again accordingly.
       Request.find({sort: 'createdAt DESC'})
       .where({
         or: [{
@@ -160,14 +174,24 @@ module.exports = {
           // Override the default sorting method.
           requests.sort(Request.compareVotes);
         }
-        return res.view('request/index', {
-            user_votes: [],
-            newest_filter_class: newest_filter_class,
-            most_votes_filter_class: most_votes_filter_class,
-            sorting_method: sorting_method,
-            pd: getPaginationData(req.param('page'), requests),
-            search_term: req.param('q')
-        });
+
+        var data = {
+          newest_filter_class: newest_filter_class,
+          most_votes_filter_class: most_votes_filter_class,
+          sorting_method: sorting_method,
+          pd: getPaginationData(req.param('page'), requests),
+          search_term: req.param('q')
+        };
+
+        if (req.session.user) {
+          User.getVotes(req.session.user.id, function(user_votes) {
+            data.user_votes = user_votes;
+            return res.view('request/index', data);
+          });
+        } else {
+          data.user_votes = [];
+          return res.view('request/index', data);
+        }
       });
     } else {
       return res.redirect('/');
