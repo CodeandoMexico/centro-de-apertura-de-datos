@@ -679,6 +679,10 @@ li.left {
   display: block;
 }
 
+.hidden-preload {
+  display: none;
+}
+
 @media screen and (max-width : 1048px){
   #header {
     display: none;
