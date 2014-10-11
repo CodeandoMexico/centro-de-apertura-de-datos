@@ -23,6 +23,13 @@ module.exports = {
       type: 'STRING',
       required: true
     },
+    state: {
+      type: 'INTEGER',
+      defaultsTo: 1
+    },
+    open_url: {
+      type: 'STRING'
+    },
     voted: {
       collection: 'user',
       via: 'votes',

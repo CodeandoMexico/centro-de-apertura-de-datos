@@ -47,6 +47,14 @@
         Solicitado <%= sails.config.moment(request.createdAt).fromNow() %> (<%= sails.config.moment(request.createdAt).format('MMMM D YYYY, HH:mm') %>)
         <br />
         URL: <a href="<%= request.url %>" target="_blank"><%= request.url %></a>
+        <br />
+        <% if (request.state == 3) { %>
+          <button type="button" class="btn btn-success btn-xs" onclick="window.open('<%= request.open_url %>')">abierto</button>
+        <% } else if (request.state == 2) { %>
+          <button type="button" class="btn btn-warning btn-xs disabled">en proceso</button>
+        <% } else if (request.state == 1) { %>
+          <button type="button" class="btn btn-default btn-xs disabled">sin procesar</button>
+        <% } %>
         <% if (req.session && req.session.user && req.session.user.id == request.creator) { %>
           <br />
           [<a href="/solicitud/editar/<%= request.id %>">editar</a>]
