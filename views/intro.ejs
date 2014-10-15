@@ -1,0 +1,29 @@
+<div id="intro" class="row">
+  <div class="container">
+    <div id="intro-text-col" class="col-md-12">
+      <div class="intro-important">
+        Solicita la apertura de datos
+      </div>
+      <div>
+        El Centro de Apertura de Datos (CAD) es una lista curada y priorizada por la comunidad para abrir recursos con datos p&uacute;blicos de M&eacute;xico, perdidos alrededor del Internet o en sitios del gobierno.
+      </div>
+      <div>
+        Te invitamos a leer 
+        <a id="intro-link" href="http://blog.codeandomexico.org/2014/08/28/centro-de-apertura-de-datos/" target="_blank">m&aacute;s informaci&oacute;n</a>
+        y las
+        <a id="intro-link" href="/faq">preguntas frecuentes</a>.
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div id="intro-btn-col" class="col-md-12">
+      <% if (req.session.user) { %>
+        <button type="button" class="btn btn-hollow btn-purple btn-wide" data-container="body" data-toggle="modal" data-target="#requestFormModal">
+      <% } else { %>
+        <button type="button" class="btn btn-hollow btn-purple btn-wide" data-container="body" data-toggle="modal" data-target="#youMustLoginModal">
+      <% } %>
+          Solicitar Datos
+        </button>
+    </div>
+  </div>
+</div>

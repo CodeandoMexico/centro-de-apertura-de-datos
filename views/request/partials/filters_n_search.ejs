@@ -1,0 +1,44 @@
+<%
+  if (typeof newest_filter_class === 'undefined') newest_filter_class = '';
+  if (typeof most_votes_filter_class == 'undefined') most_votes_filter_class = '';
+%>
+
+<div id="filters-n-search-wrapper" class="row">
+  <div class="filters-n-search-col">
+    <span class="sized-font">Filtrar por:</span>
+  </div>
+  <% if (typeof search_term === 'undefined') { %>
+    <div class="filters-n-search-col">
+      <button class="btn btn-hollow btn-purple btn-thin btn-filter <%= newest_filter_class %>" onclick="location.href='/request/index?sort_by=newest'">
+        M&aacute;s recientes
+      </button>
+    </div>
+    <div class="filters-n-search-col">
+      <button class="btn btn-hollow btn-purple btn-thin btn-filter <%= most_votes_filter_class %>" onclick="location.href='/request/index?sort_by=most_votes'">
+        M&aacute;s votos
+      </button>
+    </div>
+    <div class="filters-n-search-col">
+      <form id="request-search-form" action="/request/search" method="GET">
+        <input id="request-search-box" type="text" name="q" placeholder="Palabras clave"></input>
+      </form>
+    </div>
+  <% } else { %>
+    <div class="filters-n-search-col">
+      <button class="btn btn-hollow btn-purple btn-thin btn-filter <%= newest_filter_class %>" onclick="location.href='/request/search?sort_by=newest&q=<%= search_term %>'">
+        M&aacute;s recientes
+      </button>
+    </div>
+    <div class="filters-n-search-col">
+      <button class="btn btn-hollow btn-purple btn-thin btn-filter <%= most_votes_filter_class %>" onclick="location.href='/request/search?sort_by=most_votes&q=<%= search_term %>'">
+        M&aacute;s votos
+      </button>
+    </div>
+    <div class="filters-n-search-col">
+      <form id="request-search-form" action="/request/search" method="GET">
+        <input id="request-search-box" class="request-search-box-with-term" type="text" name="q" value="<%= search_term %>"></input>
+      </form>
+      <a href="/"><i class="glyphicon glyphicon-remove glyphicon-remove-search"></i></a>
+    </div>
+  <% } %>
+</div>

@@ -1,0 +1,32 @@
+<%- partial('../intro') %>
+
+<div id="main-content-div" class="container">
+
+  <div>
+    <%- partial('partials/filters_n_search') %>
+  </div>
+
+  <ul class="requested-data-list">
+    <% if (pd.paged_requests.length == 0) { %>
+        <div class="wide-centered-text">
+          <span class="sized-font">No hay solicitudes.</span>
+        </div>
+    <% } else { %>
+      <% for(i in pd.paged_requests) { %>
+        <li>
+          <%- partial('partials/request_in_index', {request: pd.paged_requests[i]}) %>
+          <% if (i != pd.paged_requests.length - 1) { // no HR for last entry %>
+            <hr>
+          <% } %>
+        </li>
+      <% } %>
+    <% } %>
+  </ul>
+
+  <div class="paginator row">
+    <%- partial('partials/page_buttons') %>
+  </div>
+
+</div>
+
+<%- partial('partials/request_form_modal') %>

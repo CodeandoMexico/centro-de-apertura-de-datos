@@ -1,0 +1,49 @@
+<div id="header-responsive" class="row">
+  <div id="header-responsive-col" class="col-md-12">
+    <a class="header-logo-anchor" href="http://datamx.io">
+      <img class="header-logo-image" alt="datamx.io" src="/images/datamx_dark.png" />
+    </a>
+    <div id="header-navigation-responsive">
+      <a id="show-left-push" href="#">
+        <i class="glyphicon glyphicon-th"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="header" class="row">
+  <a id="header-logo-anchor" href="http://datamx.io">
+    <img id="header-logo-image" alt="datamx.io" src="/images/datamx_dark.png" />
+  </a>
+  <ul class="header-navigation" id="header-navigation">
+    <li><a href="http://datamx.io/dataset">Datos</a></li>
+    <li><a href="http://datamx.io/organization">Organizaciones</a></li>
+    <li><a href="https://github.com/CodeandoMexico">Apps</a></li>
+    <li><a href="http://apertura.datamx.io">Centro de Apertura</a></li>
+  </ul>
+  <div class="header-login">
+    <% if (!req.session.user || typeof req.session.user === 'undefined') { %>
+      <ul id="header-login-actions">
+        <li>
+          <a href="/user/signin">Iniciar Sesi&oacute;n</a>
+        </li>
+      </ul>
+    <% } else { %>
+      <ul id="header-login-actions">
+        <li>
+          <a title="Mi perfil" href="/user/profile">
+            <img class="user-profile-picture" width="30" height="30" src="<%= req.session.user.profile_image_url %>"/>
+          </a>
+        </li>
+        <li>
+          <button id="popover-login" data-toggle="popover" data-content="" onclick="window.location.href='/user/profile'">
+            <%= req.session.user.name %>
+          </button>
+        </li>
+        <li>
+          <a title="Logout" href="/user/signout"><i class="glyphicon glyphicon-log-out"></i></a>
+        </li>
+      </ul>
+    <% } %>
+  </div>
+</div>

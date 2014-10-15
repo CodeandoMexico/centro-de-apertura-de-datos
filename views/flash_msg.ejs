@@ -1,0 +1,6 @@
+<% if (typeof req.session.flash !== 'undefined' && req.session.flash != null) { %>
+  <div class="sized-text flash flash-<%= req.session.flash.type %>">
+    <%= req.session.flash.text %>
+  </div>
+  <% req.session.flash = null; %>
+<% } %>
