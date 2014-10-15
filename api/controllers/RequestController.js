@@ -12,12 +12,13 @@
  */
 function getPaginationData(req_param_page, requests) {
     var pd = {};
+    var requests_per_page = 7;
 
     pd.show_prev_page_btn = true;
     pd.show_next_page_btn = true;
 
     // Get the amount of possible pages.
-    var pages_float = requests.length / sails.config.globals.cmx.requests_per_page;
+    var pages_float = requests.length / requests_per_page;
     var pages_int = (pages_float === parseInt(pages_float)) ? pages_float : Math.floor(pages_float) + 1;
 
     // Always default to page 1.
@@ -49,8 +50,8 @@ function getPaginationData(req_param_page, requests) {
     pd.next_page = pd.requested_page + 1;
 
     // Get which requests should be shown in this page.
-    var start = (pd.requested_page - 1) * sails.config.globals.cmx.requests_per_page;
-    pd.paged_requests = requests.slice(start, start + sails.config.globals.cmx.requests_per_page);
+    var start = (pd.requested_page - 1) * requests_per_page;
+    pd.paged_requests = requests.slice(start, start + requests_per_page);
 
     return pd;
 }

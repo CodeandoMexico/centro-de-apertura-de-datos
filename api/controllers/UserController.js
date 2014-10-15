@@ -8,7 +8,7 @@
 module.exports = {
 
   signin: function(req, res) {
-    sails.config.oauth.twitter.getRequestToken(
+    sails.config.globals.oauth.twitter.getRequestToken(
       function(error, request_token, request_token_secret, results) {
       if (error) {
          console.log('Error getting OAuth request token', error);
@@ -29,7 +29,7 @@ module.exports = {
                              req.session.oauth.request_token_secret;
 
     if (has_request_tokens) {
-      sails.config.oauth.twitter.getAccessToken(
+      sails.config.globals.oauth.twitter.getAccessToken(
         req.session.oauth.request_token,
         req.session.oauth.request_token_secret,
         req.param('oauth_verifier'),
@@ -37,7 +37,7 @@ module.exports = {
         if (error) {
           console.log('Error getting access token:', error);
         } else {
-          sails.config.oauth.twitter.verifyCredentials(
+          sails.config.globals.oauth.twitter.verifyCredentials(
             access_token, 
             access_token_secret, 
             function(error, data, response) {

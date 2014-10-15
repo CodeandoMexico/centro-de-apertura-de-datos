@@ -8,7 +8,7 @@
         <div class="request-details-edit">
           <input class="edit-input" type="text" value="<%= request.url %>" name="url">
           <br />
-          Solicitado <%= sails.config.moment(request.createdAt).fromNow() %> (<%= sails.config.moment(request.createdAt).format('MMMM D YYYY, HH:mm') %>)
+          Solicitado <%= sails.config.globals.moment(request.createdAt).fromNow() %> (<%= sails.config.globals.moment(request.createdAt).format('MMMM D YYYY, HH:mm') %>)
         </div>
       </div>
     </div>

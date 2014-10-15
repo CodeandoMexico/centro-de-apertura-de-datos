@@ -56,7 +56,7 @@ module.exports = {
    * @param url {string} A string representing a user-given URL
    */
   getFormattedUrl: function(url) {
-    var url_protocol = sails.config.url.parse(url).protocol;
+    var url_protocol = sails.config.globals.url.parse(url).protocol;
     return url_protocol == null ? 'http://' + url : url;
   },
 
@@ -83,7 +83,7 @@ module.exports = {
     if (req.param('title') == '' || req.param('description') == '' || req.param('url') == '') {
       // Check for empty data.
       next('invalid');
-    } else if (typeof sails.config.valid_url.isWebUri(formatted_url) === 'undefined') {
+    } else if (typeof sails.config.globals.valid_url.isWebUri(formatted_url) === 'undefined') {
       // Check for invalid web URLs.
       next('invalid');
     } else {

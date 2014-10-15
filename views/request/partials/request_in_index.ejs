@@ -42,10 +42,10 @@
     <div class="requested-data-info col-md-10">
       <h3 class="title">
         <a href="/solicitud/<%= request.id %>"><%= request.title %></a>
-        <span class="request-details">(<%= sails.config.url.parse(request.url).hostname %>)</span> 
+        <span class="request-details">(<%= sails.config.globals.url.parse(request.url).hostname %>)</span> 
       </h3>
       <div class="request-details">
-        Solicitado <%= sails.config.moment(request.createdAt).fromNow() %>
+        Solicitado <%= sails.config.globals.moment(request.createdAt).fromNow() %>
         <br />
         <% if (request.state == 3) { %>
           <button type="button" class="btn btn-success btn-xs" onclick="window.open('<%= request.open_url %>')">abierto</button>
