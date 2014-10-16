@@ -3,26 +3,31 @@
     <div id="vote-col-<%= request.id %>" class="col-md-1 centered-text vote">
       <span id="vote-btns-<%= request.id %>">
         <% if (req.session.user) { %>
-          <%if (user_votes.indexOf(request.id) < 0) { // Logged in and hasn't voted for this one %>
-            <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" onclick="processVoteAjax(<%= request.id %>, '/user/giveVote', '<%= _csrf %>');">
-              <i class="glyphicon glyphicon-chevron-up"></i>
-            </a>
-          <% } else { // Logged in and has already voted for this request %>
+
+          <% if (vote_dict[request.id] && vote_dict[request.id].voted) { %>
             <a title="Ya has votado" class="btn-vote btn-give-vote-voted">
               <i class="glyphicon glyphicon-chevron-up"></i>
             </a>
-            <a title="Quitar mi voto" class="btn-vote-small btn-remove-vote" onclick="processVoteAjax(<%= request.id %>, '/user/removeVote', '<%= _csrf %>');">
+            <a title="Quitar mi voto" class="btn-vote-small btn-remove-vote" onclick="vote(<%= request.id %>, 'down', '<%= _csrf %>');">
               <i class="glyphicon glyphicon-remove"></i>
             </a>
+          <% } else { %>
+            <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" onclick="vote(<%= request.id %>, 'up', '<%= _csrf %>');">
+              <i class="glyphicon glyphicon-chevron-up"></i>
+            </a>
           <% } %>
+
         <% } else { // Not logged in. %>
+
             <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" data-toggle="modal" href="#youMustLoginModal">
               <i class="glyphicon glyphicon-chevron-up"></i>
             </a>
+
         <% } %>
       </span>
       <div id="vote-count-<%= request.id %>" class="vote-count">
-        <% if (request.voted.length == 1) { %>
+
+        <% if (request.voted_by.length == 1) { %>
           <span id="vote-count-number-<%= request.id %>">
             1
           </span>
@@ -31,12 +36,13 @@
           </span>
         <% } else { %>
           <span id="vote-count-number-<%= request.id %>">
-            <%= request.voted.length %>
+            <%= request.voted_by.length %>
           </span>
           <span id="vote-count-noun-<%= request.id %>">
             votos
           </span>
         <% } %>
+
       </div>
     </div>
     <div class="requested-data-info col-md-10">
@@ -47,6 +53,7 @@
       <div class="request-details">
         Solicitado <%= sails.config.globals.moment(request.createdAt).fromNow() %>
         <br />
+
         <% if (request.state == 3) { %>
           <button type="button" class="btn btn-success btn-xs" onclick="window.open('<%= request.open_url %>')">abierto</button>
         <% } else if (request.state == 2) { %>
@@ -55,7 +62,7 @@
           <button type="button" class="btn btn-default btn-xs disabled">sin procesar</button>
         <% } %>
 
-        <% if (req.session && req.session.user && req.session.user.id == request.creator) { %>
+        <% if (req.session && req.session.user && req.session.user.id == request.user) { %>
           <br />
           [<a href="/solicitud/editar/<%= request.id %>">editar</a>]
         <% } %>

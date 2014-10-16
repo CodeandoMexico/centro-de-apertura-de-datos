@@ -1,8 +1,5 @@
 /**
  * Request.js
- *
- * @description :: TODO: You might write a short summary of how this model works and what it represents here.
- * @docs		:: http://sailsjs.org/#!documentation/models
  */
 
 module.exports = {
@@ -19,10 +16,6 @@ module.exports = {
       type: 'STRING',
       required: true
     },
-    creator: {
-      type: 'STRING',
-      required: true
-    },
     state: {
       type: 'INTEGER',
       defaultsTo: 1
@@ -30,25 +23,19 @@ module.exports = {
     open_url: {
       type: 'STRING'
     },
-    voted: {
+    vote_count: {
+      type: 'INTEGER', // Only this calculated attribute to filter requests by popularity.
+      defaultsTo: 0    // Do not use for vital actions. Could be prone to race conditions.
+    },
+    user: {
+      model: 'user'
+    },
+    voted_by: {
       collection: 'user',
-      via: 'votes',
+      via: 'voted_for',
       dominant: true
     }
 	},
-
-  /*
-   * Function used to sort requests by number ov votes.
-   * @param a {Request} A request object to compare against b
-   * @param b {Request} A request object to compare against a
-   */
-  compareVotes: function(a, b) {
-    if (a.voted.length < b.voted.length)
-      return 1;
-    if (a.voted.length > b.voted.length)
-      return -1;
-    return 0;
-  },
 
   /*
    * If no URL protocol is specified, like in "datamx.io", default it

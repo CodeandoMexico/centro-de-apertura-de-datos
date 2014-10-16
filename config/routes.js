@@ -36,6 +36,16 @@ module.exports.routes = {
     action: 'view'
   },
 
+  '/solicitud/:id/voteup': {
+    controller: 'request',
+    action: 'voteup'
+  },
+
+  '/solicitud/:id/votedown': {
+    controller: 'request',
+    action: 'votedown'
+  },
+
   '/solicitud/editar/:id': {
     controller: 'request',
     action: 'edit'
@@ -44,6 +54,16 @@ module.exports.routes = {
   '/faq': {
     controller: 'static',
     action: 'faq'
+  },
+
+  '/solicitudes/busca': {
+    controller: 'request',
+    action: 'search'
+  },
+
+  '/solicitudes/:sort_by': {
+    controller: 'request',
+    action: 'index'
   },
 
   // If a request to a URL doesn't match any of the custom routes above, it is matched 
