@@ -28,6 +28,7 @@ function _success(msg, req, res, url) {
 
 function userHasVotedForTheseRequests(requests, user_id, next) {
   var vote_dict = {}; 
+  if (requests.length == 0) return next(vote_dict);
   for (var i = 0; i < requests.length; i++) {
     for (var j = 0; j < requests[i].voted_by.length; j++) {
       if (requests[i].voted_by[j].id == user_id) {
@@ -178,7 +179,10 @@ module.exports = {
 
   view: function(req, res) {
     if (req.method == 'GET' || req.method == 'get') {
-      Request.findOne({id: req.param('id')})
+      Request.findOne({
+        id: req.param('id'),
+        slug: req.param('slug')
+      })
       .populate('voted_by')
       .exec(function(err, request) {
         if (err) return _error(err, req, res, false)
@@ -229,7 +233,7 @@ module.exports = {
         }).exec(function(err, requests) {
           if (err) return _error(err, req, res, false);
           if (!requests[0]) return _error('Error al actualizar solicitud', req, res, true);
-          return _success('Solicitud editada exitosamente', req, res, '/solicitud/' + requests[0].id)
+          return _success('Solicitud editada exitosamente', req, res, '/solicitud/' + requests[0].id + '/' + requests[0].slug);
         });
       });
     } else {

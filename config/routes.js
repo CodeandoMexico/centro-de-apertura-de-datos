@@ -31,11 +31,6 @@ module.exports.routes = {
     action: 'index'
   },
 
-  '/solicitud/:id': {
-    controller: 'request',
-    action: 'view'
-  },
-
   '/solicitud/:id/voteup': {
     controller: 'request',
     action: 'voteup'
@@ -49,6 +44,11 @@ module.exports.routes = {
   '/solicitud/:id/editar': {
     controller: 'request',
     action: 'edit'
+  },
+
+  '/solicitud/:id/:slug': {
+    controller: 'request',
+    action: 'view'
   },
 
   '/preguntas-frecuentes': {
