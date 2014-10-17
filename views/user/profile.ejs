@@ -11,33 +11,35 @@
           ¡Hola <%= req.session.user.name %>! (<a href="https://twitter.com/<%= req.session.user.screen_name%>" target="_blank">@<%= req.session.user.screen_name %></a>)
         </div>
         <div>
-          <% var requests_noun = requests.length == 0 || requests.length > 1 ? 'solicitudes' : 'solicitud' %>
-          <% var votes_noun = user.votes.length == 0 || user.votes.length > 1 ? 'votos' : 'voto' %>
-          Has hecho <%= requests.length %> <%= requests_noun %> y has dado <%= user.votes.length %> <%= votes_noun %>.
+          <% var requests_noun = user.requests.length == 0 || user.requests.length > 1 ? 'solicitudes' : 'solicitud' %>
+          <% var votes_noun = user.voted_for.length == 0 || user.voted_for.length > 1 ? 'votos' : 'voto' %>
+          Has hecho <%= user.requests.length %> <%= requests_noun %> y has dado <%= user.voted_for.length %> <%= votes_noun %>.
         </div>
         <br />
-        <% if (requests.length > 0) { %>
+        <% if (user.requests.length > 0) { %>
           <div>
             Tus solicitudes:
             <ul>
-              <% for(i in requests) { %>
+              <% for(var i = 0; i < user.requests.length; i++) { %>
                 <li>
-                  <a href="/solicitud/<%= requests[i].id %>"><%= requests[i].title %></a>
+                  <a href="/solicitud/<%= user.requests[i].id %>"><%= user.requests[i].title %></a>
                   &nbsp;
-                  [<a href="/solicitud/editar/<%= requests[i].id %>">editar</a>]
+                  <% if (user.requests[i].state == 1) { %>
+                    [<a href="/solicitud/<%= user.requests[i].id %>/editar">editar</a>]
+                  <% } %>
                 </li>
               <% } %>
             </ul>
           </div>
         <% } %>
         <br />
-        <% if (user.votes.length > 0) { %>
+        <% if (user.voted_for.length > 0) { %>
         <div>
           Tus votos:
           <ul>
-            <% for(i in user.votes) { %>
-              <% if (typeof user.votes[i].title !== 'undefined') { %>
-                <li><a href="/solicitud/<%= user.votes[i].id %>"><%= user.votes[i].title %></a></li>
+            <% for(var i = 0; i < user.voted_for.length; i++) { %>
+              <% if (typeof user.voted_for[i].title !== 'undefined') { %>
+                <li><a href="/solicitud/<%= user.voted_for[i].id %>"><%= user.voted_for[i].title %></a></li>
               <% } %>
             <% } %>
           </ul>

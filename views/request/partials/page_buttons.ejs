@@ -1,0 +1,48 @@
+<h3>
+
+  <!-- Previous page button -->
+  <% if (parseInt(page, 10) > 1) { %>
+
+    <% if (typeof search_term === 'undefined') { %>
+    <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/solicitudes/<%= sort_by %>/<%= (parseInt(page, 10) - 1) %>'">
+    <% } else { %>
+    <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/solicitudes/<%= sort_by %>/busca?q=<%= search_term %>&p=<%= (parseInt(page, 10) - 1) %>'">
+    <% } %>
+      < p&aacute;gina <%= (parseInt(page, 10) - 1) %>
+    </button>
+
+  <% } else { %>
+
+    <button class="btn btn-hollow btn-purple btn-thin btn-hidden">
+      < p&aacute;gina -
+    </button>
+
+  <% } %>
+
+
+  <!-- Current page button -->
+  <button class="btn btn-hollow btn-purple btn-current-page btn-thin">
+    <%= page %>
+  </button>
+
+
+  <!-- Next page button -->
+  <% if (more_pages) { %>
+
+    <% if (typeof search_term === 'undefined') { %>
+    <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/solicitudes/<%= sort_by %>/<%= (parseInt(page, 10) + 1) %>'">
+    <% } else { %>
+    <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/solicitudes/<%= sort_by %>/busca?q=<%= search_term %>&p=<%= (parseInt(page, 10) + 1) %>'">
+    <% } %>
+      p&aacute;gina <%= (parseInt(page, 10) + 1) %> >
+    </button>
+
+  <% } else { %>
+
+    <button class="btn btn-hollow btn-purple btn-thin btn-hidden">
+      p&aacute;gina + >
+    </button>
+
+  <% } %>
+
+</h3>
