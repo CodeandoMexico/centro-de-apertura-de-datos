@@ -96,9 +96,10 @@ module.exports = {
   profile: function(req, res) {
     if (req.method == 'GET' || req.method == 'get') {
       User.findOne({id: req.session.user.id})
-      .populate('voted_for')
       .populate('requests')
+      .populate('voted_for')
       .exec(function(err, user) {
+        console.log(user);
         return res.view({user: user});
       });
     }

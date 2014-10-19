@@ -25,7 +25,8 @@
     "node-twitter-api": "1.5.0",
     "moment": "2.8.1",
     "valid-url": "1.0.9",
-    "sails-postgresql": "0.10.9"
+    "sails-postgresql": "0.10.9",
+    "slug": "0.8.0"
   },
   "scripts": {
     "start": "node app.js",

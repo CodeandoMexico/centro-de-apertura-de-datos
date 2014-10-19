@@ -27,6 +27,9 @@ module.exports = {
       type: 'INTEGER', // Only this calculated attribute to filter requests by popularity.
       defaultsTo: 0    // Do not use for vital actions. Could be prone to race conditions.
     },
+    slug: {
+      type: 'STRING'
+    },
     user: {
       model: 'user'
     },
@@ -55,7 +58,18 @@ module.exports = {
    * @param next {Sails.js internal function} Called to actually insert into the DB.
    */
   beforeCreate: function(params, next) {
+    var slug = require('slug');
+    params.slug = slug(params.title).toLowerCase();
     params.url = Request.getFormattedUrl(params.url);
+    next();
+  },
+
+  beforeUpdate: function(params, next) {
+    if (typeof params.title !== 'undefined') {
+      // An update can be an upvote/downvote, which don't carry a title.
+      var slug = require('slug');
+      params.slug = slug(params.title).toLowerCase();
+    }
     next();
   },
 

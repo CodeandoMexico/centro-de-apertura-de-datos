@@ -1,41 +1,41 @@
 <div id="filters-n-search-wrapper" class="row">
+  <div class="filters-n-search-col">
+    Mostrar:
+  </div>
   <% if (typeof search_term === 'undefined') { %>
     <div class="filters-n-search-col">
-      Mostrar:
-    </div>
-    <div class="filters-n-search-col">
-      <button class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/nuevas'">
-        Nuevas
-      </button>
-    </div>
-    <div class="filters-n-search-col">
-      <button class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/populares'">
+      <button id="btn-populares" class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/populares'">
         Populares
       </button>
     </div>
     <div class="filters-n-search-col">
-      <button class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/abiertas'">
+      <button id="btn-nuevas" class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/nuevas'">
+        Nuevas
+      </button>
+    </div>
+    <div class="filters-n-search-col">
+      <button id="btn-abiertas" class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/abiertas'">
         Abiertas
       </button>
     </div>
     <div class="filters-n-search-col">
-      <form id="request-search-form" action="/solicitudes/busca" method="GET">
+      <form id="request-search-form" action="/solicitudes/<%= sort_by %>/busca" method="GET">
         <input id="request-search-box" type="text" name="q" placeholder="Palabras clave"></input>
       </form>
     </div>
   <% } else { %>
     <div class="filters-n-search-col">
-      <button class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/nuevas/busca/<%= search_term %>'">
-        Nuevas
-      </button>
-    </div>
-    <div class="filters-n-search-col">
-      <button class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/populares/busca/<%= search_term %>'">
+      <button id="btn-populares" class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/populares/busca?q=<%= search_term %>'">
         Populares
       </button>
     </div>
     <div class="filters-n-search-col">
-      <button class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/abiertas/busca/<%= search_term %>'">
+      <button id="btn-nuevas" class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/nuevas/busca?q=<%= search_term %>'">
+        Nuevas
+      </button>
+    </div>
+    <div class="filters-n-search-col">
+      <button id="btn-abiertas" class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/abiertas/busca?q=<%= search_term %>'">
         Abiertas
       </button>
     </div>
@@ -47,3 +47,13 @@
     </div>
   <% } %>
 </div>
+
+<script>
+  var url_arr = document.URL.split('/');
+  var activate_this = url_arr[4];
+  console.log(activate_this);
+  var btn = document.getElementById('btn-' + activate_this);
+  if (typeof btn !== 'undefined' && btn != null) {
+    btn.className = btn.className + ' active-filter';
+  }
+</script>

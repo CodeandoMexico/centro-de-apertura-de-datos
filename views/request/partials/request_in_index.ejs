@@ -47,7 +47,7 @@
     </div>
     <div class="requested-data-info col-md-10">
       <h3 class="title">
-        <a href="/solicitud/<%= request.id %>"><%= request.title %></a>
+        <a href="/solicitud/<%= request.id %>/<%= request.slug %>"><%= request.title %></a>
         <span class="request-details">(<%= sails.config.globals.url.parse(request.url).hostname %>)</span> 
       </h3>
       <div class="request-details">
@@ -61,10 +61,9 @@
         <% } else if (request.state == 1) { %>
           <button type="button" class="btn btn-default btn-xs disabled">sin procesar</button>
         <% } %>
-
-        <% if (req.session && req.session.user && req.session.user.id == request.user) { %>
+        <% if (req.session && req.session.user && req.session.user.id == request.user.id && request.state == 1) { %>
           <br />
-          [<a href="/solicitud/editar/<%= request.id %>">editar</a>]
+          [<a href="/solicitud/<%= request.id %>/editar">editar</a>]
         <% } %>
 
       </div>

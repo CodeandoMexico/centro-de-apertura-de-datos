@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <form id="edit-form" action="/request/edit" method="POST">
+  <form id="edit-form" action="/solicitud/<%= request.id %>/editar" method="POST">
     <div class="requested-data row">
       <div class="requested-data-info-edit col-md-12">
         <h3 class="title">
@@ -17,7 +17,6 @@
         <textarea class="edit-textarea" name="description"><%= request.description %></textarea>
       </div>
     </div>
-    <input type="hidden" name="id" value="<%= request.id %>">
     <input type="hidden" name="_csrf" value="<%= _csrf %>">
     <button class="btn btn-hollow btn-purple btn-thin" onclikc="document.getElementById('edit-form').submit()">Actualizar</button>
   </form>

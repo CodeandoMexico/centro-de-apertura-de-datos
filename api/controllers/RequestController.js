@@ -26,53 +26,84 @@ function _success(msg, req, res, url) {
   }
 }
 
+function userHasVotedForTheseRequests(requests, user_id, next) {
+  var vote_dict = {}; 
+  if (requests.length == 0) return next(vote_dict);
+  for (var i = 0; i < requests.length; i++) {
+    for (var j = 0; j < requests[i].voted_by.length; j++) {
+      if (requests[i].voted_by[j].id == user_id) {
+        vote_dict[requests[i].id] = {voted: true};
+        break;
+      }
+    }
+    if (i == requests.length - 1) return next(vote_dict);
+  }
+}
+
+function userHasVotedForThisRequest(user_id, request, next) {
+  if (request.voted_by.length == 0) return next(false);
+  for (var i = 0; i < request.voted_by.length; i++) {
+    if (request.voted_by[i].id == user_id) return next(true);
+    if (i == request.voted_by.length - 1) return next(false);
+  }
+}
+
+function sortingMethod(sort_by) {
+  var s = {};
+  switch(sort_by) {
+    case 'nuevas':
+      s.sort_by_backend  = 'createdAt';
+      s.sort_by_frontend = 'nuevas'
+      break;
+    case 'populares':
+      s.sort_by_backend  = 'vote_count';
+      s.sort_by_frontend = 'populares'
+      break;
+    case 'abiertas':
+      s.sort_by_backend  = 'state';
+      s.sort_by_frontend = 'abiertas'
+      break;
+    default:
+      s.sort_by_backend  = 'createdAt';
+      s.sort_by_frontend = 'nuevas'
+  }
+  return s;
+}
+
 module.exports = {
 
   index: function(req, res) {
-    var sort_by;
-    switch(req.param('sort_by')) {
-      case 'nuevas':
-        sort_by = 'createdAt';
-        break;
-      case 'populares':
-        sort_by = 'vote_count';
-        break;
-      case 'abiertas':
-        sort_by = 'state';
-        break;
-      default:
-        sort_by = 'createdAt';
+    
+    if (typeof req.param('sort_by') === 'undefined') {
+      return res.redirect('/solicitudes/populares');
     }
+    var s = sortingMethod(req.param('sort_by'));
 
-    Request.find({sort: sort_by + ' DESC'})
-    .paginate({page: 1, limit: 6})
+    Request.find({sort: s.sort_by_backend + ' DESC'})
+    .paginate({page: req.param('page') || 1, limit: 6})
+    .populate('user')
     .populate('voted_by')
     .exec(function(err, requests) {
       if (err) return _error(err, req, res, false);
       if (!requests) return _error('Error getting requests', req, res, false);
 
+      var response = {
+        requests   : requests,
+        page       : req.param('page') || 1,
+        sort_by    : s.sort_by_frontend,
+        more_pages : requests.length == 6
+      };
+
       if (req.session.user) {
-        var vote_dict = {}; 
-        for (i in requests) {
-          for (j in requests[i].voted_by) {
-            if (requests[i].voted_by[j].id == req.session.user.id) {
-              vote_dict[requests[i].id] = {voted: true};
-              break;
-            }
-          }
-          if (i == requests.length - 1) {
-            return res.view({
-              vote_dict : vote_dict,
-              requests  : requests
-            });
-          }
-        }
-      } else {
-        return res.view({
-          vote_dict : {},
-          requests  : requests
+        userHasVotedForTheseRequests(requests, req.session.user.id, function(vote_dict) {
+          response.vote_dict = vote_dict;
+          return res.view(response);
         });
+      } else {
+        response.vote_dict = {};
+        return res.view(response);
       }
+
     });
   },
 
@@ -84,7 +115,7 @@ module.exports = {
             title: req.param('title').trim(),
             url: req.param('url'),
             description: req.param('description').trim(),
-            creator: req.session.user.id
+            user: req.session.user.id
           }, function(err, request) {
             if (err) return _error(err, req, res, false);
             return _success('Tu solicitud ha sido creada', req, res);
@@ -104,23 +135,9 @@ module.exports = {
       if (typeof req.param('q') === 'undefined' || req.param('q') == '') {
         return res.redirect('/');
       }
+      var s = sortingMethod(req.param('sort_by'));
 
-      var sort_by;
-      switch(req.param('sort_by')) {
-        case 'nuevas':
-          sort_by = 'createdAt';
-          break;
-        case 'populares':
-          sort_by = 'vote_count';
-          break;
-        case 'abiertas':
-          sort_by = 'state';
-          break;
-        default:
-          sort_by = 'createdAt';
-      }
-
-      Request.find({sort: sort_by + ' DESC'})
+      Request.find({sort: s.sort_by_backend + ' DESC'})
       .where({
         or: [{
           url: {contains: req.param('q')}
@@ -136,21 +153,24 @@ module.exports = {
         if (err) return _error(err, req, res, false);
         if (!requests) return _error('Error getting requests', req, res);
 
-        var data = {
-          requests: requests,
-          search_term: req.param('q'),
-          page: req.param('p') || 1
+        var response = {
+          requests    : requests,
+          search_term : req.param('q'),
+          page        : req.param('p') || 1,
+          sort_by     : s.sort_by_frontend,
+          more_pages : requests.length == 6
         };
 
         if (req.session.user) {
-          User.getVotes(req.session.user.id, function(user_votes) {
-            data.user_votes = user_votes;
-            return res.view('request/index', {data: data});
+          userHasVotedForTheseRequests(requests, req.session.user.id, function(vote_dict) {
+            response.vote_dict = vote_dict;
+            return res.view('request/index', response);
           });
         } else {
-          data.user_votes = [];
-          return res.view('request/index', {data: data});
+          response.vote_dict = {};
+          return res.view('request/index', response);
         }
+
       });
     } else {
       return res.redirect('/');
@@ -159,15 +179,20 @@ module.exports = {
 
   view: function(req, res) {
     if (req.method == 'GET' || req.method == 'get') {
-      Request.findOne({id: req.param('id')})
+      Request.findOne({
+        id: req.param('id'),
+        slug: req.param('slug')
+      })
       .populate('voted_by')
       .exec(function(err, request) {
         if (err) return _error(err, req, res, false)
         if (!request) return _error('Error getting request', req, res, false);
         if (req.session.user) {
-          return res.view({
-            request: request,
-            voted_by_user: true
+          userHasVotedForThisRequest(req.session.user.id, request, function(answer) {
+            return res.view({
+              request: request,
+              voted_by_user: answer
+            });
           });
         } else {
           return res.view({
@@ -183,11 +208,10 @@ module.exports = {
 
   edit: function(req, res) {
     if (req.method == 'GET' || req.method == 'get') {
-      Request.findOne({
-        id: req.param('id')
-      }).exec(function(err, request) {
+      Request.findOne({id: req.param('id')}).exec(function(err, request) {
         if (err) return _error(err, req, res, false);
         if (!request) return _error('Error getting request', req, res, false);
+        if (request.state == 2) return _error('No se pueden editar solicitudes en proceso', req, res, true);
         if (request.user == req.session.user.id) {
           return res.view({request: request});
         } else {
@@ -195,17 +219,22 @@ module.exports = {
         }
       });
     } else if (req.method == 'POST' || req.method == 'post') {
-      Request.update({
-        id: req.param('id'),
-        creator: req.session.user.id
-      }, {
-        title: req.param('title').trim(),
-        url: req.param('url'),
-        description: req.param('description').trim()
-      }).exec(function(err, requests) {
+      Request.findOne({id: req.param('id')}).exec(function(err, request) {
         if (err) return _error(err, req, res, false);
-        if (!requests[0]) return _error('Error al actualizar solicitud', req, res, true);
-        return _success('Solicitud editada exitosamente', req, res, '/solicitud/' + requests[0].id)
+        if (!request) return _error('Error getting request', req, res, false);
+        if (request.state == 2) return _error('No se pueden editar solicitudes en proceso', req, res, true);
+        Request.update({
+          id: req.param('id'),
+          user: req.session.user.id
+        }, {
+          title: req.param('title').trim(),
+          url: req.param('url'),
+          description: req.param('description').trim()
+        }).exec(function(err, requests) {
+          if (err) return _error(err, req, res, false);
+          if (!requests[0]) return _error('Error al actualizar solicitud', req, res, true);
+          return _success('Solicitud editada exitosamente', req, res, '/solicitud/' + requests[0].id + '/' + requests[0].slug);
+        });
       });
     } else {
       return res.redirect('/');
