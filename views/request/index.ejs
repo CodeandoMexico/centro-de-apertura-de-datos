@@ -7,15 +7,15 @@
   </div>
 
   <ul class="requested-data-list">
-    <% if (pd.paged_requests.length == 0) { %>
+    <% if (requests.length == 0) { %>
         <div class="wide-centered-text">
           <span class="sized-font">No hay solicitudes.</span>
         </div>
     <% } else { %>
-      <% for(i in pd.paged_requests) { %>
+      <% for(i in requests) { %>
         <li>
-          <%- partial('partials/request_in_index', {request: pd.paged_requests[i]}) %>
-          <% if (i != pd.paged_requests.length - 1) { // no HR for last entry %>
+          <%- partial('partials/request_in_index', {request: requests[i], vote_dict: vote_dict}) %>
+          <% if (i != requests.length - 1) { // no HR for last entry %>
             <hr>
           <% } %>
         </li>

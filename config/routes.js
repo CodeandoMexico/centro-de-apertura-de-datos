@@ -31,23 +31,44 @@ module.exports.routes = {
     action: 'index'
   },
 
-  '/solicitud/:id': {
+  '/solicitud/:id/voteup': {
     controller: 'request',
-    action: 'view'
+    action: 'voteup'
   },
 
-  '/solicitud/editar/:id': {
+  '/solicitud/:id/votedown': {
+    controller: 'request',
+    action: 'votedown'
+  },
+
+  '/solicitud/:id/editar': {
     controller: 'request',
     action: 'edit'
   },
 
-  '/faq': {
+  '/solicitud/:id/:slug': {
+    controller: 'request',
+    action: 'view'
+  },
+
+  '/preguntas-frecuentes': {
     controller: 'static',
     action: 'faq'
   },
 
-  // If a request to a URL doesn't match any of the custom routes above, it is matched 
-  // against Sails route blueprints.  See `config/blueprints.js` for configuration options
-  // and examples.
+  '/solicitudes/:sort_by/busca': {
+    controller: 'request',
+    action: 'search'
+  },
+
+  '/solicitudes/:sort_by/:page': {
+    controller: 'request',
+    action: 'index'
+  },
+
+  '/solicitudes/:sort_by': {
+    controller: 'request',
+    action: 'index'
+  },
 
 };
