@@ -31,12 +31,12 @@
     <% } else { %>
       <ul id="header-login-actions">
         <li>
-          <a title="Mi perfil" href="/user/profile">
+          <a title="Mi perfil" href="/perfil">
             <img class="user-profile-picture" width="30" height="30" src="<%= req.session.user.profile_image_url %>"/>
           </a>
         </li>
         <li>
-          <button id="popover-login" data-toggle="popover" data-content="" onclick="window.location.href='/user/profile'">
+          <button id="popover-login" data-toggle="popover" data-content="" onclick="window.location.href='/perfil'">
             <%= req.session.user.name %>
           </button>
         </li>

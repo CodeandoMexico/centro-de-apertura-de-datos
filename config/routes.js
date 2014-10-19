@@ -71,4 +71,9 @@ module.exports.routes = {
     action: 'index'
   },
 
+  '/perfil': {
+    controller: 'user',
+    action: 'profile'
+  }
+
 };
