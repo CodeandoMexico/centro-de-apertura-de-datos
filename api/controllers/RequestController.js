@@ -42,7 +42,7 @@ function userHasVotedForTheseRequests(requests, user_id, next) {
 
 function userHasVotedForThisRequest(user_id, request, next) {
   if (request.voted_by.length == 0) return next(false);
-  for (i = 0; i < request.voted_by.length; i++) {
+  for (var i = 0; i < request.voted_by.length; i++) {
     if (request.voted_by[i].id == user_id) return next(true);
     if (i == request.voted_by.length - 1) return next(false);
   }

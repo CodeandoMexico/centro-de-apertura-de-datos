@@ -22,7 +22,7 @@
             <ul>
               <% for(var i = 0; i < user.requests.length; i++) { %>
                 <li>
-                  <a href="/solicitud/<%= user.requests[i].id %>"><%= user.requests[i].title %></a>
+                  <a href="/solicitud/<%= user.requests[i].id %>/<%= user.requests[i].slug %>"><%= user.requests[i].title %></a>
                   &nbsp;
                   <% if (user.requests[i].state == 1) { %>
                     [<a href="/solicitud/<%= user.requests[i].id %>/editar">editar</a>]
@@ -39,7 +39,7 @@
           <ul>
             <% for(var i = 0; i < user.voted_for.length; i++) { %>
               <% if (typeof user.voted_for[i].title !== 'undefined') { %>
-                <li><a href="/solicitud/<%= user.voted_for[i].id %>"><%= user.voted_for[i].title %></a></li>
+                <li><a href="/solicitud/<%= user.voted_for[i].id %>/<%= user.voted_for[i].slug %>"><%= user.voted_for[i].title %></a></li>
               <% } %>
             <% } %>
           </ul>
