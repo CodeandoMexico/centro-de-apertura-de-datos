@@ -2,7 +2,7 @@
   <h3>
     <% if (req.session.user) { %>
       <button onclick="window.location.href='/user/signout';" class="cbp-btn">Cerrar sesi&oacute;n</button>
-      <a class="cbp-regular-anchor" title="Mi perfil" href="/user/profile">
+      <a class="cbp-regular-anchor" title="Mi perfil" href="/perfil">
         <img class="user-profile-picture-responsive" width="30" height="30" src="<%= req.session.user.profile_image_url %>"/>
       </a>
     <% } else { %>
@@ -11,6 +11,5 @@
   </h3>
   <a href="http://datamx.io/dataset">Datos</a>
   <a href="http://datamx.io/organization">Organizaciones</a>
-  <a href="https://github.com/CodeandoMexico">Apps</a>
   <a href="http://apertura.datamx.io">Centro de Apertura</a>
 </nav>
