@@ -64,6 +64,7 @@ module.exports = {
                     twitter_id: data.id
                   }).exec(function(err, user) {
                     if (err) console.log('Error creating user:', err);
+                    req.session.user.id = user.id;
                     return res.redirect('/');
                   });
                 } else {
