@@ -99,7 +99,6 @@ module.exports = {
       .populate('requests')
       .populate('voted_for')
       .exec(function(err, user) {
-        console.log(user);
         return res.view({user: user});
       });
     }
