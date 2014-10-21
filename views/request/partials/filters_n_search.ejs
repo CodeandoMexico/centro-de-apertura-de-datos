@@ -1,58 +1,34 @@
-<div id="filters-n-search-wrapper" class="row">
-  <div class="filters-n-search-col">
-    Mostrar:
-  </div>
+<div class="row">    
+  <div class="col-md-12 col-sm-12 text-center">
   <% if (typeof search_term === 'undefined') { %>
-    <div class="filters-n-search-col">
-      <button id="btn-populares" class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/populares'">
-        Populares
-      </button>
-    </div>
-    <div class="filters-n-search-col">
-      <button id="btn-nuevas" class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/nuevas'">
-        Nuevas
-      </button>
-    </div>
-    <div class="filters-n-search-col">
-      <button id="btn-abiertas" class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/abiertas'">
-        Abiertas
-      </button>
-    </div>
-    <div class="filters-n-search-col">
-      <form id="request-search-form" action="/solicitudes/<%= sort_by %>/busca" method="GET">
-        <input id="request-search-box" type="text" name="q" placeholder="Palabras clave"></input>
-      </form>
-    </div>
+    <button type="button" id="btn-populares" class="btn btn-default" onclick="location.href='/solicitudes/populares'">Populares</button>
+    <button type="button" id="btn-nuevas"    class="btn btn-default" onclick="location.href='/solicitudes/nuevas'">Nuevas</button>
+    <button type="button" id="btn-abiertas"  class="btn btn-default" onclick="location.href='/solicitudes/abiertas'">Abiertas</button>
+    <br><br>
+    <form action="/solicitudes/<%= sort_by %>/busca" method="GET">
+      <input type="text" name="q" placeholder="palabras clave"></input>
+    </form>
+    &nbsp;<i class="glyphicon glyphicon-search"></i>
   <% } else { %>
-    <div class="filters-n-search-col">
-      <button id="btn-populares" class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/populares/busca?q=<%= search_term %>'">
-        Populares
-      </button>
-    </div>
-    <div class="filters-n-search-col">
-      <button id="btn-nuevas" class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/nuevas/busca?q=<%= search_term %>'">
-        Nuevas
-      </button>
-    </div>
-    <div class="filters-n-search-col">
-      <button id="btn-abiertas" class="btn btn-hollow btn-purple btn-thin btn-filter" onclick="location.href='/solicitudes/abiertas/busca?q=<%= search_term %>'">
-        Abiertas
-      </button>
-    </div>
-    <div class="filters-n-search-col">
-      <form id="request-search-form" action="/solicitudes/busca" method="GET">
-        <input id="request-search-box" class="request-search-box-with-term" type="text" name="q" value="<%= search_term %>"></input>
-      </form>
-      <a href="/"><i class="glyphicon glyphicon-remove glyphicon-remove-search"></i></a>
-    </div>
+    <button type="button" id="btn-populares" class="btn btn-default" onclick="location.href='/solicitudes/populares/busca?q=<%= search_term %>'">Populares</button>
+    <button type="button" id="btn-nuevas"    class="btn btn-default" onclick="location.href='/solicitudes/nuevas/busca?q=<%= search_term %>'">Nuevas</button>
+    <button type="button" id="btn-abiertas"  class="btn btn-default" onclick="location.href='/solicitudes/abiertas/busca?q=<%= search_term %>'">Abiertas</button>
+    <br><br>
+    <form action="/solicitudes/<%= sort_by %>/busca" method="GET">
+      <input type="text" name="q" placeholder="palabras clave" value="<%= search_term %>"></input>
+    </form>
+    &nbsp;<a href="/"><i class="glyphicon glyphicon-remove glyphicon-remove-search"></i></a>
   <% } %>
+    <br><br>
+  </div>
 </div>
+<hr>
 
 <script>
   var url_arr = document.URL.split('/');
   var activate_this = url_arr[4];
   var btn = document.getElementById('btn-' + activate_this);
   if (typeof btn !== 'undefined' && btn != null) {
-    btn.className = btn.className + ' active-filter';
+    btn.className = btn.className + ' active';
   }
 </script>
