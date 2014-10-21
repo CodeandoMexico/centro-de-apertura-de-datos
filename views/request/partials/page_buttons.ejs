@@ -2,47 +2,26 @@
 
   <!-- Previous page button -->
   <% if (parseInt(page, 10) > 1) { %>
-
     <% if (typeof search_term === 'undefined') { %>
-    <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/solicitudes/<%= sort_by %>/<%= (parseInt(page, 10) - 1) %>'">
+    <a href="/solicitudes/<%= sort_by %>/<%= (parseInt(page, 10) - 1) %>" class="btn btn-primary pull-left btnPrevious">
     <% } else { %>
-    <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/solicitudes/<%= sort_by %>/busca?q=<%= search_term %>&p=<%= (parseInt(page, 10) - 1) %>'">
+    <a href="/solicitudes/<%= sort_by %>/busca?q=<%= search_term %>&p=<%= (parseInt(page, 10) - 1) %>" class="btn btn-primary pull-left btnPrevious">
     <% } %>
-      < p&aacute;gina <%= (parseInt(page, 10) - 1) %>
-    </button>
-
-  <% } else { %>
-
-    <button class="btn btn-hollow btn-purple btn-thin btn-hidden">
-      < p&aacute;gina -
-    </button>
-
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      p&aacute;gina <%= (parseInt(page, 10) - 1) %>
+    </a>
   <% } %>
-
-
-  <!-- Current page button -->
-  <button class="btn btn-hollow btn-purple btn-current-page btn-thin">
-    <%= page %>
-  </button>
-
 
   <!-- Next page button -->
   <% if (more_pages) { %>
-
     <% if (typeof search_term === 'undefined') { %>
-    <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/solicitudes/<%= sort_by %>/<%= (parseInt(page, 10) + 1) %>'">
+    <a href="/solicitudes/<%= sort_by %>/<%= (parseInt(page, 10) + 1) %>" class="btn btn-primary pull-right btnNext">
     <% } else { %>
-    <button class="btn btn-hollow btn-purple btn-thin" onclick="location.href='/solicitudes/<%= sort_by %>/busca?q=<%= search_term %>&p=<%= (parseInt(page, 10) + 1) %>'">
+    <a href="/solicitudes/<%= sort_by %>/busca?q=<%= search_term %>&p=<%= (parseInt(page, 10) + 1) %>" class="btn btn-primary pull-right btnNext">
     <% } %>
-      p&aacute;gina <%= (parseInt(page, 10) + 1) %> >
-    </button>
-
-  <% } else { %>
-
-    <button class="btn btn-hollow btn-purple btn-thin btn-hidden">
-      p&aacute;gina + >
-    </button>
-
+      p&aacute;gina <%= (parseInt(page, 10) + 1) %>
+      <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
   <% } %>
 
 </h3>

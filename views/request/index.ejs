@@ -1,30 +1,36 @@
 <%- partial('../intro') %>
 
-<div id="main-content-div" class="container">
+<div class="container">
+  <div class="row">
+    <div class="col-md-12"> 
 
-  <div>
-    <%- partial('partials/filters_n_search') %>
-  </div>
+      <div class="panel">
+        <div class="panel-body">
+          <div>
+            <%- partial('partials/filters_n_search') %>
+          </div>
 
-  <ul class="requested-data-list">
-    <% if (requests.length == 0) { %>
-        <div class="wide-centered-text">
-          <span class="sized-font">No hay solicitudes.</span>
+          <% if (requests.length == 0) { %>
+            <div class="wide-centered-text">
+              <span class="sized-font">No hay solicitudes.</span>
+            </div>
+          <% } else { %>
+            <% for(i in requests) { %>
+              <%- partial('partials/request_in_index', {request: requests[i], vote_dict: vote_dict}) %>
+              <% if (i != requests.length - 1) { // no HR for last entry %>
+                <hr>
+              <% } %>
+            <% } %>
+          <% } %>
+
+          <div class="paginator row">
+            <%- partial('partials/page_buttons') %>
+          </div>
         </div>
-    <% } else { %>
-      <% for(i in requests) { %>
-        <%- partial('partials/request_in_index', {request: requests[i], vote_dict: vote_dict}) %>
-        <% if (i != requests.length - 1) { // no HR for last entry %>
-          <hr>
-        <% } %>
-      <% } %>
-    <% } %>
-  </ul>
-
-  <div class="paginator row">
-    <%- partial('partials/page_buttons') %>
+      </div>
+      
+    </div><!--end col-12-->
   </div>
-
 </div>
 
 <%- partial('partials/request_form_modal') %>
