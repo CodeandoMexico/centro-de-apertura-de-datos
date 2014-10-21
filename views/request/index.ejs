@@ -13,12 +13,10 @@
         </div>
     <% } else { %>
       <% for(i in requests) { %>
-        <li>
-          <%- partial('partials/request_in_index', {request: requests[i], vote_dict: vote_dict}) %>
-          <% if (i != requests.length - 1) { // no HR for last entry %>
-            <hr>
-          <% } %>
-        </li>
+        <%- partial('partials/request_in_index', {request: requests[i], vote_dict: vote_dict}) %>
+        <% if (i != requests.length - 1) { // no HR for last entry %>
+          <hr>
+        <% } %>
       <% } %>
     <% } %>
   </ul>

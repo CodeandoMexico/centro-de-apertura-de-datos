@@ -1,6 +1,7 @@
-<div class="container-fluid">
-  <div class="requested-data row">
-    <div id="vote-col-<%= request.id %>" class="col-md-1 centered-text vote">
+<div class="row">    
+  <br>
+  <div class="col-md-2 col-sm-3 text-center">
+
       <span id="vote-btns-<%= request.id %>">
         <% if (req.session.user) { %>
 
@@ -44,22 +45,25 @@
         <% } %>
 
       </div>
-    </div>
-    <div class="requested-data-info col-md-10">
-      <h3 class="title">
-        <a href="/solicitud/<%= request.id %>/<%= request.slug %>"><%= request.title %></a>
-        <span class="request-details">(<%= sails.config.globals.url.parse(request.url).hostname %>)</span> 
-      </h3>
-      <div class="request-details">
-        Solicitado <%= sails.config.globals.moment(request.createdAt).fromNow() %>
+
+  </div>
+  <div class="col-md-10 col-sm-9">
+    <h3>
+      <a href="/solicitud/<%= request.id %>/<%= request.slug %>"><%= request.title %></a>
+      <span class="request-details">(<%= sails.config.globals.url.parse(request.url).hostname %>)</span> 
+    </h3>
+    <div class="row">
+      <div class="col-xs-9">
+
+        solicitado <%= sails.config.globals.moment(request.createdAt).fromNow() %>
         <br />
 
         <% if (request.state == 3) { %>
-          <button type="button" class="btn btn-success btn-xs" onclick="window.open('<%= request.open_url %>')">abierto</button>
+          <h4><a href="<%= request.open_url %>"><span class="label label-success">abierto</span></a></h4>
         <% } else if (request.state == 2) { %>
-          <button type="button" class="btn btn-warning btn-xs disabled">en proceso</button>
+          <h4><span class="label label-warning disabled">en proceso</span></h4>
         <% } else if (request.state == 1) { %>
-          <button type="button" class="btn btn-default btn-xs disabled">sin procesar</button>
+          <h4><span class="label label-default disabled">sin procesar</span></h4>
         <% } %>
         <% if (req.session && req.session.user && req.session.user.id == request.user.id && request.state == 1) { %>
           <br />
@@ -67,7 +71,9 @@
         <% } %>
 
       </div>
+      <div class="col-xs-3"></div>
     </div>
+    <br><br>
   </div>
 </div>
 
