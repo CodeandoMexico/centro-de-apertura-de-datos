@@ -22,12 +22,12 @@
   </head>
 
   <body>
+    <% if (typeof req.session.user === 'undefined' || req.session.user == null) { %>
+      <%- partial('you_must_login_modal') %>
+    <% } %>
     <div class="wrapper">
       <%- partial('header') %>
       <%- partial('flash_msg') %>
-      <% if (typeof req.session.user === 'undefined' || req.session.user == null) { %>
-        <%- partial('you_must_login_modal') %>
-      <% } %>
       <%- body %>
       <!--TEMPLATES-->
       

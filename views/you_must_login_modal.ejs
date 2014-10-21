@@ -1,19 +1,25 @@
-<div class="modal fade" id="youMustLoginModal" tabindex="-1" role="dialog" aria-labelledby="youMustLoginModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title modal-centered">
-            Necesitas iniciar sesi&oacute;n para poder realizar esta acci&oacute;n
-          </h4>
-        </div>
-        <div class="modal-body">
-          <div class="wide-centered-text">
-            <a href="/user/signin">
-              <img src="/images/sign-in-with-twitter-gray.png">
-            </a>
-          </div>
-        </div>
+<div class="modal fade" id="youMustLoginModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+        <h4 class="modal-title">Inicia sesi&oacute;n primero</h4>
       </div>
-    </div>
-</div>
+      <div class="modal-body">
+        <p>
+          Antes de poder crear solicitudes o votar, debes de iniciar sesi&oacute;n mediante Twitter.
+          <br />
+          Tus solicitudes y votos ser&aacute;n privados.
+        </p>
+        <p>
+          <a href="/user/signin">
+            <img src="/images/sign-in-with-twitter-gray.png">
+          </a>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
