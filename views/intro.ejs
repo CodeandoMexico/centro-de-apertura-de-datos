@@ -1,29 +1,38 @@
-<div id="intro" class="row">
+<div id="masthead">  
+
   <div class="container">
-    <div id="intro-text-col" class="col-md-12">
-      <div class="intro-important">
-        Solicita la apertura de datos
+    <div class="row">
+      <div class="col-md-7">
+        <h1>
+          Centro de Apertura de Datos
+          <p class="lead"></p>
+        </h1>
       </div>
-      <div>
-        El Centro de Apertura de Datos (CAD) es una lista curada y priorizada por la comunidad para abrir recursos con datos p&uacute;blicos de M&eacute;xico, perdidos alrededor del Internet o en sitios del gobierno.
+      <div class="col-md-5">
+        <div class="well well-lg"> 
+          <div class="row">
+            <div class="col-sm-12" style="text-align:justify">
+              El Centro de Apertura de Datos (CAD) es una lista curada y priorizada por la comunidad para abrir recursos con datos p&uacute;blicos de M&eacute;xico, perdidos alrededor del Internet o en sitios del gobierno.
+              Te invitamos a leer <a id="intro-link" href="http://blog.codeandomexico.org/2014/08/28/centro-de-apertura-de-datos/" target="_blank">m&aacute;s informaci&oacute;n</a> y las <a id="intro-link" href="/preguntas-frecuentes">preguntas frecuentes</a>. 
+              <br><br>
+              <% if (req.session.user) { %>
+              <button style="width:100%" type="button" class="btn btn-primary" data-container="body" data-toggle="modal" data-target="#requestFormModal">Crea una solicitud</button>
+              <% } else { %>
+              <button style="width:100%" type="button" class="btn btn-primary" data-container="body" data-toggle="modal" data-target="#youMustLoginModal">Crea una solicitud</button>
+              <% } %>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        Te invitamos a leer 
-        <a id="intro-link" href="http://blog.codeandomexico.org/2014/08/28/centro-de-apertura-de-datos/" target="_blank">m&aacute;s informaci&oacute;n</a>
-        y las
-        <a id="intro-link" href="/preguntas-frecuentes">preguntas frecuentes</a>.
-      </div>
-    </div>
+    </div> 
   </div>
-  <div class="row">
-    <div id="intro-btn-col" class="col-md-12">
-      <% if (req.session.user) { %>
-        <button type="button" class="btn btn-hollow btn-purple btn-wide" data-container="body" data-toggle="modal" data-target="#requestFormModal">
-      <% } else { %>
-        <button type="button" class="btn btn-hollow btn-purple btn-wide" data-container="body" data-toggle="modal" data-target="#youMustLoginModal">
-      <% } %>
-          Solicitar Datos
-        </button>
-    </div>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="top-spacer"> </div>
+      </div>
+    </div> 
   </div>
+  
 </div>
