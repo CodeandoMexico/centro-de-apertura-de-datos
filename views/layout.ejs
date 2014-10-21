@@ -6,7 +6,7 @@
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- Facebook meta for sharing -->
-    <meta property="og:site_name" content="datamx.io - Centro de Apertura de Datos"/>
+    <meta property="og:site_name" content="CAD - datamx.io"/>
 
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
@@ -21,9 +21,8 @@
 
   </head>
 
-  <body class="cbp-spmenu-push">
-    <img width="0" height="0" src="/images/loader.gif" class="hidden-preload">
-    <div id="super-container">
+  <body>
+    <div class="wrapper">
       <%- partial('header') %>
       <%- partial('flash_msg') %>
       <% if (typeof req.session.user === 'undefined' || req.session.user == null) { %>
@@ -40,7 +39,7 @@
       <script src="/js/dependencies/bootstrap.min.js"></script>
       <script src="/js/ajax-vote.js"></script>
       <!--SCRIPTS END-->
-      <div class="clearfooter"></div>
+      <div class="push"></div>
     </div>
     <%- partial('footer') %>
 

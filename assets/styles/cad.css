@@ -10,11 +10,20 @@ html, body {
   height: 100%;
   margin: 0 auto -4em;
 }
+
+
 .footer, .push {
   height: 4em;
   padding-bottom:40px;
-  background-color:#283858;
   text-align: center;
+}
+
+.footer {
+  background-color:#283858;
+}
+
+.push {
+  background-color:transparent;
 }
 
 .navbar-form input, .form-inline input {
