@@ -196,5 +196,20 @@ a,a:hover {
   width: auto;
 }
 
-#youMustLoginModal {
+.request-form {
+    width: 100%;
+    clear: both;
+}   
+.request-form input {
+    width: 100%;
+    clear: both;
+}
+
+.request-form textarea {
+    width: 100%;
+    clear: both;
+}
+
+.required-field-msg {
+    color: red;
 }
