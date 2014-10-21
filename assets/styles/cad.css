@@ -213,3 +213,7 @@ a,a:hover {
 .required-field-msg {
     color: red;
 }
+
+h3 a:hover {
+  text-decoration: underline;
+}

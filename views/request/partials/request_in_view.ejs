@@ -1,74 +1,84 @@
-<div class="container-fluid">
-  <div class="requested-data row">
-    <div class="col-md-1 centered-text vote">
-      <span id="vote-btns-<%= request.id %>">
-        <% if (req.session.user) { %>
-
-          <% if (voted_by_user) { %>
-            <a title="Ya has votado" class="btn-vote btn-give-vote-voted">
-              <i class="glyphicon glyphicon-chevron-up"></i>
-            </a>
-            <a title="Quitar mi voto" class="btn-vote-small btn-remove-vote" onclick="vote(<%= request.id %>, 'down', '<%= _csrf %>');">
-              <i class="glyphicon glyphicon-remove"></i>
-            </a>
-          <% } else { %>
-            <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" onclick="vote(<%= request.id %>, 'up', '<%= _csrf %>');">
-              <i class="glyphicon glyphicon-chevron-up"></i>
-            </a>
-          <% } %>
-
-        <% } else { %>
-            <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" data-toggle="modal" href="#youMustLoginModal">
-              <i class="glyphicon glyphicon-chevron-up"></i>
-            </a>
-        <% } %>
-      </span>
-      <div class="vote-count">
-        <% if (request.voted_by.length == 1) { %>
-          <span id="vote-count-number-<%= request.id %>">
-            1
-          </span>
-          <span id="vote-count-noun-<%= request.id %>">
-            voto
-          </span>
-        <% } else { %>
-          <span id="vote-count-number-<%= request.id %>">
-            <%= request.voted_by.length %>
-          </span>
-          <span id="vote-count-noun-<%= request.id %>">
-            votos
-          </span>
-        <% } %>
-      </div>
-    </div>
-    <div class="requested-data-info col-md-10">
-      <h3 class="title">
-        <%= request.title %>
-      </h3>
-      <div class="request-details">
-        Solicitado <%= sails.config.globals.moment(request.createdAt).fromNow() %> (<%= sails.config.globals.moment(request.createdAt).format('MMMM D YYYY, HH:mm') %>)
-        <br />
-        URL: <a href="<%= request.url %>" target="_blank"><%= request.url %></a>
-        <br />
-        <% if (request.state == 3) { %>
-          <button type="button" class="btn btn-success btn-xs" onclick="window.open('<%= request.open_url %>')">abierto</button>
-        <% } else if (request.state == 2) { %>
-          <button type="button" class="btn btn-warning btn-xs disabled">en proceso</button>
-        <% } else if (request.state == 1) { %>
-          <button type="button" class="btn btn-default btn-xs disabled">sin procesar</button>
-        <% } %>
-        <% if (req.session && req.session.user && req.session.user.id == request.user && request.state == 1) { %>
-          <br />
-          [<a href="/solicitud/<%= request.id %>/editar">editar</a>]
-        <% } %>
-      </div>
-    </div>
-  </div>
+<div class="container">
   <div class="row">
-    <div class="requested-data-description col-md-1"></div>
-    <div class="requested-data-description col-md-10">
-      <%= request.description %>
-    </div>
+    <div class="col-md-12"> 
+
+      <div class="panel">
+        <div class="panel-body">
+
+          <div class="col-md-2 col-sm-3 text-center">
+              <span id="vote-btns-<%= request.id %>">
+                <% if (req.session.user) { %>
+                  <% if (voted_by_user) { %>
+                    <a title="Ya has votado" class="btn-vote btn-give-vote-voted">
+                      <i class="glyphicon glyphicon-chevron-up"></i>
+                    </a>
+                    <a title="Quitar mi voto" class="btn-vote-small btn-remove-vote" onclick="vote(<%= request.id %>, 'down', '<%= _csrf %>');">
+                      <i class="glyphicon glyphicon-remove"></i>
+                    </a>
+                  <% } else { %>
+                    <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" onclick="vote(<%= request.id %>, 'up', '<%= _csrf %>');">
+                      <i class="glyphicon glyphicon-chevron-up"></i>
+                    </a>
+                  <% } %>
+                <% } else { // Not logged in. %>
+                    <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" data-toggle="modal" href="#youMustLoginModal">
+                      <i class="glyphicon glyphicon-chevron-up"></i>
+                    </a>
+                <% } %>
+              </span>
+              <div id="vote-count-<%= request.id %>" class="vote-count">
+                <% if (request.voted_by.length == 1) { %>
+                  <span id="vote-count-number-<%= request.id %>">
+                    1
+                  </span>
+                  <span id="vote-count-noun-<%= request.id %>">
+                    voto
+                  </span>
+                <% } else { %>
+                  <span id="vote-count-number-<%= request.id %>">
+                    <%= request.voted_by.length %>
+                  </span>
+                  <span id="vote-count-noun-<%= request.id %>">
+                    votos
+                  </span>
+                <% } %>
+              </div>
+          </div>
+          <div class="col-md-10 col-sm-9">
+            <h3>
+              <a href="/solicitud/<%= request.id %>/<%= request.slug %>"><%= request.title %></a>
+              <span class="request-details">(<%= sails.config.globals.url.parse(request.url).hostname %>)</span> 
+            </h3>
+            <div class="row">
+              <div class="col-xs-9">
+                liga completa: <a href="<%= request.url %>" target="_blank"><%= request.url %></a>
+                <br />
+                solicitado <%= sails.config.globals.moment(request.createdAt).fromNow() %>
+                <br />
+                <% if (request.state == 3) { %>
+                  <h4><a href="<%= request.open_url %>"><span class="label label-success">abierto</span></a></h4>
+                <% } else if (request.state == 2) { %>
+                  <h4><span class="label label-warning disabled">en proceso</span></h4>
+                <% } else if (request.state == 1) { %>
+                  <h4><span class="label label-default disabled">sin procesar</span></h4>
+                <% } %>
+                <% if (req.session && req.session.user && req.session.user.id == request.user && request.state == 1) { %>
+                  <br />
+                  [<a href="/solicitud/<%= request.id %>/editar">editar</a>]
+                <% } %>
+              </div>
+              <div class="col-xs-3"></div>
+            </div>
+            <br><br>
+            <div>
+              <%= request.description %>
+            </div>
+            <br><br>
+          </div>
+
+        </div>
+      </div>
+      
+    </div><!--end col-12-->
   </div>
 </div>
-
