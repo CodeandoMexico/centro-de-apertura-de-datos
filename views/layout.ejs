@@ -25,7 +25,6 @@
     <img width="0" height="0" src="/images/loader.gif" class="hidden-preload">
     <div id="super-container">
       <%- partial('header') %>
-      <%- partial('responsive_header') %>
       <%- partial('flash_msg') %>
       <% if (typeof req.session.user === 'undefined' || req.session.user == null) { %>
         <%- partial('you_must_login_modal') %>
