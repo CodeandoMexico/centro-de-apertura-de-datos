@@ -1,0 +1,7 @@
+<% if (request.state == 3) { %>
+  <button type="button" class="btn btn-success btn-xs" onclick="window.open('<%= request.open_url %>')">abierto</button>
+<% } else if (request.state == 2) { %>
+  <button type="button" class="btn btn-warning btn-xs disabled">en proceso</button>
+<% } else if (request.state == 1) { %>
+  <button type="button" class="btn btn-default btn-xs disabled">sin procesar</button>
+<% } %>

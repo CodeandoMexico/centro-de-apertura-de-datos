@@ -1,63 +1,36 @@
 <div class="container-fluid">
   <div class="requested-data row">
     <div class="col-md-1 centered-text vote">
-      <span id="vote-btns-<%= request.id %>">
-        <% if (req.session.user) { %>
-
-          <% if (voted_by_user) { %>
-            <a title="Ya has votado" class="btn-vote btn-give-vote-voted">
-              <i class="glyphicon glyphicon-chevron-up"></i>
-            </a>
-            <a title="Quitar mi voto" class="btn-vote-small btn-remove-vote" onclick="vote(<%= request.id %>, 'down', '<%= _csrf %>');">
-              <i class="glyphicon glyphicon-remove"></i>
-            </a>
-          <% } else { %>
-            <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" onclick="vote(<%= request.id %>, 'up', '<%= _csrf %>');">
-              <i class="glyphicon glyphicon-chevron-up"></i>
-            </a>
-          <% } %>
-
-        <% } else { %>
-            <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" data-toggle="modal" href="#youMustLoginModal">
-              <i class="glyphicon glyphicon-chevron-up"></i>
-            </a>
-        <% } %>
-      </span>
-      <div class="vote-count">
-        <% if (request.voted_by.length == 1) { %>
-          <span id="vote-count-number-<%= request.id %>">
-            1
-          </span>
-          <span id="vote-count-noun-<%= request.id %>">
-            voto
-          </span>
-        <% } else { %>
-          <span id="vote-count-number-<%= request.id %>">
-            <%= request.voted_by.length %>
-          </span>
-          <span id="vote-count-noun-<%= request.id %>">
-            votos
-          </span>
-        <% } %>
-      </div>
+      <%-
+        partial('vote_buttons', {
+          voted     : voted_by_user || false,
+          request   : request,
+          logged_in : (req.session && req.session.user) || false
+        }) 
+      %>
+      <%- 
+        partial('vote_score', {
+          request : request
+        })  
+      %>
     </div>
     <div class="requested-data-info col-md-10">
       <h3 class="title">
         <%= request.title %>
       </h3>
       <div class="request-details">
-        Solicitado <%= sails.config.globals.moment(request.createdAt).fromNow() %> (<%= sails.config.globals.moment(request.createdAt).format('MMMM D YYYY, HH:mm') %>)
+        Solicitado <%= sails.config.globals.moment(request.createdAt).fromNow() %>
+        &nbsp;
+        (<%= sails.config.globals.moment(request.createdAt).format('MMMM D YYYY, HH:mm') %>)
         <br />
         URL: <a href="<%= request.url %>" target="_blank"><%= request.url %></a>
         <br />
-        <% if (request.state == 3) { %>
-          <button type="button" class="btn btn-success btn-xs" onclick="window.open('<%= request.open_url %>')">abierto</button>
-        <% } else if (request.state == 2) { %>
-          <button type="button" class="btn btn-warning btn-xs disabled">en proceso</button>
-        <% } else if (request.state == 1) { %>
-          <button type="button" class="btn btn-default btn-xs disabled">sin procesar</button>
-        <% } %>
-        <% if (req.session && req.session.user && req.session.user.id == request.user && request.state == 1) { %>
+        <%- 
+          partial('state_badge', {
+            request : request
+          })
+        %>
+        <% if (req.session.user && req.session.user.id == request.user && request.state == 1) { %>
           <br />
           [<a href="/solicitud/<%= request.id %>/editar">editar</a>]
         <% } %>
@@ -71,4 +44,3 @@
     </div>
   </div>
 </div>
-

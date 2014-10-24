@@ -8,7 +8,9 @@
         <div class="request-details-edit">
           <input class="edit-input" type="text" value="<%= request.url %>" name="url">
           <br />
-          Solicitado <%= sails.config.globals.moment(request.createdAt).fromNow() %> (<%= sails.config.globals.moment(request.createdAt).format('MMMM D YYYY, HH:mm') %>)
+          Solicitado <%= sails.config.globals.moment(request.createdAt).fromNow() %>
+          &nbsp;
+          (<%= sails.config.globals.moment(request.createdAt).format('MMMM D YYYY, HH:mm') %>)
         </div>
       </div>
     </div>
@@ -18,7 +20,9 @@
       </div>
     </div>
     <input type="hidden" name="_csrf" value="<%= _csrf %>">
-    <button class="btn btn-hollow btn-purple btn-thin" onclikc="document.getElementById('edit-form').submit()">Actualizar</button>
+    <button class="btn btn-hollow btn-purple btn-thin" onclikc="document.getElementById('edit-form').submit()">
+      Aceptar
+    </button>
   </form>
 </div>
 

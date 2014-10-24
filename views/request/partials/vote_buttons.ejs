@@ -1,0 +1,20 @@
+<span id="vote-btns-<%= request.id %>">
+<% if (logged_in) { %>
+  <% if (voted) { %>
+     <a title="Ya has votado" class="btn-vote btn-give-vote-voted">
+       <i class="glyphicon glyphicon-chevron-up"></i>
+     </a>
+     <a title="Quitar mi voto" class="btn-vote-small btn-remove-vote" onclick="vote(<%= request.id %>, 'down', '<%= _csrf %>');">
+       <i class="glyphicon glyphicon-remove"></i>
+     </a>
+  <% } else { %>
+    <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" onclick="vote(<%= request.id %>, 'up', '<%= _csrf %>');">
+      <i class="glyphicon glyphicon-chevron-up"></i>
+    </a>
+  <% } %>
+<% } else { %>
+  <a title="Dar mi voto" class="btn-vote btn-give-vote-unvoted" data-toggle="modal" href="#youMustLoginModal">
+    <i class="glyphicon glyphicon-chevron-up"></i>
+  </a>
+<% } %>
+</span>

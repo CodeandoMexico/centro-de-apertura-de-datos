@@ -1,0 +1,17 @@
+<div class="vote-count">
+<% if (request.voted_by.length == 1) { %>
+  <span id="vote-count-number-<%= request.id %>">
+    1   
+  </span>
+  <span id="vote-count-noun-<%= request.id %>">
+    voto
+  </span>
+<% } else { %>
+  <span id="vote-count-number-<%= request.id %>">
+    <%= request.voted_by.length %>
+  </span>
+  <span id="vote-count-noun-<%= request.id %>">
+    votos
+  </span>
+<% } %>
+</div>
