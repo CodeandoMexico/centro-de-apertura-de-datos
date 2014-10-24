@@ -25,11 +25,11 @@
   <body class="cbp-spmenu-push">
     <img width="0" height="0" src="/images/loader.gif" class="hidden-preload">
     <div id="super-container">
-      <%- partial('header') %>
-      <%- partial('responsive_header') %>
-      <%- partial('flash_msg') %>
+      <%- partial('root_partials/header') %>
+      <%- partial('root_partials/responsive_header') %>
+      <%- partial('root_partials/flash_msg') %>
       <% if (typeof req.session.user === 'undefined' || req.session.user == null) { %>
-        <%- partial('you_must_login_modal') %>
+        <%- partial('root_partials/login_modal') %>
       <% } %>
       <%- body %>
       <!--TEMPLATES-->
@@ -42,11 +42,10 @@
       <script src="/js/dependencies/bootstrap.min.js"></script>
       <script src="/js/ajax-vote.js"></script>
       <script src="/js/cbp.js"></script>
-      <script src="/js/processVoteAjax.js"></script>
       <!--SCRIPTS END-->
       <div class="clearfooter"></div>
     </div>
-    <%- partial('footer') %>
+    <%- partial('root_partials/footer') %>
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
