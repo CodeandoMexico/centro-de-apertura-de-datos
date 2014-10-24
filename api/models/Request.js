@@ -4,7 +4,7 @@
 
 module.exports = {
 
-	attributes: {
+  attributes: {
     title: {
       type: 'STRING',
       required: true
@@ -38,7 +38,7 @@ module.exports = {
       via: 'voted_for',
       dominant: true
     }
-	},
+  },
 
   /*
    * If no URL protocol is specified, like in "datamx.io", default it

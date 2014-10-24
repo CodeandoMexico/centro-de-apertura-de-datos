@@ -18,6 +18,6 @@ module.exports = {
       collection: 'request',
       via: 'user'
     }
-	},
+  },
 
 };
