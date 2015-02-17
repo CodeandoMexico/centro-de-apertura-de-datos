@@ -111,28 +111,30 @@ module.exports = {
     if (req.method == 'POST' || req.method == 'post') {
       Request.checkData(req, function(check) {
         if (check == 'valid') {
-          Request.create({
-            title: req.param('title').trim(),
-            url: req.param('url'),
-            description: req.param('description').trim(),
-            user: req.session.user.id
-          }, function(err, request) {
-            if (err) return _error(err, req, res, false);
+          sails.config.globals.github.api.issues.create({
+            user: sails.config.globals.github.user,
+            repo: sails.config.globals.github.repo,
+            title: "Abrir dataset " + req.param('title'),
+            labels: [],
+            body: 'Abrir dataset [' + req.param('title') + '](' + 
+                         req.param('url') + '), solicitado por ' + '[' + 
+                         req.session.user.name + ']('+ "https://twitter.com/" + req.session.user.screen_name + ')'
+          }, function createdIssue (err, result) {
+              var issue = 0;
+              if (err) console.error("Verificar creacion de " + err);
+              else issue = result.number;
+              
+              Request.create({
+                title: req.param('title').trim(),
+                url: req.param('url'),
+                description: req.param('description').trim(),
+                user: req.session.user.id,
+                issue: issue
+              }, function(err, request) {
+                if (err) return _error(err, req, res, false);
 
-            sails.config.globals.github.api.issues.create({
-              user: sails.config.globals.github.user,
-              repo: sails.config.globals.github.repo,
-              title: "Abrir dataset " + req.param('title'),
-              labels: [],
-              body: 'Abrir dataset [' + req.param('title') + '](' + 
-                           req.param('url') + '), solicitado por ' + '[' + 
-                           req.session.user.name + ']('+ "https://twitter.com/" + req.session.user.screen_name + ')'
-            }, function createdIssue (err, result) {
-             if (err) return console.error("Verificar creacion de " + err);
-               console.log("Estado del issue "  + JSON.stringify(result));
+                return _success('Tu solicitud ha sido creada', req, res);
             });
-
-            return _success('Tu solicitud ha sido creada', req, res);
           });
         } else if (check == 'invalid') {
           return _error('Imposible crear solicitud: datos incompletos o inv&aacute;lidos', req, res, true);

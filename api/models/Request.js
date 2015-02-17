@@ -33,6 +33,9 @@ module.exports = {
     user: {
       model: 'user'
     },
+    issue: {
+      type: 'INTEGER'
+    },
     voted_by: {
       collection: 'user',
       via: 'voted_for',
