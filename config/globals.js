@@ -10,6 +10,18 @@ var oauth = {
   })
 }
 
+gh = require("github");
+var github = {
+  user: process.env.GITHUB_USER,
+  repo: process.env.GITHUB_REPO,
+  api: new gh({version: "3.0.0"})
+}
+
+github.api.authenticate({
+  type: "oauth",
+  token: process.env.GITHUB_OAUTH_TOKEN
+});
+
 
 var moment = require('moment');
 moment.locale('es-MX');
@@ -23,6 +35,7 @@ module.exports.globals = {
   oauth: oauth,
   url: require('url'),
   valid_url: require('valid-url'),
-  moment: moment
+  moment: moment,
+  github: github
 };
 
