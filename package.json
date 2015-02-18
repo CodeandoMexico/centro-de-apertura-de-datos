@@ -5,6 +5,7 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
+    "deasync": "0.0.10",
     "ejs": "~0.8.4",
     "github": "^0.2.3",
     "grunt": "0.4.2",

@@ -27,6 +27,11 @@
             request : request
           })
         %>
+        <%-
+          partial('github_badge', {
+            request : request
+          })
+        %>
         <% if (req.session.user && req.session.user.id == request.user.id && request.state == 1) { %>
           <br />
           [<a href="/solicitud/<%= request.id %>/editar">editar</a>]

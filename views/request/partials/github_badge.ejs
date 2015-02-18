@@ -1,0 +1,7 @@
+<% if (request.issue !== null) { %>
+<% var _issue = Github.getIssue(request.issue) %>
+
+<button type="button" gh-issue-number="<%= request.issue %>" onClick="window.open('<%= _issue.html_url %>')" class="btn btn-primary btn-xs">Ver en Github</button>
+<% if (_issue.assignee != null ) { %>
+  <button type="button" class="btn btn-danger btn-xs" onClick="window.open('<%= _issue.assignee.html_url %>')">Asignado a <%= _issue.assignee.login %></button>
+<% } } %>
