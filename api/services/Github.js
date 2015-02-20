@@ -20,6 +20,11 @@ function updateIssues() {
               if (err || !requests[0]) return console.warning('Error al actualizar el estado de requests: ' + issue.number);
 	      console.log("Estado actualizado correctamente de request: " + issue.number);
 	    });
+	  } else if (request.state == 2 && verify.state == "closed") {
+	    Request.update({id: request.id}, {state: 3} , function (err, requests) {
+              if (err || !requests[0]) return console.warning('Error al actualizar el estado de requests: ' + issue.number);
+	      console.log("Estado actualizado correctamente de request: " + issue.number);
+	    });
 	  }
 	}
       });
@@ -28,8 +33,7 @@ function updateIssues() {
       return {};
     }
   });
-  console.log("Updating issues");
-  setTimeout(updateIssues, 10000);
+  setTimeout(updateIssues, 30000);
 }
 updateIssues();
 
