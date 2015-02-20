@@ -111,35 +111,24 @@ module.exports = {
     if (req.method == 'POST' || req.method == 'post') {
       Request.checkData(req, function(check) {
         if (check == 'valid') {
-          sails.config.globals.github.api.issues.create({
-            user: sails.config.globals.github.user,
-            repo: sails.config.globals.github.repo,
-            title: "Abrir dataset " + req.param('title'),
-            labels: [],
-            body: 'Abrir dataset [' + req.param('title') + '](' + 
-                         req.param('url') + '), solicitado por ' + '[' + 
-                         req.session.user.name + ']('+ "https://twitter.com/" + req.session.user.screen_name + ')'
-          }, function createdIssue (err, result) {
-              var issue = 0;
-              if (err) console.error("Verificar creacion de " + err);
-              else issue = result.number;
-              
-              Request.create({
+          Request.create({
+            title: req.param('title').trim(),
+            url: req.param('url'),
+            description: req.param('description').trim(),
+            user: req.session.user.id,
+          }, function(err, request) {
+              if (err) return _error(err, req, res, false);
+              Github.createIssue(request.id, req.session.user, { 
                 title: req.param('title').trim(),
-                url: req.param('url'),
-                description: req.param('description').trim(),
-                user: req.session.user.id,
-                issue: issue
-              }, function(err, request) {
-                if (err) return _error(err, req, res, false);
-
-                return _success('Tu solicitud ha sido creada', req, res);
-            });
-          });
+                url: req.param('url') /* ,
+                 description: req.param('description').trim()
+		*/
+	      });
+              return _success('Tu solicitud ha sido creada', req, res);
+	    });
         } else if (check == 'invalid') {
           return _error('Imposible crear solicitud: datos incompletos o inv&aacute;lidos', req, res, true);
-        }
-      });
+      }});
     } else {
       return res.redirect('/');
     }
@@ -249,7 +238,23 @@ module.exports = {
         }).exec(function(err, requests) {
           if (err) return _error(err, req, res, false);
           if (!requests[0]) return _error('Error al actualizar solicitud', req, res, true);
-          return _success('Solicitud editada exitosamente', req, res, '/solicitud/' + requests[0].id + '/' + requests[0].slug);
+	  
+	  if (requests[0].issue != undefined || requests[0].issue != null) {
+	    Github.updateIssue(req.param('id'), req.session.user, {
+              title: req.param('title').trim(),
+              url: req.param('url'),
+              description: req.param('description').trim(),
+              issue: requests[0].issue
+	    });
+	  } else {
+	    Github.createIssue(req.param('id'), req.session.user, {
+              title: req.param('title').trim(),
+              url: req.param('url'),
+              description: req.param('description').trim(),
+              issue: requests[0].issue
+	  })}
+          
+	  return _success('Solicitud editada exitosamente', req, res, '/solicitud/' + requests[0].id + '/' + requests[0].slug);
         });
       });
     } else {
