@@ -17,12 +17,12 @@ function updateIssues() {
 	else {
 	  if (request.state == 1 && verify.assignee != null) {
 	    Request.update({id: request.id}, {state: 2} , function (err, requests) {
-              if (err || !requests[0]) return console.warning('Error al actualizar el estado de requests: ' + issue.number);
+              if (err || !requests[0]) return console.log('Error al actualizar el estado de requests: ' + issue.number);
 	      console.log("Estado actualizado correctamente de request: " + issue.number);
 	    });
 	  } else if (request.state == 2 && verify.state == "closed") {
 	    Request.update({id: request.id}, {state: 3} , function (err, requests) {
-              if (err || !requests[0]) return console.warning('Error al actualizar el estado de requests: ' + issue.number);
+              if (err || !requests[0]) return console.log('Error al actualizar el estado de requests: ' + issue.number);
 	      console.log("Estado actualizado correctamente de request: " + issue.number);
 	    });
 	  }
@@ -55,7 +55,7 @@ module.exports = {
         }, {
           issue: result.number
         }).exec(function(err, requests) {
-          if (err || !requests[0]) return console.warning('Error al actualizar el numero de issue');
+          if (err || !requests[0]) return console.log('Error al actualizar el numero de issue ' + err);
 	  console.log("Issue asignado correctamente");
         })})},
   getIssue: function (number) {
